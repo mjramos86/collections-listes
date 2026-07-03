@@ -339,6 +339,78 @@ function ensureSubIssues(item) {
   }
 }
 
+// ── Mario seed data ────────────────────────────────────────────
+const MARIO_FIELDS = [
+  {key:'num',label:'#',type:'number'},
+  {key:'title',label:'Title',type:'text'},
+  {key:'series',label:'Series',type:'text'},
+  {key:'platform',label:'Platform',type:'text'},
+  {key:'year',label:'Year',type:'number'},
+  {key:'notes',label:'Notes',type:'text'},
+];
+
+const MARIO_ITEMS = [
+  // Origins
+  {id:'m-1',completed:false,num:1,title:'Donkey Kong',series:'2D Platformer',platform:'Arcade / NES',year:1981,notes:"Mario's debut as Jumpman — the game that started it all."},
+  {id:'m-2',completed:false,num:2,title:'Mario Bros.',series:'2D Platformer',platform:'Arcade / NES',year:1983,notes:"Introduced Luigi and established co-op play."},
+  // 2D Platformers
+  {id:'m-3',completed:false,num:3,title:'Super Mario Bros.',series:'2D Platformer',platform:'NES',year:1985,notes:"The genre-defining classic that launched the franchise worldwide."},
+  {id:'m-4',completed:false,num:4,title:'Super Mario Bros.: The Lost Levels',series:'2D Platformer',platform:'NES / Famicom Disk',year:1986,notes:"The true Japanese sequel — notoriously harder than the original."},
+  {id:'m-5',completed:false,num:5,title:'Super Mario Bros. 2',series:'2D Platformer',platform:'NES',year:1988,notes:"Introduced Peach, Toad, and item-pulling gameplay from Doki Doki Panic."},
+  {id:'m-6',completed:false,num:6,title:'Super Mario Bros. 3',series:'2D Platformer',platform:'NES',year:1988,notes:"Power-ups, world map, and airships — widely considered the best NES game."},
+  {id:'m-7',completed:false,num:7,title:'Super Mario Land',series:'2D Platformer',platform:'Game Boy',year:1989,notes:"First portable Mario adventure; takes place outside the Mushroom Kingdom."},
+  {id:'m-8',completed:false,num:8,title:'Super Mario World',series:'2D Platformer',platform:'SNES',year:1990,notes:"SNES launch title introducing Yoshi; often called the greatest 2D Mario."},
+  {id:'m-9',completed:false,num:9,title:'Super Mario Land 2: 6 Golden Coins',series:'2D Platformer',platform:'Game Boy',year:1992,notes:"Introduced Wario as the main villain; big leap over the original Land."},
+  {id:'m-10',completed:false,num:10,title:"Wario Land: Super Mario Land 3",series:'2D Platformer',platform:'Game Boy',year:1994,notes:"Wario takes centre stage; direct follow-up to Land 2."},
+  {id:'m-11',completed:false,num:11,title:"Yoshi's Island (Super Mario World 2)",series:'2D Platformer',platform:'SNES',year:1995,notes:"Baby Mario, crayon art style, and Yoshi mechanics. Stunning 16-bit farewell."},
+  {id:'m-12',completed:false,num:12,title:'New Super Mario Bros.',series:'2D Platformer',platform:'Nintendo DS',year:2006,notes:"First new 2D Mario in 11 years; revived the side-scrolling formula."},
+  {id:'m-13',completed:false,num:13,title:'New Super Mario Bros. Wii',series:'2D Platformer',platform:'Wii',year:2009,notes:"Four-player simultaneous co-op in a mainline 2D Mario for the first time."},
+  {id:'m-14',completed:false,num:14,title:'New Super Mario Bros. 2',series:'2D Platformer',platform:'Nintendo 3DS',year:2012,notes:"Coin-collecting focus; first retail 3DS game available digitally at launch."},
+  {id:'m-15',completed:false,num:15,title:'New Super Mario Bros. U',series:'2D Platformer',platform:'Wii U',year:2012,notes:"HD 2D Mario debut with Nabbit and Acorn power-up."},
+  {id:'m-16',completed:false,num:16,title:'Super Mario Maker',series:'2D Platformer',platform:'Wii U',year:2015,notes:"Create and share levels in four classic Mario styles."},
+  {id:'m-17',completed:false,num:17,title:'Super Mario Run',series:'2D Platformer',platform:'iOS / Android',year:2016,notes:"One-handed auto-runner; first proper Mario game on smartphones."},
+  {id:'m-18',completed:false,num:18,title:'Super Mario Maker 2',series:'2D Platformer',platform:'Switch',year:2019,notes:"Expanded maker with online multiplayer and a story mode."},
+  {id:'m-19',completed:false,num:19,title:'New Super Mario Bros. U Deluxe',series:'2D Platformer',platform:'Switch',year:2019,notes:"Includes NSMBU and New Super Luigi U with playable Toadette/Nabbit."},
+  {id:'m-20',completed:false,num:20,title:'Super Mario Bros. Wonder',series:'2D Platformer',platform:'Switch',year:2023,notes:"Wonder Flower mechanics shake up 2D Mario for the first time in decades."},
+  // 3D Platformers
+  {id:'m-21',completed:false,num:21,title:'Super Mario 64',series:'3D Platformer',platform:'Nintendo 64',year:1996,notes:"Defined 3D platforming. Still influential. 120 stars, analogue movement."},
+  {id:'m-22',completed:false,num:22,title:'Super Mario Sunshine',series:'3D Platformer',platform:'GameCube',year:2002,notes:"FLUDD water pack on Isle Delfino; polarising but beloved by its fans."},
+  {id:'m-23',completed:false,num:23,title:'Super Mario Galaxy',series:'3D Platformer',platform:'Wii',year:2007,notes:"Gravity-defying spherical worlds; widely considered among the best games ever made."},
+  {id:'m-24',completed:false,num:24,title:'Super Mario Galaxy 2',series:'3D Platformer',platform:'Wii',year:2010,notes:"Yoshi returns; denser level design than the original — some prefer it."},
+  {id:'m-25',completed:false,num:25,title:'Super Mario 3D Land',series:'3D Platformer',platform:'Nintendo 3DS',year:2011,notes:"Hybrid 2D/3D on handheld; uses 3D effect meaningfully for depth perception."},
+  {id:'m-26',completed:false,num:26,title:'Super Mario 3D World',series:'3D Platformer',platform:'Wii U',year:2013,notes:"Four-player 3D co-op with Cat Mario suit; addictive competitive play."},
+  {id:'m-27',completed:false,num:27,title:"Super Mario 3D World + Bowser's Fury",series:'3D Platformer',platform:'Switch',year:2021,notes:"Includes 3D World plus Bowser's Fury — a seamless open-world mini-sequel."},
+  {id:'m-28',completed:false,num:28,title:'Super Mario Odyssey',series:'3D Platformer',platform:'Switch',year:2017,notes:"Cappy possession mechanic; massive sandbox worlds; over 880 Moons."},
+  // RPGs — Super Mario RPG
+  {id:'m-29',completed:false,num:29,title:'Super Mario RPG: Legend of the Seven Stars',series:'RPG – Super Mario RPG',platform:'SNES',year:1996,notes:"Square-developed; introduced timed attacks and Geno. The RPG that started it all."},
+  {id:'m-30',completed:false,num:30,title:'Super Mario RPG (Remake)',series:'RPG – Super Mario RPG',platform:'Switch',year:2023,notes:"Full 3D remake with updated visuals, new boss rush, and arranged soundtrack."},
+  // RPGs — Paper Mario
+  {id:'m-31',completed:false,num:31,title:'Paper Mario',series:'RPG – Paper Mario',platform:'Nintendo 64',year:2000,notes:"Spiritual successor to Super Mario RPG; introduced the paper aesthetic."},
+  {id:'m-32',completed:false,num:32,title:'Paper Mario: The Thousand-Year Door',series:'RPG – Paper Mario',platform:'GameCube',year:2004,notes:"Widely regarded as the best in the series; classic badge/partner system."},
+  {id:'m-33',completed:false,num:33,title:'Super Paper Mario',series:'RPG – Paper Mario',platform:'Wii',year:2007,notes:"Action-platformer hybrid with dimension-flipping; darker tone and story."},
+  {id:'m-34',completed:false,num:34,title:'Paper Mario: Sticker Star',series:'RPG – Paper Mario',platform:'Nintendo 3DS',year:2012,notes:"Divisive departure — removed EXP and traditional partners; sticker battle system."},
+  {id:'m-35',completed:false,num:35,title:'Paper Mario: Color Splash',series:'RPG – Paper Mario',platform:'Wii U',year:2016,notes:"Paint mechanic and improved writing over Sticker Star; underplayed gem."},
+  {id:'m-36',completed:false,num:36,title:'Paper Mario: The Origami King',series:'RPG – Paper Mario',platform:'Switch',year:2020,notes:"Ring-based battle system; excellent overworld and writing despite odd combat."},
+  {id:'m-37',completed:false,num:37,title:'Paper Mario: The Thousand-Year Door (Remake)',series:'RPG – Paper Mario',platform:'Switch',year:2024,notes:"HD remake with new cutscenes, updated music, and quality-of-life improvements."},
+  // RPGs — Mario & Luigi
+  {id:'m-38',completed:false,num:38,title:'Mario & Luigi: Superstar Saga',series:'RPG – Mario & Luigi',platform:'Game Boy Advance',year:2003,notes:"The bro duo heads to Beanbean Kingdom; introduced the brothers' signature action RPG style."},
+  {id:'m-39',completed:false,num:39,title:'Mario & Luigi: Partners in Time',series:'RPG – Mario & Luigi',platform:'Nintendo DS',year:2005,notes:"Baby Mario and Baby Luigi join; dual-screen time-travel adventure."},
+  {id:'m-40',completed:false,num:40,title:"Mario & Luigi: Bowser's Inside Story",series:'RPG – Mario & Luigi',platform:'Nintendo DS',year:2009,notes:"Play as Bowser AND the Bros — often considered the series peak."},
+  {id:'m-41',completed:false,num:41,title:'Mario & Luigi: Dream Team',series:'RPG – Mario & Luigi',platform:'Nintendo 3DS',year:2013,notes:"Luigi's dreams become surreal battle arenas; uses gyro and touchscreen."},
+  {id:'m-42',completed:false,num:42,title:'Mario & Luigi: Paper Jam',series:'RPG – Mario & Luigi',platform:'Nintendo 3DS',year:2015,notes:"Crossover with Paper Mario universe; three-character trio battles."},
+  {id:'m-43',completed:false,num:43,title:'Mario & Luigi: Superstar Saga + Bowser\'s Minions',series:'RPG – Mario & Luigi',platform:'Nintendo 3DS',year:2017,notes:"3DS remake of Superstar Saga with an added Bowser's Minions side mode."},
+  {id:'m-44',completed:false,num:44,title:"Mario & Luigi: Bowser's Inside Story + Bowser Jr.'s Journey",series:'RPG – Mario & Luigi',platform:'Nintendo 3DS',year:2019,notes:"3DS remake of Bowser's Inside Story with a Bowser Jr. side campaign."},
+  {id:'m-45',completed:false,num:45,title:'Mario & Luigi: Brothership',series:'RPG – Mario & Luigi',platform:'Switch',year:2024,notes:"First M&L on Switch; island-connecting adventure with new Bros. Attacks."},
+];
+
+const MARIO_COLLECTION = {
+  id:'mario-franchise', name:'Mario Franchise Games',
+  description:'2D & 3D platformers and all RPG series — no sports spinoffs.',
+  category:'gaming', icon:'🎮',
+  fields: MARIO_FIELDS, items: MARIO_ITEMS,
+  sortField:'num', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -351,14 +423,20 @@ let expandedId = null;
 function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(collections)); }
 function load() {
   try { const d = localStorage.getItem(STORAGE_KEY); if (d) collections = JSON.parse(d); } catch{}
-  if (!collections.length) {
-    collections = [{
+  // Seed Marvel if missing
+  if (!collections.find(c=>c.id==='marvel-top-100')) {
+    collections.unshift({
       id:'marvel-top-100', name:'Marvel Top 100 Story Arcs',
       description:'Greatest Marvel story arcs in publication order.',
       category:'reading', icon:'📚',
       fields: MARVEL_FIELDS, items: MARVEL_SEED,
       sortField:'pub_order', sortDir:'asc'
-    }];
+    });
+    save();
+  }
+  // Seed Mario if missing
+  if (!collections.find(c=>c.id==='mario-franchise')) {
+    collections.push(MARIO_COLLECTION);
     save();
   }
 }
