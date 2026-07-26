@@ -284,7 +284,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -2515,6 +2515,74 @@ const AXM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── X-Treme X-Men (2001, Claremont) seed data ──────────────────
+const XTREME_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'issue',label:'Issue',type:'text'},
+  {key:'date',label:'Cover Date',type:'text'},
+  {key:'title',label:'Story / Arc',type:'text'},
+  {key:'creators',label:'Creators',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+
+const XTREME_ITEMS = [
+  {"id":"xt-1","completed":false,"seq":1,"issue":"#1","date":"Jul 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":"Claremont's globe-trotting, Storm-led team debuts; the hunt for Destiny's diaries."},
+  {"id":"xt-2","completed":false,"seq":2,"issue":"#2","date":"Aug 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":"Death of Psylocke (Betsy Braddock), killed by Vargas."},
+  {"id":"xt-3","completed":false,"seq":3,"issue":"#3","date":"Sep 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2001","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2002","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2002","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-9","completed":false,"seq":9,"issue":"#9","date":"Mar 2002","title":"Destiny (the Destiny Diaries)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-10","completed":false,"seq":10,"issue":"#10","date":"Apr 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-11","completed":false,"seq":11,"issue":"#11","date":"May 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-12","completed":false,"seq":12,"issue":"#12","date":"Jun 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-14","completed":false,"seq":14,"issue":"#14","date":"Aug 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-15","completed":false,"seq":15,"issue":"#15","date":"Sep 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-16","completed":false,"seq":16,"issue":"#16","date":"Oct 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-17","completed":false,"seq":17,"issue":"#17","date":"Nov 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-18","completed":false,"seq":18,"issue":"#18","date":"Dec 2002","title":"Invisible Sun (Sage & Bishop)","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-19","completed":false,"seq":19,"issue":"#19","date":"Jan 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-20","completed":false,"seq":20,"issue":"#20","date":"Feb 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-21","completed":false,"seq":21,"issue":"#21","date":"Mar 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-22","completed":false,"seq":22,"issue":"#22","date":"Apr 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-23","completed":false,"seq":23,"issue":"#23","date":"May 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-24","completed":false,"seq":24,"issue":"#24","date":"Jun 2003","title":"Storm's team — Larroca finale","creators":"Chris Claremont / Salvador Larroca","notes":""},
+  {"id":"xt-25","completed":false,"seq":25,"issue":"#25","date":"Jul 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":"Igor Kordey becomes penciller; 'God Loves, Man Kills II' begins."},
+  {"id":"xt-26","completed":false,"seq":26,"issue":"#26","date":"Aug 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-27","completed":false,"seq":27,"issue":"#27","date":"Aug 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-28","completed":false,"seq":28,"issue":"#28","date":"Sep 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-29","completed":false,"seq":29,"issue":"#29","date":"Sep 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-30","completed":false,"seq":30,"issue":"#30","date":"Oct 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-31","completed":false,"seq":31,"issue":"#31","date":"Oct 2003","title":"God Loves, Man Kills II","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-32","completed":false,"seq":32,"issue":"#32","date":"Nov 2003","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-33","completed":false,"seq":33,"issue":"#33","date":"Nov 2003","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-34","completed":false,"seq":34,"issue":"#34","date":"Dec 2003","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-35","completed":false,"seq":35,"issue":"#35","date":"Dec 2003","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-36","completed":false,"seq":36,"issue":"#36","date":"Jan 2004","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-37","completed":false,"seq":37,"issue":"#37","date":"Jan 2004","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-38","completed":false,"seq":38,"issue":"#38","date":"Feb 2004","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-39","completed":false,"seq":39,"issue":"#39","date":"Feb 2004","title":"Intifada & the Kordey era","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-40","completed":false,"seq":40,"issue":"#40","date":"Mar 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-41","completed":false,"seq":41,"issue":"#41","date":"Mar 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-42","completed":false,"seq":42,"issue":"#42","date":"Apr 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-43","completed":false,"seq":43,"issue":"#43","date":"Apr 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-44","completed":false,"seq":44,"issue":"#44","date":"May 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-45","completed":false,"seq":45,"issue":"#45","date":"May 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":""},
+  {"id":"xt-46","completed":false,"seq":46,"issue":"#46","date":"Jun 2004","title":"Final arcs","creators":"Chris Claremont / Igor Kordey","notes":"Final issue; leads into 'X-Men: Reload' (2004)."}
+];
+
+
+const XTREME_COLLECTION = {
+  id:'x-treme-x-men', name:'X-Treme X-Men (2001) — Claremont',
+  description:'Chris Claremont\u2019s first X-Treme X-Men series (vol. 1, 2001\u20132004): the complete #1\u201346, Storm\u2019s globe-trotting team, in cover-date order.',
+  category:'reading', icon:'📚', checks: COMIC_CHECKS,
+  fields: XTREME_FIELDS, items: XTREME_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -2587,6 +2655,11 @@ function load() {
   // Seed Astonishing X-Men (Whedon) if missing
   if (!collections.find(c=>c.id==='astonishing-xmen')) {
     collections.push(AXM_COLLECTION);
+    save();
+  }
+  // Seed X-Treme X-Men (Claremont) if missing
+  if (!collections.find(c=>c.id==='x-treme-x-men')) {
+    collections.push(XTREME_COLLECTION);
     save();
   }
   // Add dual "Read / Collected" checks to comic collections that predate them.
