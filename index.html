@@ -284,7 +284,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -2583,6 +2583,34 @@ const XTREME_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── X-Men: Deadly Genesis (2005, Brubaker) seed data ───────────
+const DG_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'issue',label:'Issue',type:'text'},
+  {key:'date',label:'Cover Date',type:'text'},
+  {key:'title',label:'Story / Arc',type:'text'},
+  {key:'creators',label:'Creators',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+
+const DG_ITEMS = [
+  {"id":"dg-1","completed":false,"seq":1,"issue":"#1","date":"Jan 2006","title":"Deadly Genesis, Part 1","creators":"Ed Brubaker / Trevor Hairsine","notes":"Ed Brubaker's first X-Men work; introduces Vulcan (Gabriel Summers), the 'third Summers brother', and a lost X-Men team retconned into Giant-Size X-Men #1."},
+  {"id":"dg-2","completed":false,"seq":2,"issue":"#2","date":"Feb 2006","title":"Deadly Genesis, Part 2","creators":"Ed Brubaker / Trevor Hairsine","notes":"The truth about Krakoa and Professor X's secret begins to surface."},
+  {"id":"dg-3","completed":false,"seq":3,"issue":"#3","date":"Mar 2006","title":"Deadly Genesis, Part 3","creators":"Ed Brubaker / Trevor Hairsine","notes":""},
+  {"id":"dg-4","completed":false,"seq":4,"issue":"#4","date":"Apr 2006","title":"Deadly Genesis, Part 4","creators":"Ed Brubaker / Trevor Hairsine","notes":""},
+  {"id":"dg-5","completed":false,"seq":5,"issue":"#5","date":"May 2006","title":"Deadly Genesis, Part 5","creators":"Ed Brubaker / Trevor Hairsine","notes":""},
+  {"id":"dg-6","completed":false,"seq":6,"issue":"#6","date":"Jun 2006","title":"Deadly Genesis, Part 6","creators":"Ed Brubaker / Trevor Hairsine","notes":"Conclusion; sets up 'The Rise and Fall of the Shi'ar Empire' and Brubaker's Uncanny X-Men run."}
+];
+
+
+const DG_COLLECTION = {
+  id:'deadly-genesis', name:'X-Men: Deadly Genesis (2005)',
+  description:'Ed Brubaker & Trevor Hairsine\u2019s six-issue limited series (2005\u20132006): the debut of Vulcan and the lost X-Men team, leading into Brubaker\u2019s Uncanny X-Men run.',
+  category:'reading', icon:'📚', checks: COMIC_CHECKS,
+  fields: DG_FIELDS, items: DG_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -2660,6 +2688,11 @@ function load() {
   // Seed X-Treme X-Men (Claremont) if missing
   if (!collections.find(c=>c.id==='x-treme-x-men')) {
     collections.push(XTREME_COLLECTION);
+    save();
+  }
+  // Seed X-Men: Deadly Genesis if missing
+  if (!collections.find(c=>c.id==='deadly-genesis')) {
+    collections.push(DG_COLLECTION);
     save();
   }
   // Add dual "Read / Collected" checks to comic collections that predate them.
