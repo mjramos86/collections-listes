@@ -284,7 +284,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -2468,6 +2468,53 @@ const XMEN2_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Astonishing X-Men (Whedon & Cassaday) seed data ────────────
+const AXM_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'issue',label:'Issue',type:'text'},
+  {key:'date',label:'Cover Date',type:'text'},
+  {key:'title',label:'Story / Arc',type:'text'},
+  {key:'creators',label:'Creators',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+
+const AXM_ITEMS = [
+  {"id":"axm-1","completed":false,"seq":1,"issue":"#1","date":"Jul 2004","title":"Gifted (Part 1)","creators":"Joss Whedon / John Cassaday","notes":"Whedon & Cassaday's run begins ('Gifted'); the mutant 'cure'; debut of S.W.O.R.D. & Abigail Brand."},
+  {"id":"axm-2","completed":false,"seq":2,"issue":"#2","date":"Aug 2004","title":"Gifted (Part 2)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-3","completed":false,"seq":3,"issue":"#3","date":"Sep 2004","title":"Gifted (Part 3)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2004","title":"Gifted (Part 4)","creators":"Joss Whedon / John Cassaday","notes":"Colossus is revealed to be alive."},
+  {"id":"axm-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2004","title":"Gifted (Part 5)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2004","title":"Gifted (Part 6)","creators":"Joss Whedon / John Cassaday","notes":"Conclusion of 'Gifted'."},
+  {"id":"axm-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2005","title":"Dangerous (Part 1)","creators":"Joss Whedon / John Cassaday","notes":"'Dangerous' begins."},
+  {"id":"axm-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2005","title":"Dangerous (Part 2)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-9","completed":false,"seq":9,"issue":"#9","date":"Apr 2005","title":"Dangerous (Part 3)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-10","completed":false,"seq":10,"issue":"#10","date":"May 2005","title":"Dangerous (Part 4)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-11","completed":false,"seq":11,"issue":"#11","date":"Jul 2005","title":"Dangerous (Part 5)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-12","completed":false,"seq":12,"issue":"#12","date":"Aug 2005","title":"Dangerous (Part 6)","creators":"Joss Whedon / John Cassaday","notes":"The Danger Room becomes sentient — the villain Danger."},
+  {"id":"axm-13","completed":false,"seq":13,"issue":"#13","date":"Apr 2006","title":"Torn (Part 1)","creators":"Joss Whedon / John Cassaday","notes":"'Torn' begins; the Hellfire Club and Emma Frost's betrayal (illusion)."},
+  {"id":"axm-14","completed":false,"seq":14,"issue":"#14","date":"Jun 2006","title":"Torn (Part 2)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-15","completed":false,"seq":15,"issue":"#15","date":"Jul 2006","title":"Torn (Part 3)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-16","completed":false,"seq":16,"issue":"#16","date":"Sep 2006","title":"Torn (Part 4)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-17","completed":false,"seq":17,"issue":"#17","date":"Oct 2006","title":"Torn (Part 5)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-18","completed":false,"seq":18,"issue":"#18","date":"Dec 2006","title":"Torn (Part 6)","creators":"Joss Whedon / John Cassaday","notes":"Conclusion of 'Torn'."},
+  {"id":"axm-19","completed":false,"seq":19,"issue":"#19","date":"Feb 2007","title":"Unstoppable (Part 1)","creators":"Joss Whedon / John Cassaday","notes":"'Unstoppable' begins; the X-Men go to the Breakworld."},
+  {"id":"axm-20","completed":false,"seq":20,"issue":"#20","date":"May 2007","title":"Unstoppable (Part 2)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-21","completed":false,"seq":21,"issue":"#21","date":"Jul 2007","title":"Unstoppable (Part 3)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-22","completed":false,"seq":22,"issue":"#22","date":"Oct 2007","title":"Unstoppable (Part 4)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-23","completed":false,"seq":23,"issue":"#23","date":"Dec 2007","title":"Unstoppable (Part 5)","creators":"Joss Whedon / John Cassaday","notes":""},
+  {"id":"axm-24","completed":false,"seq":24,"issue":"#24","date":"Mar 2008","title":"Unstoppable (Part 6)","creators":"Joss Whedon / John Cassaday","notes":"Climax of 'Unstoppable' on the Breakworld."},
+  {"id":"axm-25","completed":false,"seq":25,"issue":"Giant-Size #1","date":"Jul 2008","title":"Unstoppable — Finale","creators":"Joss Whedon / John Cassaday","notes":"Series finale; Kitty Pryde phases the Breakworld bullet through Earth and is lost."}
+];
+
+
+const AXM_COLLECTION = {
+  id:'astonishing-xmen', name:'Astonishing X-Men — Whedon & Cassaday',
+  description:'Joss Whedon & John Cassaday\u2019s complete run: Astonishing X-Men (2004) #1\u201324 plus Giant-Size Astonishing X-Men #1 \u2014 the arcs Gifted, Dangerous, Torn & Unstoppable, in cover-date order.',
+  category:'reading', icon:'📚', checks: COMIC_CHECKS,
+  fields: AXM_FIELDS, items: AXM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -2535,6 +2582,11 @@ function load() {
   // Seed X-Men (1991) legacy line if missing
   if (!collections.find(c=>c.id==='x-men-1991')) {
     collections.push(XMEN2_COLLECTION);
+    save();
+  }
+  // Seed Astonishing X-Men (Whedon) if missing
+  if (!collections.find(c=>c.id==='astonishing-xmen')) {
+    collections.push(AXM_COLLECTION);
     save();
   }
   // Add dual "Read / Collected" checks to comic collections that predate them.
