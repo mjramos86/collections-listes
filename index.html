@@ -93,6 +93,7 @@ tbody tr:nth-child(even){background:var(--surface2)}
 tbody tr:nth-child(odd){background:var(--surface)}
 tbody tr:hover{filter:brightness(1.15)}
 tbody tr.completed-row{opacity:.5}
+th.check-head{width:56px;text-align:center;font-size:0.64rem;font-weight:700;color:var(--text2);cursor:default!important;padding:10px 4px;text-transform:uppercase;letter-spacing:.03em}
 td{padding:9px 12px;vertical-align:middle}
 td.check-cell{width:36px;text-align:center}
 .check-box{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:4px;border:2px solid var(--border);transition:all .15s;flex-shrink:0}
@@ -281,6 +282,9 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 
 <script>
 const STORAGE_KEY = 'collectliste-v1';
+// Collections that track two independent statuses per item instead of one.
+const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -1938,7 +1942,7 @@ const XMEN_ITEMS = [
 
 
 const XMEN_COLLECTION = {
-  id:'uncanny-xmen', name:'The Uncanny X-Men #1–544',
+  id:'uncanny-xmen', name:'The Uncanny X-Men #1–544', checks: COMIC_CHECKS,
   description:'Every issue of The X-Men / Uncanny X-Men (vol. 1) from #1 through #544 (1963–2011), plus all annuals (#1–18, ’95–’97, 2006/2009/2011), in cover-date (release) order.',
   category:'reading', icon:'📚',
   fields: XMEN_FIELDS, items: XMEN_ITEMS,
@@ -2159,7 +2163,7 @@ const WOLV_ITEMS = [
 
 
 const WOLV_COLLECTION = {
-  id:'wolverine-comics', name:'Wolverine — Miller Mini + First Ongoing',
+  id:'wolverine-comics', name:'Wolverine — Miller Mini + First Ongoing', checks: COMIC_CHECKS,
   description:'The 1982 Claremont/Miller limited series (#1–4) plus the whole first ongoing series, Wolverine vol. 2 (#1–189, 1988–2003) with all six annuals (’95–2001), in cover-date (release) order.',
   category:'reading', icon:'🗡️',
   fields: WOLV_FIELDS, items: WOLV_ITEMS,
@@ -2457,7 +2461,7 @@ const XMEN2_ITEMS = [
 
 
 const XMEN2_COLLECTION = {
-  id:'x-men-1991', name:'X-Men (1991) → New X-Men → Legacy #1–275',
+  id:'x-men-1991', name:'X-Men (1991) → New X-Men → Legacy #1–275', checks: COMIC_CHECKS,
   description:'The 1991 X-Men (vol. 2) in one continuous run: X-Men #1–113, New X-Men #114–156 (Grant Morrison), X-Men #157–207, and X-Men: Legacy #208–275, in cover-date (release) order.',
   category:'reading', icon:'🧬',
   fields: XMEN2_FIELDS, items: XMEN2_ITEMS,
@@ -2533,6 +2537,16 @@ function load() {
     collections.push(XMEN2_COLLECTION);
     save();
   }
+  // Add dual "Read / Collected" checks to comic collections that predate them.
+  // Any prior single check-off is carried over as "Read".
+  for (const id of DUAL_CHECK_IDS) {
+    const c = collections.find(x=>x.id===id);
+    if (c && !(c.checks && c.checks.length)) {
+      c.checks = COMIC_CHECKS;
+      c.items.forEach(it=>{ if (it.completed) it.read = true; });
+      save();
+    }
+  }
 }
 
 function uid() { return Math.random().toString(36).slice(2)+Date.now().toString(36); }
@@ -2553,9 +2567,17 @@ function renderHome() {
   document.getElementById('home-label').textContent = `Your Collections (${collections.length})`;
   grid.innerHTML = '';
   for (const c of collections) {
-    const done = c.items.filter(i=>i.completed).length;
     const total = c.items.length;
-    const pct = total ? Math.round(done/total*100) : 0;
+    let statsText, pct;
+    if (isDual(c)) {
+      const parts = c.checks.map(ch => ({label:ch.label, d:c.items.filter(i=>i[ch.key]).length}));
+      statsText = parts.map(p=>`${p.label} ${p.d}/${total}`).join(' · ');
+      pct = total ? Math.round(parts[0].d/total*100) : 0;
+    } else {
+      const done = c.items.filter(i=>i.completed).length;
+      pct = total ? Math.round(done/total*100) : 0;
+      statsText = `${done} / ${total} completed`;
+    }
     const color = CAT_COLORS[c.category]||CAT_COLORS.other;
     const card = document.createElement('button');
     card.className = 'card';
@@ -2567,7 +2589,7 @@ function renderHome() {
       </div>
       <h3>${esc(c.name)}</h3>
       ${c.description?`<p class="desc">${esc(c.description)}</p>`:'<p class="desc">&nbsp;</p>'}
-      <div class="card-stats"><span>${done} / ${total} completed</span><span class="card-pct" style="color:${color}">${pct}%</span></div>
+      <div class="card-stats"><span>${statsText}</span><span class="card-pct" style="color:${color}">${pct}%</span></div>
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
     `;
     grid.appendChild(card);
@@ -2602,10 +2624,35 @@ function openCollection(id) {
 
 function getActive() { return collections.find(c=>c.id===activeId); }
 
+// ── Check helpers (single "completed" by default, or per-collection `checks`) ──
+function checksOf(c) { return (c.checks && c.checks.length) ? c.checks : [{key:'completed',label:''}]; }
+function isDual(c) { return !!(c.checks && c.checks.length > 1); }
+function fullyDone(c, item) { return checksOf(c).every(ch => !!item[ch.key]); }
+
+function toggleCheck(id, key) {
+  if (key === 'completed') { toggleComplete(id); return; } // preserve sub-issue logic
+  const c = getActive();
+  const item = c.items.find(i=>i.id===id);
+  if (!item) return;
+  item[key] = !item[key];
+  save(); updateProgress(); renderTable();
+}
+
 function updateProgress() {
   const c = getActive();
-  const done = c.items.filter(i=>i.completed).length;
   const total = c.items.length;
+  if (isDual(c)) {
+    const stats = c.checks.map(ch => {
+      const d = c.items.filter(i=>i[ch.key]).length;
+      return {label:ch.label, d, pct: total?Math.round(d/total*100):0};
+    });
+    document.getElementById('lv-count').innerHTML =
+      stats.map(s=>`${s.d} <span>/ ${total} ${esc(s.label.toLowerCase())}</span>`).join(' &nbsp;·&nbsp; ');
+    document.getElementById('lv-pct').textContent = stats.map(s=>s.pct+'%').join(' / ');
+    document.getElementById('lv-fill').style.width = stats[0].pct+'%';
+    return;
+  }
+  const done = c.items.filter(i=>i.completed).length;
   const pct = total ? Math.round(done/total*100) : 0;
   document.getElementById('lv-count').innerHTML = `${done} <span>/ ${total} completed</span>`;
   document.getElementById('lv-pct').textContent = pct+'%';
@@ -2623,8 +2670,8 @@ function getDisplayedItems() {
   const c = getActive();
   const q = document.getElementById('search-input').value.toLowerCase();
   let items = c.items.filter(i => {
-    if (filterMode==='completed' && !i.completed) return false;
-    if (filterMode==='pending' && i.completed) return false;
+    if (filterMode==='completed' && !fullyDone(c,i)) return false;
+    if (filterMode==='pending' && fullyDone(c,i)) return false;
     if (q) return c.fields.some(f => String(i[f.key]||'').toLowerCase().includes(q));
     return true;
   });
@@ -2639,13 +2686,15 @@ function getDisplayedItems() {
 
 function renderTable() {
   const c = getActive();
+  const checks = checksOf(c);
   const mainFields = c.fields.slice(0,5);
   const extraFields = c.fields.slice(5);
   const items = getDisplayedItems();
+  const leadCols = checks.length; // number of check columns before the data columns
 
   // Header
   document.getElementById('table-head').innerHTML = '<tr>' +
-    '<th style="width:36px;cursor:default"></th>' +
+    checks.map(ch=>`<th class="check-head">${esc(ch.label)}</th>`).join('') +
     mainFields.map(f=>`<th class="${sortField===f.key?'sorted':''}" onclick="toggleSort('${f.key}')">${esc(f.label)}${sortField===f.key?(sortDir==='asc'?' ↑':' ↓'):''}</th>`).join('') +
     (extraFields.length?'<th style="width:40px;cursor:default">▾</th>':'') +
     '<th style="width:32px;cursor:default"></th>' +
@@ -2654,9 +2703,11 @@ function renderTable() {
   const body = document.getElementById('table-body');
   body.innerHTML = '';
 
+  const totalCols = leadCols + mainFields.length + (extraFields.length?1:0) + 1;
+
   if (!items.length) {
     const tr = document.createElement('tr');
-    tr.innerHTML = `<td colspan="${mainFields.length+3}" style="text-align:center;padding:24px;color:var(--text2)">No items match.</td>`;
+    tr.innerHTML = `<td colspan="${totalCols}" style="text-align:center;padding:24px;color:var(--text2)">No items match.</td>`;
     body.appendChild(tr); return;
   }
 
@@ -2667,22 +2718,27 @@ function renderTable() {
     const hasSub = sub && sub.length > 0;
     const subDone = hasSub ? sub.filter(s=>s.done).length : 0;
     const isPartial = hasSub && subDone > 0 && subDone < sub.length;
+    const rowDone = fullyDone(c, item);
 
     const tr = document.createElement('tr');
-    if (item.completed) tr.classList.add('completed-row');
+    if (rowDone) tr.classList.add('completed-row');
     tr.onclick = () => toggleExpand(item.id);
 
-    // Checkbox cell
-    const checkCell = document.createElement('td');
-    checkCell.className = 'check-cell';
-    const boxClass = item.completed ? 'done' : (isPartial ? 'partial' : '');
-    checkCell.innerHTML = `<span class="check-box ${boxClass}">${item.completed?'✓':(isPartial?'–':'')}</span>`;
-    checkCell.onclick = e => { e.stopPropagation(); toggleComplete(item.id); };
-    tr.appendChild(checkCell);
+    // Checkbox cell(s) — one per check
+    for (const ch of checks) {
+      const on = !!item[ch.key];
+      const showPartial = (ch.key==='completed') && !on && isPartial;
+      const boxClass = on ? 'done' : (showPartial ? 'partial' : '');
+      const checkCell = document.createElement('td');
+      checkCell.className = 'check-cell';
+      checkCell.innerHTML = `<span class="check-box ${boxClass}">${on?'✓':(showPartial?'–':'')}</span>`;
+      checkCell.onclick = e => { e.stopPropagation(); toggleCheck(item.id, ch.key); };
+      tr.appendChild(checkCell);
+    }
 
     for (const f of mainFields) {
       const td = document.createElement('td');
-      td.className = 'truncate'+(item.completed?' strike':'');
+      td.className = 'truncate'+(rowDone?' strike':'');
       td.textContent = item[f.key]??'';
       tr.appendChild(td);
     }
@@ -2702,7 +2758,7 @@ function renderTable() {
       const etr = document.createElement('tr');
       etr.className = 'expand-row';
       const etd = document.createElement('td');
-      etd.colSpan = mainFields.length + (extraFields.length?1:0) + 2;
+      etd.colSpan = totalCols;
 
       // Sub-issues section
       let issuesHTML = '';
@@ -2731,11 +2787,15 @@ function renderTable() {
         <div><div class="expand-field-label">${esc(f.label)}</div><div class="expand-field-val">${esc(String(item[f.key]??'—'))}</div></div>
       `).join('')}</div>`;
 
+      const actionBtns = isDual(c)
+        ? checks.map(ch=>{const on=!!item[ch.key];return `<button class="${on?'btn-incomplete':'btn-complete'}" onclick="toggleCheck('${item.id}','${ch.key}')">${on?('Unmark '+esc(ch.label)):('Mark '+esc(ch.label))}</button>`;}).join('')
+        : `<button class="${item.completed?'btn-incomplete':'btn-complete'}" onclick="toggleComplete('${item.id}')">${item.completed?'Mark Incomplete':'Mark Complete'}</button>`;
+
       etd.innerHTML = `<div class="expand-inner">
         ${issuesHTML}
         ${metaHTML}
         <div class="expand-actions">
-          <button class="${item.completed?'btn-incomplete':'btn-complete'}" onclick="toggleComplete('${item.id}')">${item.completed?'Mark Incomplete':'Mark Complete'}</button>
+          ${actionBtns}
           <button class="btn-del-item" onclick="deleteItem('${item.id}')">Delete</button>
         </div>
       </div>`;
