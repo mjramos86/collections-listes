@@ -46,6 +46,23 @@ input,select{font-family:inherit}
 .card-add span:first-child{font-size:1.8rem;margin-bottom:4px}
 .card-add span:last-child{font-size:0.85rem}
 
+/* Collapsible category tree */
+.cat-tree{display:block}
+.cat-node{margin-bottom:6px}
+.cat-header{display:flex;align-items:center;gap:9px;padding:9px 12px;cursor:pointer;border-radius:10px;user-select:none;transition:background .12s}
+.cat-header:hover{background:var(--surface)}
+.cat-chevron{transition:transform .15s;font-size:0.7rem;color:var(--text2);flex-shrink:0;width:10px}
+.cat-node.collapsed>.cat-header .cat-chevron{transform:rotate(-90deg)}
+.cat-title{font-weight:700;letter-spacing:-0.2px}
+.cat-title.lvl0{font-size:1.05rem}
+.cat-title.lvl1{font-size:0.92rem}
+.cat-title.lvl2{font-size:0.85rem;color:var(--text)}
+.cat-count{font-size:0.7rem;color:var(--text2);font-weight:600;background:var(--surface2);border:1px solid var(--border);border-radius:20px;padding:1px 8px}
+.cat-children{padding-left:14px;border-left:1px solid var(--border);margin-left:16px;margin-top:4px}
+.cat-node.collapsed>.cat-children{display:none}
+.cat-children .cards{margin:8px 0 10px}
+.cat-empty{font-size:0.78rem;color:var(--text2);padding:6px 12px;font-style:italic}
+
 /* List view */
 .lv-header{display:flex;align-items:center;gap:10px;padding:12px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:10;background:var(--surface)}
 .back-btn{font-size:0.85rem;color:var(--text2);font-weight:600}
@@ -2822,43 +2839,104 @@ function showHome() {
   renderHome();
 }
 
+function collectionCardEl(c) {
+  const total = c.items.length;
+  let statsText, pct;
+  if (isDual(c)) {
+    const parts = c.checks.map(ch => ({label:ch.label, d:c.items.filter(i=>i[ch.key]).length}));
+    statsText = parts.map(p=>`${p.label} ${p.d}/${total}`).join(' · ');
+    pct = total ? Math.round(parts[0].d/total*100) : 0;
+  } else {
+    const done = c.items.filter(i=>i.completed).length;
+    pct = total ? Math.round(done/total*100) : 0;
+    statsText = `${done} / ${total} completed`;
+  }
+  const color = CAT_COLORS[c.category]||CAT_COLORS.other;
+  const card = document.createElement('button');
+  card.className = 'card';
+  card.onclick = () => openCollection(c.id);
+  card.innerHTML = `
+    <div class="card-top">
+      <span class="card-icon">${c.icon}</span>
+      <span class="card-badge" style="background:${color}22;color:${color}">${c.category}</span>
+    </div>
+    <h3>${esc(c.name)}</h3>
+    ${c.description?`<p class="desc">${esc(c.description)}</p>`:'<p class="desc">&nbsp;</p>'}
+    <div class="card-stats"><span>${statsText}</span><span class="card-pct" style="color:${color}">${pct}%</span></div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
+  `;
+  return card;
+}
+
+function buildCategoryTree() {
+  const clone = o => { const r={}; for (const k in o) r[k]=clone(o[k]); return r; };
+  const tree = clone(CATEGORY_TREE);
+  for (const c of collections) {
+    let node = tree;
+    for (const seg of pathOf(c)) { if (!node[seg]) node[seg] = {}; node = node[seg]; }
+  }
+  return tree;
+}
+
+function orderedKeys(name, subtree) {
+  const pref = CHILD_ORDER[name];
+  const keys = Object.keys(subtree);
+  keys.sort((a,b) => {
+    const ia = pref ? pref.indexOf(a) : -1, ib = pref ? pref.indexOf(b) : -1;
+    return (ia<0?99:ia) - (ib<0?99:ib) || a.localeCompare(b);
+  });
+  return keys;
+}
+
+function renderCatNode(name, subtree, path) {
+  const key = path.join('/');
+  const collapsed = !!uiState.collapsed[key];
+  const depth = path.length - 1;
+  const node = document.createElement('div');
+  node.className = 'cat-node' + (collapsed?' collapsed':'');
+
+  const header = document.createElement('div');
+  header.className = 'cat-header';
+  header.onclick = () => toggleCat(key);
+  header.innerHTML =
+    `<span class="cat-chevron">▾</span>` +
+    `<span class="cat-title lvl${Math.min(depth,2)}">${esc(name)}</span>` +
+    `<span class="cat-count">${countUnder(path)}</span>`;
+  node.appendChild(header);
+
+  const children = document.createElement('div');
+  children.className = 'cat-children';
+  const childKeys = orderedKeys(name, subtree);
+  for (const k of childKeys) children.appendChild(renderCatNode(k, subtree[k], [...path, k]));
+
+  const here = collections.filter(c => samePath(pathOf(c), path));
+  if (here.length) {
+    const wrap = document.createElement('div');
+    wrap.className = 'cards';
+    for (const c of here) wrap.appendChild(collectionCardEl(c));
+    children.appendChild(wrap);
+  }
+  if (!childKeys.length && !here.length) {
+    const empty = document.createElement('div');
+    empty.className = 'cat-empty';
+    empty.textContent = 'No collections yet';
+    children.appendChild(empty);
+  }
+  node.appendChild(children);
+  return node;
+}
+
 function renderHome() {
   const grid = document.getElementById('cards-grid');
   document.getElementById('home-label').textContent = `Your Collections (${collections.length})`;
+  grid.className = 'cat-tree';
   grid.innerHTML = '';
-  for (const c of collections) {
-    const total = c.items.length;
-    let statsText, pct;
-    if (isDual(c)) {
-      const parts = c.checks.map(ch => ({label:ch.label, d:c.items.filter(i=>i[ch.key]).length}));
-      statsText = parts.map(p=>`${p.label} ${p.d}/${total}`).join(' · ');
-      pct = total ? Math.round(parts[0].d/total*100) : 0;
-    } else {
-      const done = c.items.filter(i=>i.completed).length;
-      pct = total ? Math.round(done/total*100) : 0;
-      statsText = `${done} / ${total} completed`;
-    }
-    const color = CAT_COLORS[c.category]||CAT_COLORS.other;
-    const card = document.createElement('button');
-    card.className = 'card';
-    card.onclick = () => openCollection(c.id);
-    card.innerHTML = `
-      <div class="card-top">
-        <span class="card-icon">${c.icon}</span>
-        <span class="card-badge" style="background:${color}22;color:${color}">${c.category}</span>
-      </div>
-      <h3>${esc(c.name)}</h3>
-      ${c.description?`<p class="desc">${esc(c.description)}</p>`:'<p class="desc">&nbsp;</p>'}
-      <div class="card-stats"><span>${statsText}</span><span class="card-pct" style="color:${color}">${pct}%</span></div>
-      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
-    `;
-    grid.appendChild(card);
-  }
-  const add = document.createElement('button');
-  add.className = 'card card-add';
-  add.onclick = openCreateModal;
-  add.innerHTML = '<span>+</span><span>New Collection</span>';
-  grid.appendChild(add);
+  const tree = buildCategoryTree();
+  const roots = Object.keys(tree).sort((a,b) => {
+    const ia = ROOT_ORDER.indexOf(a), ib = ROOT_ORDER.indexOf(b);
+    return (ia<0?99:ia) - (ib<0?99:ib) || a.localeCompare(b);
+  });
+  for (const r of roots) grid.appendChild(renderCatNode(r, tree[r], [r]));
 }
 
 // ── Collection view ────────────────────────────────────────────
@@ -2883,6 +2961,46 @@ function openCollection(id) {
 }
 
 function getActive() { return collections.find(c=>c.id===activeId); }
+
+// ── Category tree (collapsible home navigation) ────────────────
+const CATEGORY_TREE = {
+  'Watching': {},
+  'Reading': { 'Marvel': { 'X-Men': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
+  'Gaming': {}
+};
+const ROOT_ORDER = ['Watching','Reading','Gaming'];
+const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW'] };
+// Where each collection lives in the tree (deepest node). Falls back to its
+// root category (capitalized) for anything not listed here.
+const COLLECTION_PATHS = {
+  'marvel-top-100':   ['Reading','Marvel'],
+  'uncanny-xmen':     ['Reading','Marvel','X-Men'],
+  'wolverine-comics': ['Reading','Marvel','X-Men'],
+  'x-men-1991':       ['Reading','Marvel','X-Men'],
+  'astonishing-xmen': ['Reading','Marvel','X-Men'],
+  'x-treme-x-men':    ['Reading','Marvel','X-Men'],
+  'deadly-genesis':   ['Reading','Marvel','X-Men'],
+  'generation-x':     ['Reading','Marvel','X-Men'],
+  'mario-franchise':  ['Gaming'],
+  'steam-library':    ['Gaming'],
+  'wwf-ppv-history':  ['Watching'],
+  'wcw-ppv-history':  ['Watching'],
+};
+function pathOf(c) {
+  if (COLLECTION_PATHS[c.id]) return COLLECTION_PATHS[c.id];
+  const cat = c.category ? c.category[0].toUpperCase()+c.category.slice(1) : 'Other';
+  return [cat];
+}
+function samePath(a,b){ return a.length===b.length && a.every((s,i)=>s===b[i]); }
+function startsWithPath(p,prefix){ return p.length>=prefix.length && prefix.every((s,i)=>p[i]===s); }
+function countUnder(path){ return collections.filter(c=>startsWithPath(pathOf(c),path)).length; }
+
+// ── Home UI state (collapse) — stored separately from collection data ──────────
+const UI_KEY = 'collectliste-ui-v1';
+let uiState = { collapsed:{} };
+function loadUI(){ try{const d=localStorage.getItem(UI_KEY); if(d) uiState=JSON.parse(d);}catch{} if(!uiState||typeof uiState!=='object') uiState={}; if(!uiState.collapsed) uiState.collapsed={}; }
+function saveUI(){ localStorage.setItem(UI_KEY, JSON.stringify(uiState)); }
+function toggleCat(key){ uiState.collapsed[key] = !uiState.collapsed[key]; saveUI(); renderHome(); }
 
 // ── Check helpers (single "completed" by default, or per-collection `checks`) ──
 function checksOf(c) { return (c.checks && c.checks.length) ? c.checks : [{key:'completed',label:''}]; }
@@ -3218,6 +3336,7 @@ function deleteCollection() {
 
 // ── Init ───────────────────────────────────────────────────────
 load();
+loadUI();
 renderHome();
 </script>
 </body>
