@@ -301,7 +301,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -3486,6 +3486,777 @@ const XMAN_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── X-Men-family series (batch 2) seed data ────────────────────
+const DP3_ITEMS = [
+  {"id":"dp3-1","completed":false,"seq":1,"issue":"#1","date":"Jan 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":"Deadpool's first ongoing series begins (Joe Kelly)."},
+  {"id":"dp3-2","completed":false,"seq":2,"issue":"#2","date":"Feb 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-3","completed":false,"seq":3,"issue":"#3","date":"Mar 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-4","completed":false,"seq":4,"issue":"#4","date":"Apr 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-5","completed":false,"seq":5,"issue":"#5","date":"May 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-6","completed":false,"seq":6,"issue":"#6","date":"Jun 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-7","completed":false,"seq":7,"issue":"#7","date":"Jul 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-8","completed":false,"seq":8,"issue":"#8","date":"Aug 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-9","completed":false,"seq":9,"issue":"#9","date":"Sep 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-10","completed":false,"seq":10,"issue":"#10","date":"Oct 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-11","completed":false,"seq":11,"issue":"#11","date":"Nov 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-12","completed":false,"seq":12,"issue":"#12","date":"Dec 1997","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-13","completed":false,"seq":13,"issue":"#13","date":"Jan 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-14","completed":false,"seq":14,"issue":"#14","date":"Feb 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-15","completed":false,"seq":15,"issue":"#15","date":"Mar 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-16","completed":false,"seq":16,"issue":"#16","date":"Apr 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-17","completed":false,"seq":17,"issue":"#17","date":"May 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-18","completed":false,"seq":18,"issue":"#18","date":"Jun 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-19","completed":false,"seq":19,"issue":"#19","date":"Jul 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-20","completed":false,"seq":20,"issue":"#20","date":"Aug 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-21","completed":false,"seq":21,"issue":"#21","date":"Sep 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-22","completed":false,"seq":22,"issue":"#22","date":"Oct 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-23","completed":false,"seq":23,"issue":"#23","date":"Nov 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-24","completed":false,"seq":24,"issue":"#24","date":"Dec 1998","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-25","completed":false,"seq":25,"issue":"#25","date":"Jan 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-26","completed":false,"seq":26,"issue":"#26","date":"Feb 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-27","completed":false,"seq":27,"issue":"#27","date":"Mar 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-28","completed":false,"seq":28,"issue":"#28","date":"Apr 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-29","completed":false,"seq":29,"issue":"#29","date":"May 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-30","completed":false,"seq":30,"issue":"#30","date":"Jun 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-31","completed":false,"seq":31,"issue":"#31","date":"Jul 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-32","completed":false,"seq":32,"issue":"#32","date":"Aug 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-33","completed":false,"seq":33,"issue":"#33","date":"Sep 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-34","completed":false,"seq":34,"issue":"#34","date":"Oct 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-35","completed":false,"seq":35,"issue":"#35","date":"Nov 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-36","completed":false,"seq":36,"issue":"#36","date":"Dec 1999","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-37","completed":false,"seq":37,"issue":"#37","date":"Jan 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-38","completed":false,"seq":38,"issue":"#38","date":"Feb 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-39","completed":false,"seq":39,"issue":"#39","date":"Mar 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-40","completed":false,"seq":40,"issue":"#40","date":"Apr 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-41","completed":false,"seq":41,"issue":"#41","date":"May 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-42","completed":false,"seq":42,"issue":"#42","date":"Jun 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-43","completed":false,"seq":43,"issue":"#43","date":"Jul 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-44","completed":false,"seq":44,"issue":"#44","date":"Aug 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-45","completed":false,"seq":45,"issue":"#45","date":"Sep 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-46","completed":false,"seq":46,"issue":"#46","date":"Oct 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-47","completed":false,"seq":47,"issue":"#47","date":"Nov 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-48","completed":false,"seq":48,"issue":"#48","date":"Dec 2000","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-49","completed":false,"seq":49,"issue":"#49","date":"Jan 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-50","completed":false,"seq":50,"issue":"#50","date":"Feb 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-51","completed":false,"seq":51,"issue":"#51","date":"Mar 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-52","completed":false,"seq":52,"issue":"#52","date":"Apr 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-53","completed":false,"seq":53,"issue":"#53","date":"May 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-54","completed":false,"seq":54,"issue":"#54","date":"Jun 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-55","completed":false,"seq":55,"issue":"#55","date":"Jul 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-56","completed":false,"seq":56,"issue":"#56","date":"Aug 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-57","completed":false,"seq":57,"issue":"#57","date":"Sep 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-58","completed":false,"seq":58,"issue":"#58","date":"Oct 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-59","completed":false,"seq":59,"issue":"#59","date":"Nov 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-60","completed":false,"seq":60,"issue":"#60","date":"Dec 2001","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-61","completed":false,"seq":61,"issue":"#61","date":"Jan 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-62","completed":false,"seq":62,"issue":"#62","date":"Feb 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-63","completed":false,"seq":63,"issue":"#63","date":"Mar 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-64","completed":false,"seq":64,"issue":"#64","date":"Apr 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-65","completed":false,"seq":65,"issue":"#65","date":"May 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-66","completed":false,"seq":66,"issue":"#66","date":"Jun 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-67","completed":false,"seq":67,"issue":"#67","date":"Jul 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-68","completed":false,"seq":68,"issue":"#68","date":"Aug 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":""},
+  {"id":"dp3-69","completed":false,"seq":69,"issue":"#69","date":"Sep 2002","title":"The Merc with a Mouth's first ongoing","creators":"Joe Kelly & various / Ed McGuinness & various","notes":"Final issue."}
+];
+
+const CND_ITEMS = [
+  {"id":"cnd-1","completed":false,"seq":1,"issue":"#1","date":"May 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":"Cable & Deadpool teams up the pair (Fabian Nicieza)."},
+  {"id":"cnd-2","completed":false,"seq":2,"issue":"#2","date":"Jun 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-3","completed":false,"seq":3,"issue":"#3","date":"Jul 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-4","completed":false,"seq":4,"issue":"#4","date":"Aug 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-5","completed":false,"seq":5,"issue":"#5","date":"Sep 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-6","completed":false,"seq":6,"issue":"#6","date":"Oct 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-7","completed":false,"seq":7,"issue":"#7","date":"Nov 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-8","completed":false,"seq":8,"issue":"#8","date":"Dec 2004","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-9","completed":false,"seq":9,"issue":"#9","date":"Jan 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-10","completed":false,"seq":10,"issue":"#10","date":"Feb 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-11","completed":false,"seq":11,"issue":"#11","date":"Mar 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-12","completed":false,"seq":12,"issue":"#12","date":"Apr 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-13","completed":false,"seq":13,"issue":"#13","date":"May 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-14","completed":false,"seq":14,"issue":"#14","date":"May 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-15","completed":false,"seq":15,"issue":"#15","date":"Jun 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-16","completed":false,"seq":16,"issue":"#16","date":"Jul 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-17","completed":false,"seq":17,"issue":"#17","date":"Aug 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-18","completed":false,"seq":18,"issue":"#18","date":"Sep 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-19","completed":false,"seq":19,"issue":"#19","date":"Oct 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-20","completed":false,"seq":20,"issue":"#20","date":"Nov 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-21","completed":false,"seq":21,"issue":"#21","date":"Dec 2005","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-22","completed":false,"seq":22,"issue":"#22","date":"Jan 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-23","completed":false,"seq":23,"issue":"#23","date":"Feb 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-24","completed":false,"seq":24,"issue":"#24","date":"Mar 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-25","completed":false,"seq":25,"issue":"#25","date":"Apr 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-26","completed":false,"seq":26,"issue":"#26","date":"May 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-27","completed":false,"seq":27,"issue":"#27","date":"Jun 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-28","completed":false,"seq":28,"issue":"#28","date":"Jul 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-29","completed":false,"seq":29,"issue":"#29","date":"Aug 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-30","completed":false,"seq":30,"issue":"#30","date":"Sep 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-31","completed":false,"seq":31,"issue":"#31","date":"Oct 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-32","completed":false,"seq":32,"issue":"#32","date":"Nov 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-33","completed":false,"seq":33,"issue":"#33","date":"Dec 2006","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-34","completed":false,"seq":34,"issue":"#34","date":"Jan 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-35","completed":false,"seq":35,"issue":"#35","date":"Feb 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-36","completed":false,"seq":36,"issue":"#36","date":"Mar 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-37","completed":false,"seq":37,"issue":"#37","date":"Apr 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-38","completed":false,"seq":38,"issue":"#38","date":"Apr 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-39","completed":false,"seq":39,"issue":"#39","date":"May 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-40","completed":false,"seq":40,"issue":"#40","date":"Jun 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-41","completed":false,"seq":41,"issue":"#41","date":"Jul 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-42","completed":false,"seq":42,"issue":"#42","date":"Aug 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-43","completed":false,"seq":43,"issue":"#43","date":"Sep 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-44","completed":false,"seq":44,"issue":"#44","date":"Oct 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-45","completed":false,"seq":45,"issue":"#45","date":"Nov 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-46","completed":false,"seq":46,"issue":"#46","date":"Dec 2007","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-47","completed":false,"seq":47,"issue":"#47","date":"Jan 2008","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-48","completed":false,"seq":48,"issue":"#48","date":"Feb 2008","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-49","completed":false,"seq":49,"issue":"#49","date":"Mar 2008","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":""},
+  {"id":"cnd-50","completed":false,"seq":50,"issue":"#50","date":"Apr 2008","title":"Cable & Deadpool, the odd couple","creators":"Fabian Nicieza / Patrick Zircher & various","notes":"Final issue."}
+];
+
+const EXI_ITEMS = [
+  {"id":"exi-1","completed":false,"seq":1,"issue":"#1","date":"Aug 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":"Exiles begins — Blink leads a team across shattered realities (Judd Winick)."},
+  {"id":"exi-2","completed":false,"seq":2,"issue":"#2","date":"Sep 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-3","completed":false,"seq":3,"issue":"#3","date":"Oct 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2001","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-9","completed":false,"seq":9,"issue":"#9","date":"Feb 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-10","completed":false,"seq":10,"issue":"#10","date":"Mar 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-11","completed":false,"seq":11,"issue":"#11","date":"Apr 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-12","completed":false,"seq":12,"issue":"#12","date":"May 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-13","completed":false,"seq":13,"issue":"#13","date":"May 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-14","completed":false,"seq":14,"issue":"#14","date":"Jun 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-15","completed":false,"seq":15,"issue":"#15","date":"Jul 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-16","completed":false,"seq":16,"issue":"#16","date":"Aug 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-17","completed":false,"seq":17,"issue":"#17","date":"Sep 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-18","completed":false,"seq":18,"issue":"#18","date":"Sep 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-19","completed":false,"seq":19,"issue":"#19","date":"Oct 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-20","completed":false,"seq":20,"issue":"#20","date":"Nov 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-21","completed":false,"seq":21,"issue":"#21","date":"Dec 2002","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-22","completed":false,"seq":22,"issue":"#22","date":"Jan 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-23","completed":false,"seq":23,"issue":"#23","date":"Jan 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-24","completed":false,"seq":24,"issue":"#24","date":"Feb 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-25","completed":false,"seq":25,"issue":"#25","date":"Mar 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-26","completed":false,"seq":26,"issue":"#26","date":"Apr 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-27","completed":false,"seq":27,"issue":"#27","date":"Apr 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-28","completed":false,"seq":28,"issue":"#28","date":"May 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-29","completed":false,"seq":29,"issue":"#29","date":"Jun 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-30","completed":false,"seq":30,"issue":"#30","date":"Jul 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-31","completed":false,"seq":31,"issue":"#31","date":"Aug 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-32","completed":false,"seq":32,"issue":"#32","date":"Aug 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-33","completed":false,"seq":33,"issue":"#33","date":"Sep 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-34","completed":false,"seq":34,"issue":"#34","date":"Oct 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-35","completed":false,"seq":35,"issue":"#35","date":"Nov 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-36","completed":false,"seq":36,"issue":"#36","date":"Dec 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-37","completed":false,"seq":37,"issue":"#37","date":"Dec 2003","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-38","completed":false,"seq":38,"issue":"#38","date":"Jan 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-39","completed":false,"seq":39,"issue":"#39","date":"Feb 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-40","completed":false,"seq":40,"issue":"#40","date":"Mar 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-41","completed":false,"seq":41,"issue":"#41","date":"Apr 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-42","completed":false,"seq":42,"issue":"#42","date":"Apr 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-43","completed":false,"seq":43,"issue":"#43","date":"May 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-44","completed":false,"seq":44,"issue":"#44","date":"Jun 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-45","completed":false,"seq":45,"issue":"#45","date":"Jul 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-46","completed":false,"seq":46,"issue":"#46","date":"Jul 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-47","completed":false,"seq":47,"issue":"#47","date":"Aug 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-48","completed":false,"seq":48,"issue":"#48","date":"Sep 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-49","completed":false,"seq":49,"issue":"#49","date":"Oct 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-50","completed":false,"seq":50,"issue":"#50","date":"Nov 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-51","completed":false,"seq":51,"issue":"#51","date":"Nov 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-52","completed":false,"seq":52,"issue":"#52","date":"Dec 2004","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-53","completed":false,"seq":53,"issue":"#53","date":"Jan 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-54","completed":false,"seq":54,"issue":"#54","date":"Feb 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-55","completed":false,"seq":55,"issue":"#55","date":"Mar 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-56","completed":false,"seq":56,"issue":"#56","date":"Mar 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-57","completed":false,"seq":57,"issue":"#57","date":"Apr 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-58","completed":false,"seq":58,"issue":"#58","date":"May 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-59","completed":false,"seq":59,"issue":"#59","date":"Jun 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-60","completed":false,"seq":60,"issue":"#60","date":"Jun 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-61","completed":false,"seq":61,"issue":"#61","date":"Jul 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-62","completed":false,"seq":62,"issue":"#62","date":"Aug 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-63","completed":false,"seq":63,"issue":"#63","date":"Sep 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-64","completed":false,"seq":64,"issue":"#64","date":"Oct 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-65","completed":false,"seq":65,"issue":"#65","date":"Oct 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-66","completed":false,"seq":66,"issue":"#66","date":"Nov 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-67","completed":false,"seq":67,"issue":"#67","date":"Dec 2005","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-68","completed":false,"seq":68,"issue":"#68","date":"Jan 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-69","completed":false,"seq":69,"issue":"#69","date":"Feb 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-70","completed":false,"seq":70,"issue":"#70","date":"Feb 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-71","completed":false,"seq":71,"issue":"#71","date":"Mar 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-72","completed":false,"seq":72,"issue":"#72","date":"Apr 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-73","completed":false,"seq":73,"issue":"#73","date":"May 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-74","completed":false,"seq":74,"issue":"#74","date":"Jun 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-75","completed":false,"seq":75,"issue":"#75","date":"Jun 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-76","completed":false,"seq":76,"issue":"#76","date":"Jul 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-77","completed":false,"seq":77,"issue":"#77","date":"Aug 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-78","completed":false,"seq":78,"issue":"#78","date":"Sep 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-79","completed":false,"seq":79,"issue":"#79","date":"Sep 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-80","completed":false,"seq":80,"issue":"#80","date":"Oct 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-81","completed":false,"seq":81,"issue":"#81","date":"Nov 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-82","completed":false,"seq":82,"issue":"#82","date":"Dec 2006","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-83","completed":false,"seq":83,"issue":"#83","date":"Jan 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-84","completed":false,"seq":84,"issue":"#84","date":"Jan 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-85","completed":false,"seq":85,"issue":"#85","date":"Feb 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-86","completed":false,"seq":86,"issue":"#86","date":"Mar 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-87","completed":false,"seq":87,"issue":"#87","date":"Apr 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-88","completed":false,"seq":88,"issue":"#88","date":"May 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-89","completed":false,"seq":89,"issue":"#89","date":"May 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-90","completed":false,"seq":90,"issue":"#90","date":"Jun 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-91","completed":false,"seq":91,"issue":"#91","date":"Jul 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-92","completed":false,"seq":92,"issue":"#92","date":"Aug 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-93","completed":false,"seq":93,"issue":"#93","date":"Aug 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-94","completed":false,"seq":94,"issue":"#94","date":"Sep 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-95","completed":false,"seq":95,"issue":"#95","date":"Oct 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-96","completed":false,"seq":96,"issue":"#96","date":"Nov 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-97","completed":false,"seq":97,"issue":"#97","date":"Dec 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-98","completed":false,"seq":98,"issue":"#98","date":"Dec 2007","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-99","completed":false,"seq":99,"issue":"#99","date":"Jan 2008","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":""},
+  {"id":"exi-100","completed":false,"seq":100,"issue":"#100","date":"Feb 2008","title":"Reality-hopping mutants fixing broken worlds","creators":"Judd Winick, Tony Bedard, Chris Claremont / various","notes":"Final issue of Exiles vol. 1."}
+];
+
+const XST_ITEMS = [
+  {"id":"xst-1","completed":false,"seq":1,"issue":"#1","date":"Sep 2002","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":"X-Statix #1 (continues from X-Force vol. 1); Milligan & Allred."},
+  {"id":"xst-2","completed":false,"seq":2,"issue":"#2","date":"Oct 2002","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-3","completed":false,"seq":3,"issue":"#3","date":"Nov 2002","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-4","completed":false,"seq":4,"issue":"#4","date":"Nov 2002","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-5","completed":false,"seq":5,"issue":"#5","date":"Dec 2002","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-6","completed":false,"seq":6,"issue":"#6","date":"Jan 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-7","completed":false,"seq":7,"issue":"#7","date":"Feb 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-8","completed":false,"seq":8,"issue":"#8","date":"Mar 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-9","completed":false,"seq":9,"issue":"#9","date":"Mar 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-10","completed":false,"seq":10,"issue":"#10","date":"Apr 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-11","completed":false,"seq":11,"issue":"#11","date":"May 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-12","completed":false,"seq":12,"issue":"#12","date":"Jun 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-14","completed":false,"seq":14,"issue":"#14","date":"Jul 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-15","completed":false,"seq":15,"issue":"#15","date":"Aug 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-16","completed":false,"seq":16,"issue":"#16","date":"Sep 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-17","completed":false,"seq":17,"issue":"#17","date":"Oct 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-18","completed":false,"seq":18,"issue":"#18","date":"Nov 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-19","completed":false,"seq":19,"issue":"#19","date":"Nov 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-20","completed":false,"seq":20,"issue":"#20","date":"Dec 2003","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-21","completed":false,"seq":21,"issue":"#21","date":"Jan 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-22","completed":false,"seq":22,"issue":"#22","date":"Feb 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-23","completed":false,"seq":23,"issue":"#23","date":"Mar 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-24","completed":false,"seq":24,"issue":"#24","date":"Mar 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-25","completed":false,"seq":25,"issue":"#25","date":"Apr 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":""},
+  {"id":"xst-26","completed":false,"seq":26,"issue":"#26","date":"May 2004","title":"Celebrity mutant team (ex-X-Force)","creators":"Peter Milligan / Mike Allred","notes":"Final issue."}
+];
+
+const DSX_ITEMS = [
+  {"id":"dsx-1","completed":false,"seq":1,"issue":"#1","date":"Jul 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":"District X begins — Bishop patrols Mutant Town (David Hine)."},
+  {"id":"dsx-2","completed":false,"seq":2,"issue":"#2","date":"Aug 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-3","completed":false,"seq":3,"issue":"#3","date":"Sep 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2004","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-9","completed":false,"seq":9,"issue":"#9","date":"Mar 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-10","completed":false,"seq":10,"issue":"#10","date":"Apr 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-11","completed":false,"seq":11,"issue":"#11","date":"May 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-12","completed":false,"seq":12,"issue":"#12","date":"Jun 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":""},
+  {"id":"dsx-14","completed":false,"seq":14,"issue":"#14","date":"Aug 2005","title":"Bishop polices 'Mutant Town'","creators":"David Hine / David Yardin","notes":"Final issue."}
+];
+
+const WX2_ITEMS = [
+  {"id":"wx2-1","completed":false,"seq":1,"issue":"#1","date":"Nov 2002","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":"Weapon X vol. 2 begins (Frank Tieri)."},
+  {"id":"wx2-2","completed":false,"seq":2,"issue":"#2","date":"Dec 2002","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-3","completed":false,"seq":3,"issue":"#3","date":"Jan 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-4","completed":false,"seq":4,"issue":"#4","date":"Jan 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-5","completed":false,"seq":5,"issue":"#5","date":"Feb 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-6","completed":false,"seq":6,"issue":"#6","date":"Mar 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-7","completed":false,"seq":7,"issue":"#7","date":"Apr 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-8","completed":false,"seq":8,"issue":"#8","date":"May 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-9","completed":false,"seq":9,"issue":"#9","date":"Jun 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-10","completed":false,"seq":10,"issue":"#10","date":"Jun 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-11","completed":false,"seq":11,"issue":"#11","date":"Jul 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-12","completed":false,"seq":12,"issue":"#12","date":"Aug 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-13","completed":false,"seq":13,"issue":"#13","date":"Sep 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-14","completed":false,"seq":14,"issue":"#14","date":"Oct 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-15","completed":false,"seq":15,"issue":"#15","date":"Oct 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-16","completed":false,"seq":16,"issue":"#16","date":"Nov 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-17","completed":false,"seq":17,"issue":"#17","date":"Dec 2003","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-18","completed":false,"seq":18,"issue":"#18","date":"Jan 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-19","completed":false,"seq":19,"issue":"#19","date":"Feb 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-20","completed":false,"seq":20,"issue":"#20","date":"Feb 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-21","completed":false,"seq":21,"issue":"#21","date":"Mar 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-22","completed":false,"seq":22,"issue":"#22","date":"Apr 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-23","completed":false,"seq":23,"issue":"#23","date":"May 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-24","completed":false,"seq":24,"issue":"#24","date":"Jun 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-25","completed":false,"seq":25,"issue":"#25","date":"Jul 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-26","completed":false,"seq":26,"issue":"#26","date":"Jul 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-27","completed":false,"seq":27,"issue":"#27","date":"Aug 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":""},
+  {"id":"wx2-28","completed":false,"seq":28,"issue":"#28","date":"Sep 2004","title":"The revived Weapon X Program","creators":"Frank Tieri / Georges Jeanty","notes":"Final issue."}
+];
+
+const MYS_ITEMS = [
+  {"id":"mys-1","completed":false,"seq":1,"issue":"#1","date":"Jun 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":"Mystique begins — Xavier's covert agent (Brian K. Vaughan)."},
+  {"id":"mys-2","completed":false,"seq":2,"issue":"#2","date":"Jul 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-3","completed":false,"seq":3,"issue":"#3","date":"Aug 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-4","completed":false,"seq":4,"issue":"#4","date":"Sep 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-5","completed":false,"seq":5,"issue":"#5","date":"Oct 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-6","completed":false,"seq":6,"issue":"#6","date":"Nov 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-7","completed":false,"seq":7,"issue":"#7","date":"Dec 2003","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-8","completed":false,"seq":8,"issue":"#8","date":"Jan 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-9","completed":false,"seq":9,"issue":"#9","date":"Feb 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-10","completed":false,"seq":10,"issue":"#10","date":"Mar 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-11","completed":false,"seq":11,"issue":"#11","date":"Apr 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-12","completed":false,"seq":12,"issue":"#12","date":"May 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-14","completed":false,"seq":14,"issue":"#14","date":"Aug 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-15","completed":false,"seq":15,"issue":"#15","date":"Sep 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-16","completed":false,"seq":16,"issue":"#16","date":"Oct 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-17","completed":false,"seq":17,"issue":"#17","date":"Nov 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-18","completed":false,"seq":18,"issue":"#18","date":"Dec 2004","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-19","completed":false,"seq":19,"issue":"#19","date":"Jan 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-20","completed":false,"seq":20,"issue":"#20","date":"Feb 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-21","completed":false,"seq":21,"issue":"#21","date":"Mar 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-22","completed":false,"seq":22,"issue":"#22","date":"Apr 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-23","completed":false,"seq":23,"issue":"#23","date":"May 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":""},
+  {"id":"mys-24","completed":false,"seq":24,"issue":"#24","date":"Jun 2005","title":"Mystique — Xavier's secret agent","creators":"Brian K. Vaughan, Sean McKeever / Jorge Lucas & Manuel Garcia","notes":"Final issue."}
+];
+
+const EMF_ITEMS = [
+  {"id":"emf-1","completed":false,"seq":1,"issue":"#1","date":"Aug 2003","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":"Emma Frost — her teenage years (Karl Bollers)."},
+  {"id":"emf-2","completed":false,"seq":2,"issue":"#2","date":"Sep 2003","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-3","completed":false,"seq":3,"issue":"#3","date":"Oct 2003","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-4","completed":false,"seq":4,"issue":"#4","date":"Nov 2003","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-5","completed":false,"seq":5,"issue":"#5","date":"Dec 2003","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-6","completed":false,"seq":6,"issue":"#6","date":"Jan 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-7","completed":false,"seq":7,"issue":"#7","date":"Feb 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-8","completed":false,"seq":8,"issue":"#8","date":"Mar 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-9","completed":false,"seq":9,"issue":"#9","date":"Apr 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-10","completed":false,"seq":10,"issue":"#10","date":"May 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-11","completed":false,"seq":11,"issue":"#11","date":"Jun 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-12","completed":false,"seq":12,"issue":"#12","date":"Jul 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-13","completed":false,"seq":13,"issue":"#13","date":"Aug 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-14","completed":false,"seq":14,"issue":"#14","date":"Sep 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-15","completed":false,"seq":15,"issue":"#15","date":"Oct 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-16","completed":false,"seq":16,"issue":"#16","date":"Nov 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-17","completed":false,"seq":17,"issue":"#17","date":"Dec 2004","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":""},
+  {"id":"emf-18","completed":false,"seq":18,"issue":"#18","date":"Jan 2005","title":"Young Emma Frost","creators":"Karl Bollers / Randy Green","notes":"Final issue."}
+];
+
+const GM3_ITEMS = [
+  {"id":"gm3-1","completed":false,"seq":1,"issue":"#1","date":"Feb 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":"Gambit's ongoing solo series (Fabian Nicieza & Steve Skroce)."},
+  {"id":"gm3-2","completed":false,"seq":2,"issue":"#2","date":"Mar 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-3","completed":false,"seq":3,"issue":"#3","date":"Apr 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-4","completed":false,"seq":4,"issue":"#4","date":"May 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-5","completed":false,"seq":5,"issue":"#5","date":"Jun 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-6","completed":false,"seq":6,"issue":"#6","date":"Jul 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-7","completed":false,"seq":7,"issue":"#7","date":"Aug 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-8","completed":false,"seq":8,"issue":"#8","date":"Sep 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-9","completed":false,"seq":9,"issue":"#9","date":"Oct 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-10","completed":false,"seq":10,"issue":"#10","date":"Nov 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-11","completed":false,"seq":11,"issue":"#11","date":"Dec 1999","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-12","completed":false,"seq":12,"issue":"#12","date":"Jan 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-13","completed":false,"seq":13,"issue":"#13","date":"Feb 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-14","completed":false,"seq":14,"issue":"#14","date":"Mar 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-15","completed":false,"seq":15,"issue":"#15","date":"Apr 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-16","completed":false,"seq":16,"issue":"#16","date":"May 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-17","completed":false,"seq":17,"issue":"#17","date":"Jun 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-18","completed":false,"seq":18,"issue":"#18","date":"Jul 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-19","completed":false,"seq":19,"issue":"#19","date":"Aug 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-20","completed":false,"seq":20,"issue":"#20","date":"Sep 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-21","completed":false,"seq":21,"issue":"#21","date":"Oct 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-22","completed":false,"seq":22,"issue":"#22","date":"Nov 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-23","completed":false,"seq":23,"issue":"#23","date":"Dec 2000","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-24","completed":false,"seq":24,"issue":"#24","date":"Jan 2001","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":""},
+  {"id":"gm3-25","completed":false,"seq":25,"issue":"#25","date":"Feb 2001","title":"Gambit solo","creators":"Fabian Nicieza / Steve Skroce & various","notes":"Final issue."}
+];
+
+const GM4_ITEMS = [
+  {"id":"gm4-1","completed":false,"seq":1,"issue":"#1","date":"Dec 2004","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":"Gambit's 2004 solo series begins."},
+  {"id":"gm4-2","completed":false,"seq":2,"issue":"#2","date":"Jan 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-3","completed":false,"seq":3,"issue":"#3","date":"Feb 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-4","completed":false,"seq":4,"issue":"#4","date":"Mar 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-5","completed":false,"seq":5,"issue":"#5","date":"Apr 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-6","completed":false,"seq":6,"issue":"#6","date":"May 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-7","completed":false,"seq":7,"issue":"#7","date":"Jun 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-8","completed":false,"seq":8,"issue":"#8","date":"Jul 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-9","completed":false,"seq":9,"issue":"#9","date":"Aug 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-10","completed":false,"seq":10,"issue":"#10","date":"Sep 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-11","completed":false,"seq":11,"issue":"#11","date":"Oct 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":""},
+  {"id":"gm4-12","completed":false,"seq":12,"issue":"#12","date":"Nov 2005","title":"Gambit solo (House of M era)","creators":"John Layman & various / various","notes":"Final issue."}
+];
+
+const BLX_ITEMS = [
+  {"id":"blx-1","completed":false,"seq":1,"issue":"#1","date":"Oct 1999","title":"Bishop lost in the timestream","creators":"various","notes":"Bishop: The Last X-Man begins."},
+  {"id":"blx-2","completed":false,"seq":2,"issue":"#2","date":"Nov 1999","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-3","completed":false,"seq":3,"issue":"#3","date":"Dec 1999","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-4","completed":false,"seq":4,"issue":"#4","date":"Jan 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-5","completed":false,"seq":5,"issue":"#5","date":"Feb 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-6","completed":false,"seq":6,"issue":"#6","date":"Mar 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-7","completed":false,"seq":7,"issue":"#7","date":"Apr 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-8","completed":false,"seq":8,"issue":"#8","date":"May 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-9","completed":false,"seq":9,"issue":"#9","date":"Jun 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-10","completed":false,"seq":10,"issue":"#10","date":"Jul 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-11","completed":false,"seq":11,"issue":"#11","date":"Aug 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-12","completed":false,"seq":12,"issue":"#12","date":"Sep 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-13","completed":false,"seq":13,"issue":"#13","date":"Oct 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-14","completed":false,"seq":14,"issue":"#14","date":"Nov 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-15","completed":false,"seq":15,"issue":"#15","date":"Dec 2000","title":"Bishop lost in the timestream","creators":"various","notes":""},
+  {"id":"blx-16","completed":false,"seq":16,"issue":"#16","date":"Jan 2001","title":"Bishop lost in the timestream","creators":"various","notes":"Final issue."}
+];
+
+const MTX_ITEMS = [
+  {"id":"mtx-1","completed":false,"seq":1,"issue":"#1","date":"Oct 1998","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":"Mutant X begins — Havok in a dark parallel world (Howard Mackie)."},
+  {"id":"mtx-2","completed":false,"seq":2,"issue":"#2","date":"Nov 1998","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-3","completed":false,"seq":3,"issue":"#3","date":"Dec 1998","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-4","completed":false,"seq":4,"issue":"#4","date":"Jan 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-5","completed":false,"seq":5,"issue":"#5","date":"Feb 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-6","completed":false,"seq":6,"issue":"#6","date":"Mar 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-7","completed":false,"seq":7,"issue":"#7","date":"Apr 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-8","completed":false,"seq":8,"issue":"#8","date":"May 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-9","completed":false,"seq":9,"issue":"#9","date":"Jun 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-10","completed":false,"seq":10,"issue":"#10","date":"Jul 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-11","completed":false,"seq":11,"issue":"#11","date":"Aug 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-12","completed":false,"seq":12,"issue":"#12","date":"Sep 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-13","completed":false,"seq":13,"issue":"#13","date":"Oct 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-14","completed":false,"seq":14,"issue":"#14","date":"Nov 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-15","completed":false,"seq":15,"issue":"#15","date":"Dec 1999","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-16","completed":false,"seq":16,"issue":"#16","date":"Jan 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-17","completed":false,"seq":17,"issue":"#17","date":"Mar 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-18","completed":false,"seq":18,"issue":"#18","date":"Apr 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-19","completed":false,"seq":19,"issue":"#19","date":"May 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-20","completed":false,"seq":20,"issue":"#20","date":"Jun 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-21","completed":false,"seq":21,"issue":"#21","date":"Jul 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-22","completed":false,"seq":22,"issue":"#22","date":"Aug 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-23","completed":false,"seq":23,"issue":"#23","date":"Sep 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-24","completed":false,"seq":24,"issue":"#24","date":"Oct 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-25","completed":false,"seq":25,"issue":"#25","date":"Nov 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-26","completed":false,"seq":26,"issue":"#26","date":"Dec 2000","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-27","completed":false,"seq":27,"issue":"#27","date":"Jan 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-28","completed":false,"seq":28,"issue":"#28","date":"Feb 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-29","completed":false,"seq":29,"issue":"#29","date":"Mar 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-30","completed":false,"seq":30,"issue":"#30","date":"Apr 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-31","completed":false,"seq":31,"issue":"#31","date":"May 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-32","completed":false,"seq":32,"issue":"#32","date":"Jun 2001","title":"Havok trapped in a parallel world","creators":"Howard Mackie / various","notes":"Final issue."},
+  {"id":"mtx-ann1","completed":false,"seq":33,"issue":"Annual 1999","date":"1999","title":"Havok trapped in a parallel world — annual","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-ann2","completed":false,"seq":34,"issue":"Annual 2000","date":"2000","title":"Havok trapped in a parallel world — annual","creators":"Howard Mackie / various","notes":""},
+  {"id":"mtx-ann3","completed":false,"seq":35,"issue":"Annual 2001","date":"2001","title":"Havok trapped in a parallel world — annual","creators":"Howard Mackie / various","notes":""}
+];
+
+const NM2_ITEMS = [
+  {"id":"nm2-1","completed":false,"seq":1,"issue":"#1","date":"Jul 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":"New Mutants vol. 2 — a new generation of students."},
+  {"id":"nm2-2","completed":false,"seq":2,"issue":"#2","date":"Aug 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-3","completed":false,"seq":3,"issue":"#3","date":"Sep 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2003","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-9","completed":false,"seq":9,"issue":"#9","date":"Mar 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-10","completed":false,"seq":10,"issue":"#10","date":"Apr 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-11","completed":false,"seq":11,"issue":"#11","date":"May 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-12","completed":false,"seq":12,"issue":"#12","date":"Jun 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":""},
+  {"id":"nm2-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2004","title":"A new class at the Xavier Institute","creators":"Nunzio DeFilippis & Christina Weir / Keron Grant","notes":"Final issue; relaunches as New X-Men: Academy X."}
+];
+
+const NXA_ITEMS = [
+  {"id":"nxa-1","completed":false,"seq":1,"issue":"#1","date":"Aug 2004","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":"New X-Men: Academy X begins (retitled New X-Men from #20)."},
+  {"id":"nxa-2","completed":false,"seq":2,"issue":"#2","date":"Sep 2004","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-3","completed":false,"seq":3,"issue":"#3","date":"Oct 2004","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-4","completed":false,"seq":4,"issue":"#4","date":"Nov 2004","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-5","completed":false,"seq":5,"issue":"#5","date":"Dec 2004","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-6","completed":false,"seq":6,"issue":"#6","date":"Jan 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-7","completed":false,"seq":7,"issue":"#7","date":"Feb 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-8","completed":false,"seq":8,"issue":"#8","date":"Mar 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-9","completed":false,"seq":9,"issue":"#9","date":"Apr 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-10","completed":false,"seq":10,"issue":"#10","date":"May 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-11","completed":false,"seq":11,"issue":"#11","date":"Jun 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-12","completed":false,"seq":12,"issue":"#12","date":"Jul 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-13","completed":false,"seq":13,"issue":"#13","date":"Jul 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-14","completed":false,"seq":14,"issue":"#14","date":"Aug 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-15","completed":false,"seq":15,"issue":"#15","date":"Sep 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-16","completed":false,"seq":16,"issue":"#16","date":"Oct 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-17","completed":false,"seq":17,"issue":"#17","date":"Nov 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-18","completed":false,"seq":18,"issue":"#18","date":"Dec 2005","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-19","completed":false,"seq":19,"issue":"#19","date":"Jan 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-20","completed":false,"seq":20,"issue":"#20","date":"Feb 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-21","completed":false,"seq":21,"issue":"#21","date":"Mar 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-22","completed":false,"seq":22,"issue":"#22","date":"Apr 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-23","completed":false,"seq":23,"issue":"#23","date":"May 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-24","completed":false,"seq":24,"issue":"#24","date":"Jun 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-25","completed":false,"seq":25,"issue":"#25","date":"Jul 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-26","completed":false,"seq":26,"issue":"#26","date":"Aug 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-27","completed":false,"seq":27,"issue":"#27","date":"Sep 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-28","completed":false,"seq":28,"issue":"#28","date":"Oct 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-29","completed":false,"seq":29,"issue":"#29","date":"Nov 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-30","completed":false,"seq":30,"issue":"#30","date":"Dec 2006","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-31","completed":false,"seq":31,"issue":"#31","date":"Jan 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-32","completed":false,"seq":32,"issue":"#32","date":"Feb 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-33","completed":false,"seq":33,"issue":"#33","date":"Mar 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-34","completed":false,"seq":34,"issue":"#34","date":"Apr 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-35","completed":false,"seq":35,"issue":"#35","date":"Apr 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-36","completed":false,"seq":36,"issue":"#36","date":"May 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-37","completed":false,"seq":37,"issue":"#37","date":"Jun 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-38","completed":false,"seq":38,"issue":"#38","date":"Jul 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-39","completed":false,"seq":39,"issue":"#39","date":"Aug 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-40","completed":false,"seq":40,"issue":"#40","date":"Sep 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-41","completed":false,"seq":41,"issue":"#41","date":"Oct 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-42","completed":false,"seq":42,"issue":"#42","date":"Nov 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-43","completed":false,"seq":43,"issue":"#43","date":"Dec 2007","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-44","completed":false,"seq":44,"issue":"#44","date":"Jan 2008","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-45","completed":false,"seq":45,"issue":"#45","date":"Feb 2008","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":""},
+  {"id":"nxa-46","completed":false,"seq":46,"issue":"#46","date":"Mar 2008","title":"The next generation of students","creators":"DeFilippis & Weir, then Kyle & Yost / various","notes":"Final issue (Kyle & Yost's 'Childhood's End')."}
+];
+
+const RG3_ITEMS = [
+  {"id":"rg3-1","completed":false,"seq":1,"issue":"#1","date":"Oct 2004","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":"Rogue's 2004 solo series begins."},
+  {"id":"rg3-2","completed":false,"seq":2,"issue":"#2","date":"Nov 2004","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-3","completed":false,"seq":3,"issue":"#3","date":"Dec 2004","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-4","completed":false,"seq":4,"issue":"#4","date":"Jan 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-5","completed":false,"seq":5,"issue":"#5","date":"Feb 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-6","completed":false,"seq":6,"issue":"#6","date":"Mar 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-7","completed":false,"seq":7,"issue":"#7","date":"Apr 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-8","completed":false,"seq":8,"issue":"#8","date":"May 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-9","completed":false,"seq":9,"issue":"#9","date":"Jun 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-10","completed":false,"seq":10,"issue":"#10","date":"Jul 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-11","completed":false,"seq":11,"issue":"#11","date":"Aug 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":""},
+  {"id":"rg3-12","completed":false,"seq":12,"issue":"#12","date":"Sep 2005","title":"Rogue solo","creators":"Robert Rodi / Cliff Richards","notes":"Final issue."}
+];
+
+const NC3_ITEMS = [
+  {"id":"nc3-1","completed":false,"seq":1,"issue":"#1","date":"Nov 2004","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":"Nightcrawler's 2004 solo series begins."},
+  {"id":"nc3-2","completed":false,"seq":2,"issue":"#2","date":"Dec 2004","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-3","completed":false,"seq":3,"issue":"#3","date":"Jan 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-4","completed":false,"seq":4,"issue":"#4","date":"Feb 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-5","completed":false,"seq":5,"issue":"#5","date":"Mar 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-6","completed":false,"seq":6,"issue":"#6","date":"Apr 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-7","completed":false,"seq":7,"issue":"#7","date":"Jun 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-8","completed":false,"seq":8,"issue":"#8","date":"Jul 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-9","completed":false,"seq":9,"issue":"#9","date":"Aug 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-10","completed":false,"seq":10,"issue":"#10","date":"Sep 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-11","completed":false,"seq":11,"issue":"#11","date":"Oct 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":""},
+  {"id":"nc3-12","completed":false,"seq":12,"issue":"#12","date":"Nov 2005","title":"Nightcrawler solo","creators":"Roberto Aguirre-Sacasa / Darick Robertson","notes":"Final issue."}
+];
+
+const SLDX_ITEMS = [
+  {"id":"sldx-1","completed":false,"seq":1,"issue":"#1","date":"Sep 2002","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":"Soldier X begins (continues Cable vol. 1; Darko Macan)."},
+  {"id":"sldx-2","completed":false,"seq":2,"issue":"#2","date":"Oct 2002","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-3","completed":false,"seq":3,"issue":"#3","date":"Nov 2002","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-4","completed":false,"seq":4,"issue":"#4","date":"Dec 2002","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-5","completed":false,"seq":5,"issue":"#5","date":"Jan 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-6","completed":false,"seq":6,"issue":"#6","date":"Feb 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-7","completed":false,"seq":7,"issue":"#7","date":"Mar 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-8","completed":false,"seq":8,"issue":"#8","date":"Apr 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-9","completed":false,"seq":9,"issue":"#9","date":"May 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-10","completed":false,"seq":10,"issue":"#10","date":"Jun 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-11","completed":false,"seq":11,"issue":"#11","date":"Jul 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":""},
+  {"id":"sldx-12","completed":false,"seq":12,"issue":"#12","date":"Aug 2003","title":"Cable as Soldier X","creators":"Darko Macan / Igor Kordey","notes":"Final issue."}
+];
+
+const SNT_ITEMS = [
+  {"id":"snt-1","completed":false,"seq":1,"issue":"#1","date":"Jun 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":"Sentinel begins — Juston Seyfert & his salvaged Sentinel (Sean McKeever)."},
+  {"id":"snt-2","completed":false,"seq":2,"issue":"#2","date":"Jul 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-3","completed":false,"seq":3,"issue":"#3","date":"Aug 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-5","completed":false,"seq":5,"issue":"#5","date":"Nov 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-6","completed":false,"seq":6,"issue":"#6","date":"Dec 2003","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-7","completed":false,"seq":7,"issue":"#7","date":"Jan 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-8","completed":false,"seq":8,"issue":"#8","date":"Feb 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-9","completed":false,"seq":9,"issue":"#9","date":"Mar 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-10","completed":false,"seq":10,"issue":"#10","date":"May 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-11","completed":false,"seq":11,"issue":"#11","date":"Jun 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":""},
+  {"id":"snt-12","completed":false,"seq":12,"issue":"#12","date":"Jul 2004","title":"A boy and his Sentinel","creators":"Sean McKeever / UDON","notes":"Final issue."}
+];
+
+const X23_ITEMS = [
+  {"id":"x23-1","completed":false,"seq":1,"issue":"#1","date":"Mar 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":"X-23: Innocence Lost — Laura Kinney's origin (Kyle & Yost)."},
+  {"id":"x23-2","completed":false,"seq":2,"issue":"#2","date":"Apr 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":""},
+  {"id":"x23-3","completed":false,"seq":3,"issue":"#3","date":"May 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":""},
+  {"id":"x23-4","completed":false,"seq":4,"issue":"#4","date":"Jun 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":""},
+  {"id":"x23-5","completed":false,"seq":5,"issue":"#5","date":"Jul 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":""},
+  {"id":"x23-6","completed":false,"seq":6,"issue":"#6","date":"Aug 2005","title":"X-23's origin","creators":"Craig Kyle & Christopher Yost / Billy Tan","notes":"Conclusion."}
+];
+
+const MDX_ITEMS = [
+  {"id":"mdx-1","completed":false,"seq":1,"issue":"#1","date":"Sep 2004","title":"Multiple Man, P.I.","creators":"Peter David / Pablo Raimondi","notes":"Madrox — Jamie Madrox as a detective (Peter David); leads into X-Factor Investigations."},
+  {"id":"mdx-2","completed":false,"seq":2,"issue":"#2","date":"Oct 2004","title":"Multiple Man, P.I.","creators":"Peter David / Pablo Raimondi","notes":""},
+  {"id":"mdx-3","completed":false,"seq":3,"issue":"#3","date":"Nov 2004","title":"Multiple Man, P.I.","creators":"Peter David / Pablo Raimondi","notes":""},
+  {"id":"mdx-4","completed":false,"seq":4,"issue":"#4","date":"Dec 2004","title":"Multiple Man, P.I.","creators":"Peter David / Pablo Raimondi","notes":""},
+  {"id":"mdx-5","completed":false,"seq":5,"issue":"#5","date":"Jan 2005","title":"Multiple Man, P.I.","creators":"Peter David / Pablo Raimondi","notes":"Conclusion."}
+];
+
+const HEL_ITEMS = [
+  {"id":"hel-1","completed":false,"seq":1,"issue":"#1","date":"Jul 2005","title":"The Hellions squad","creators":"Nunzio DeFilippis & Christina Weir / Clayton Henry","notes":"New X-Men: Hellions — the rival student squad."},
+  {"id":"hel-2","completed":false,"seq":2,"issue":"#2","date":"Aug 2005","title":"The Hellions squad","creators":"Nunzio DeFilippis & Christina Weir / Clayton Henry","notes":""},
+  {"id":"hel-3","completed":false,"seq":3,"issue":"#3","date":"Sep 2005","title":"The Hellions squad","creators":"Nunzio DeFilippis & Christina Weir / Clayton Henry","notes":""},
+  {"id":"hel-4","completed":false,"seq":4,"issue":"#4","date":"Oct 2005","title":"The Hellions squad","creators":"Nunzio DeFilippis & Christina Weir / Clayton Henry","notes":"Conclusion."}
+];
+
+const DP3_COLLECTION = {
+  id:'deadpool-1997', name:"Deadpool (1997)",
+  description:"Deadpool (vol. 3, 1997–2002): the complete #1–69 — Wade Wilson's first ongoing, incl. Joe Kelly's run.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: DP3_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const CND_COLLECTION = {
+  id:'cable-deadpool', name:"Cable & Deadpool (2004)",
+  description:"Cable & Deadpool (2004–2008): the complete #1–50, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: CND_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const EXI_COLLECTION = {
+  id:'exiles-2001', name:"Exiles (2001)",
+  description:"Exiles (vol. 1, 2001–2008): the complete #1–100 — reality-hopping mutants, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: EXI_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const XST_COLLECTION = {
+  id:'x-statix', name:"X-Statix (2002)",
+  description:"X-Statix (2002–2004): the complete #1–26 — Milligan & Allred's satirical celebrity mutants.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: XST_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const DSX_COLLECTION = {
+  id:'district-x', name:"District X (2004)",
+  description:"District X (2004–2005): the complete #1–14 — Bishop in Mutant Town, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: DSX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const WX2_COLLECTION = {
+  id:'weapon-x-2002', name:"Weapon X (2002)",
+  description:"Weapon X (vol. 2, 2002–2004): the complete #1–28 — the Weapon X Program, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: WX2_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MYS_COLLECTION = {
+  id:'mystique', name:"Mystique (2003)",
+  description:"Mystique (2003–2005): the complete #1–24, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: MYS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const EMF_COLLECTION = {
+  id:'emma-frost', name:"Emma Frost (2003)",
+  description:"Emma Frost (2003–2005): the complete #1–18 — Emma's youth, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: EMF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const GM3_COLLECTION = {
+  id:'gambit-1999', name:"Gambit (1999)",
+  description:"Gambit (vol. 3, 1999–2001): the complete #1–25, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: GM3_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const GM4_COLLECTION = {
+  id:'gambit-2004', name:"Gambit (2004)",
+  description:"Gambit (vol. 4, 2004–2005): the complete #1–12, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: GM4_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const BLX_COLLECTION = {
+  id:'bishop-last', name:"Bishop: The Last X-Man (1999)",
+  description:"Bishop: The Last X-Man (1999–2001): the complete #1–16, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: BLX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MTX_COLLECTION = {
+  id:'mutant-x', name:"Mutant X (1998)",
+  description:"Mutant X (1998–2001): the complete #1–32 plus the three annuals, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: MTX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const NM2_COLLECTION = {
+  id:'new-mutants-2003', name:"New Mutants (2003)",
+  description:"New Mutants (vol. 2, 2003–2004): the complete #1–13, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: NM2_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const NXA_COLLECTION = {
+  id:'new-x-men-academy', name:"New X-Men: Academy X (2004)",
+  description:"New X-Men: Academy X (2004–2008): the complete #1–46 (New Mutants successor), in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: NXA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const RG3_COLLECTION = {
+  id:'rogue-2004', name:"Rogue (2004)",
+  description:"Rogue (vol. 3, 2004–2005): the complete #1–12, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: RG3_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const NC3_COLLECTION = {
+  id:'nightcrawler-2004', name:"Nightcrawler (2004)",
+  description:"Nightcrawler (vol. 3, 2004–2005): the complete #1–12, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: NC3_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const SLDX_COLLECTION = {
+  id:'soldier-x', name:"Soldier X (2002)",
+  description:"Soldier X (2002–2003): the complete #1–12 — Cable's series continued, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: SLDX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const SNT_COLLECTION = {
+  id:'sentinel-2003', name:"Sentinel (2003)",
+  description:"Sentinel (vol. 1, 2003–2004): the complete #1–12, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: SNT_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const X23_COLLECTION = {
+  id:'x23-2005', name:"X-23 (2005)",
+  description:"X-23 (2005): the complete six-issue 'Innocence Lost' origin, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: X23_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MDX_COLLECTION = {
+  id:'madrox', name:"Madrox (2004)",
+  description:"Madrox (2004–2005): the complete five-issue mini (→ X-Factor Investigations), in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: MDX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const HEL_COLLECTION = {
+  id:'hellions', name:"New X-Men: Hellions (2005)",
+  description:"New X-Men: Hellions (2005): the complete four-issue mini, in cover-date order.",
+  category:'reading', icon:'\U0001F4DA', checks: COMIC_CHECKS,
+  fields: XFAM_FIELDS, items: HEL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -3582,6 +4353,28 @@ function load() {
   if (!collections.find(c=>c.id==='x-force')) { collections.push(XFOR_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='cable')) { collections.push(CABLE_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='x-man')) { collections.push(XMAN_COLLECTION); save(); }
+  // Seed X-Men-family series (batch 2) if missing
+  if (!collections.find(c=>c.id==='deadpool-1997')) { collections.push(DP3_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='cable-deadpool')) { collections.push(CND_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='exiles-2001')) { collections.push(EXI_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='x-statix')) { collections.push(XST_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='district-x')) { collections.push(DSX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='weapon-x-2002')) { collections.push(WX2_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='mystique')) { collections.push(MYS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='emma-frost')) { collections.push(EMF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='gambit-1999')) { collections.push(GM3_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='gambit-2004')) { collections.push(GM4_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='bishop-last')) { collections.push(BLX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='mutant-x')) { collections.push(MTX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='new-mutants-2003')) { collections.push(NM2_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='new-x-men-academy')) { collections.push(NXA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='rogue-2004')) { collections.push(RG3_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='nightcrawler-2004')) { collections.push(NC3_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='soldier-x')) { collections.push(SLDX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='sentinel-2003')) { collections.push(SNT_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='x23-2005')) { collections.push(X23_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='madrox')) { collections.push(MDX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='hellions')) { collections.push(HEL_COLLECTION); save(); }
   // Add dual "Read / Collected" checks to comic collections that predate them.
   // Any prior single check-off is carried over as "Read".
   for (const id of DUAL_CHECK_IDS) {
@@ -3755,6 +4548,27 @@ const COLLECTION_PATHS = {
   'x-force': ['Reading','Marvel','X-Men'],
   'cable': ['Reading','Marvel','X-Men'],
   'x-man': ['Reading','Marvel','X-Men'],
+  'deadpool-1997': ['Reading','Marvel','X-Men'],
+  'cable-deadpool': ['Reading','Marvel','X-Men'],
+  'exiles-2001': ['Reading','Marvel','X-Men'],
+  'x-statix': ['Reading','Marvel','X-Men'],
+  'district-x': ['Reading','Marvel','X-Men'],
+  'weapon-x-2002': ['Reading','Marvel','X-Men'],
+  'mystique': ['Reading','Marvel','X-Men'],
+  'emma-frost': ['Reading','Marvel','X-Men'],
+  'gambit-1999': ['Reading','Marvel','X-Men'],
+  'gambit-2004': ['Reading','Marvel','X-Men'],
+  'bishop-last': ['Reading','Marvel','X-Men'],
+  'mutant-x': ['Reading','Marvel','X-Men'],
+  'new-mutants-2003': ['Reading','Marvel','X-Men'],
+  'new-x-men-academy': ['Reading','Marvel','X-Men'],
+  'rogue-2004': ['Reading','Marvel','X-Men'],
+  'nightcrawler-2004': ['Reading','Marvel','X-Men'],
+  'soldier-x': ['Reading','Marvel','X-Men'],
+  'sentinel-2003': ['Reading','Marvel','X-Men'],
+  'x23-2005': ['Reading','Marvel','X-Men'],
+  'madrox': ['Reading','Marvel','X-Men'],
+  'hellions': ['Reading','Marvel','X-Men'],
   'mario-franchise':  ['Gaming'],
   'steam-library':    ['Gaming'],
   'wwf-ppv-history':  ['Watching'],
