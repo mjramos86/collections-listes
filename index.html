@@ -301,7 +301,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -4746,6 +4746,451 @@ const LS00_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Crossover events (batch 4) seed data ───────────────────────
+// ── Crossover-event fieldset ───────────────────────────────────
+const EVENT_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'series',label:'Title',type:'text'},
+  {key:'issue',label:'Issue',type:'text'},
+  {key:'date',label:'Cover Date',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+
+const MM_ITEMS = [
+  {"id":"mm-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#210","date":"Oct 1986","notes":""},
+  {"id":"mm-2","completed":false,"seq":2,"series":"X-Factor","issue":"#9","date":"Oct 1986","notes":""},
+  {"id":"mm-3","completed":false,"seq":3,"series":"Uncanny X-Men","issue":"#211","date":"Nov 1986","notes":""},
+  {"id":"mm-4","completed":false,"seq":4,"series":"X-Factor","issue":"#10","date":"Nov 1986","notes":""},
+  {"id":"mm-5","completed":false,"seq":5,"series":"New Mutants","issue":"#46","date":"Nov 1986","notes":""},
+  {"id":"mm-6","completed":false,"seq":6,"series":"Uncanny X-Men","issue":"#212","date":"Nov 1986","notes":""},
+  {"id":"mm-7","completed":false,"seq":7,"series":"X-Factor","issue":"#11","date":"Nov 1986","notes":""},
+  {"id":"mm-8","completed":false,"seq":8,"series":"Uncanny X-Men","issue":"#213","date":"Dec 1986","notes":""},
+  {"id":"mm-9","completed":false,"seq":9,"series":"New Mutants","issue":"#47","date":"Dec 1986","notes":""},
+  {"id":"mm-10","completed":false,"seq":10,"series":"Uncanny X-Men","issue":"#214","date":"Dec 1986","notes":""},
+  {"id":"mm-11","completed":false,"seq":11,"series":"X-Factor","issue":"#12","date":"Jan 1987","notes":""},
+  {"id":"mm-12","completed":false,"seq":12,"series":"X-Factor","issue":"#13","date":"Jan 1987","notes":""},
+  {"id":"mm-13","completed":false,"seq":13,"series":"X-Factor","issue":"#14","date":"Jan 1987","notes":""},
+  {"id":"mm-14","completed":false,"seq":14,"series":"X-Factor","issue":"#15","date":"Jan 1987","notes":""},
+  {"id":"mm-15","completed":false,"seq":15,"series":"X-Factor","issue":"#16","date":"Jan 1987","notes":""},
+  {"id":"mm-16","completed":false,"seq":16,"series":"X-Factor","issue":"#17","date":"Feb 1987","notes":""},
+  {"id":"mm-17","completed":false,"seq":17,"series":"Uncanny X-Men","issue":"#215","date":"Feb 1987","notes":""},
+  {"id":"mm-18","completed":false,"seq":18,"series":"Uncanny X-Men","issue":"#216","date":"Feb 1987","notes":""},
+  {"id":"mm-19","completed":false,"seq":19,"series":"Uncanny X-Men","issue":"#217","date":"Mar 1987","notes":""},
+  {"id":"mm-20","completed":false,"seq":20,"series":"Uncanny X-Men","issue":"#218","date":"Mar 1987","notes":""},
+  {"id":"mm-21","completed":false,"seq":21,"series":"Uncanny X-Men","issue":"#219","date":"Mar 1987","notes":""}
+];
+
+const FOM_ITEMS = [
+  {"id":"fom-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#225","date":"Jan 1988","notes":""},
+  {"id":"fom-2","completed":false,"seq":2,"series":"Uncanny X-Men","issue":"#226","date":"Jan 1988","notes":""},
+  {"id":"fom-3","completed":false,"seq":3,"series":"Uncanny X-Men","issue":"#227","date":"Jan 1988","notes":""},
+  {"id":"fom-4","completed":false,"seq":4,"series":"New Mutants","issue":"#58","date":"Feb 1988","notes":""},
+  {"id":"fom-5","completed":false,"seq":5,"series":"New Mutants","issue":"#59","date":"Feb 1988","notes":""},
+  {"id":"fom-6","completed":false,"seq":6,"series":"New Mutants","issue":"#60","date":"Feb 1988","notes":""},
+  {"id":"fom-7","completed":false,"seq":7,"series":"X-Factor","issue":"#24","date":"Feb 1988","notes":""},
+  {"id":"fom-8","completed":false,"seq":8,"series":"X-Factor","issue":"#25","date":"Mar 1988","notes":""},
+  {"id":"fom-9","completed":false,"seq":9,"series":"New Mutants","issue":"#61","date":"Mar 1988","notes":""},
+  {"id":"fom-10","completed":false,"seq":10,"series":"X-Factor","issue":"#26","date":"Mar 1988","notes":""}
+];
+
+const INF_ITEMS = [
+  {"id":"inf-1","completed":false,"seq":1,"series":"X-Factor","issue":"#33","date":"Nov 1988","notes":""},
+  {"id":"inf-2","completed":false,"seq":2,"series":"X-Terminators","issue":"#1","date":"Nov 1988","notes":""},
+  {"id":"inf-3","completed":false,"seq":3,"series":"X-Factor","issue":"#34","date":"Nov 1988","notes":""},
+  {"id":"inf-4","completed":false,"seq":4,"series":"X-Terminators","issue":"#2","date":"Dec 1988","notes":""},
+  {"id":"inf-5","completed":false,"seq":5,"series":"Uncanny X-Men","issue":"#239","date":"Dec 1988","notes":""},
+  {"id":"inf-6","completed":false,"seq":6,"series":"X-Factor","issue":"#35","date":"Dec 1988","notes":""},
+  {"id":"inf-7","completed":false,"seq":7,"series":"X-Terminators","issue":"#3","date":"Jan 1989","notes":""},
+  {"id":"inf-8","completed":false,"seq":8,"series":"New Mutants","issue":"#71","date":"Jan 1989","notes":""},
+  {"id":"inf-9","completed":false,"seq":9,"series":"X-Factor","issue":"#36","date":"Jan 1989","notes":""},
+  {"id":"inf-10","completed":false,"seq":10,"series":"Uncanny X-Men","issue":"#240","date":"Jan 1989","notes":""},
+  {"id":"inf-11","completed":false,"seq":11,"series":"Uncanny X-Men","issue":"#241","date":"Jan 1989","notes":""},
+  {"id":"inf-12","completed":false,"seq":12,"series":"X-Terminators","issue":"#4","date":"Feb 1989","notes":""},
+  {"id":"inf-13","completed":false,"seq":13,"series":"New Mutants","issue":"#72","date":"Feb 1989","notes":""},
+  {"id":"inf-14","completed":false,"seq":14,"series":"New Mutants","issue":"#73","date":"Feb 1989","notes":""},
+  {"id":"inf-15","completed":false,"seq":15,"series":"Excalibur","issue":"#6","date":"Mar 1989","notes":""},
+  {"id":"inf-16","completed":false,"seq":16,"series":"Excalibur","issue":"#7","date":"Mar 1989","notes":""},
+  {"id":"inf-17","completed":false,"seq":17,"series":"X-Factor","issue":"#37","date":"Mar 1989","notes":""},
+  {"id":"inf-18","completed":false,"seq":18,"series":"Uncanny X-Men","issue":"#242","date":"Mar 1989","notes":""},
+  {"id":"inf-19","completed":false,"seq":19,"series":"X-Factor","issue":"#38","date":"Mar 1989","notes":""},
+  {"id":"inf-20","completed":false,"seq":20,"series":"Uncanny X-Men","issue":"#243","date":"Apr 1989","notes":""},
+  {"id":"inf-21","completed":false,"seq":21,"series":"X-Factor","issue":"#39","date":"Apr 1989","notes":""}
+];
+
+const DOFP_ITEMS = [
+  {"id":"dofp-1","completed":false,"seq":1,"series":"Fantastic Four Annual","issue":"#23","date":"Jan 1990","notes":""},
+  {"id":"dofp-2","completed":false,"seq":2,"series":"New Mutants Annual","issue":"#6","date":"Mar 1990","notes":""},
+  {"id":"dofp-3","completed":false,"seq":3,"series":"X-Factor Annual","issue":"#5","date":"Apr 1990","notes":""},
+  {"id":"dofp-4","completed":false,"seq":4,"series":"Uncanny X-Men Annual","issue":"#14","date":"Jun 1990","notes":""}
+];
+
+const XTA_ITEMS = [
+  {"id":"xta-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#270","date":"Nov 1990","notes":""},
+  {"id":"xta-2","completed":false,"seq":2,"series":"New Mutants","issue":"#95","date":"Nov 1990","notes":""},
+  {"id":"xta-3","completed":false,"seq":3,"series":"X-Factor","issue":"#60","date":"Nov 1990","notes":""},
+  {"id":"xta-4","completed":false,"seq":4,"series":"Uncanny X-Men","issue":"#271","date":"Dec 1990","notes":""},
+  {"id":"xta-5","completed":false,"seq":5,"series":"New Mutants","issue":"#96","date":"Dec 1990","notes":""},
+  {"id":"xta-6","completed":false,"seq":6,"series":"X-Factor","issue":"#61","date":"Dec 1990","notes":""},
+  {"id":"xta-7","completed":false,"seq":7,"series":"Uncanny X-Men","issue":"#272","date":"Jan 1991","notes":""},
+  {"id":"xta-8","completed":false,"seq":8,"series":"New Mutants","issue":"#97","date":"Jan 1991","notes":""},
+  {"id":"xta-9","completed":false,"seq":9,"series":"X-Factor","issue":"#62","date":"Jan 1991","notes":""}
+];
+
+const MIS_ITEMS = [
+  {"id":"mis-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#278","date":"Jul 1991","notes":""},
+  {"id":"mis-2","completed":false,"seq":2,"series":"Uncanny X-Men","issue":"#279","date":"Jul 1991","notes":""},
+  {"id":"mis-3","completed":false,"seq":3,"series":"X-Factor","issue":"#69","date":"Aug 1991","notes":""},
+  {"id":"mis-4","completed":false,"seq":4,"series":"Uncanny X-Men","issue":"#280","date":"Sep 1991","notes":""},
+  {"id":"mis-5","completed":false,"seq":5,"series":"X-Factor","issue":"#70","date":"Sep 1991","notes":""}
+];
+
+const XCS_ITEMS = [
+  {"id":"xcs-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#294","date":"Nov 1992","notes":""},
+  {"id":"xcs-2","completed":false,"seq":2,"series":"X-Factor","issue":"#84","date":"Nov 1992","notes":""},
+  {"id":"xcs-3","completed":false,"seq":3,"series":"X-Men","issue":"#14","date":"Nov 1992","notes":""},
+  {"id":"xcs-4","completed":false,"seq":4,"series":"X-Force","issue":"#16","date":"Dec 1992","notes":""},
+  {"id":"xcs-5","completed":false,"seq":5,"series":"Uncanny X-Men","issue":"#295","date":"Dec 1992","notes":""},
+  {"id":"xcs-6","completed":false,"seq":6,"series":"X-Factor","issue":"#85","date":"Dec 1992","notes":""},
+  {"id":"xcs-7","completed":false,"seq":7,"series":"X-Men","issue":"#15","date":"Dec 1992","notes":""},
+  {"id":"xcs-8","completed":false,"seq":8,"series":"X-Force","issue":"#17","date":"Jan 1993","notes":""},
+  {"id":"xcs-9","completed":false,"seq":9,"series":"Uncanny X-Men","issue":"#296","date":"Jan 1993","notes":""},
+  {"id":"xcs-10","completed":false,"seq":10,"series":"X-Factor","issue":"#86","date":"Jan 1993","notes":""},
+  {"id":"xcs-11","completed":false,"seq":11,"series":"X-Men","issue":"#16","date":"Jan 1993","notes":""},
+  {"id":"xcs-12","completed":false,"seq":12,"series":"X-Force","issue":"#18","date":"Feb 1993","notes":""},
+  {"id":"xcs-13","completed":false,"seq":13,"series":"Stryfe's Strike File","issue":"#1","date":"Feb 1993","notes":""},
+  {"id":"xcs-14","completed":false,"seq":14,"series":"Uncanny X-Men","issue":"#297","date":"Feb 1993","notes":""}
+];
+
+const FA_ITEMS = [
+  {"id":"fa-1","completed":false,"seq":1,"series":"X-Factor","issue":"#92","date":"Oct 1993","notes":""},
+  {"id":"fa-2","completed":false,"seq":2,"series":"Uncanny X-Men","issue":"#304","date":"Nov 1993","notes":""},
+  {"id":"fa-3","completed":false,"seq":3,"series":"X-Men","issue":"#25","date":"Nov 1993","notes":""},
+  {"id":"fa-4","completed":false,"seq":4,"series":"Wolverine","issue":"#75","date":"Nov 1993","notes":""},
+  {"id":"fa-5","completed":false,"seq":5,"series":"X-Force","issue":"#25","date":"Dec 1993","notes":""}
+];
+
+const PHC_ITEMS = [
+  {"id":"phc-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#316","date":"Aug 1994","notes":""},
+  {"id":"phc-2","completed":false,"seq":2,"series":"X-Men","issue":"#36","date":"Aug 1994","notes":""},
+  {"id":"phc-3","completed":false,"seq":3,"series":"Uncanny X-Men","issue":"#317","date":"Aug 1994","notes":""},
+  {"id":"phc-4","completed":false,"seq":4,"series":"X-Men","issue":"#37","date":"Aug 1994","notes":""},
+  {"id":"phc-5","completed":false,"seq":5,"series":"X-Factor","issue":"#106","date":"Sep 1994","notes":""},
+  {"id":"phc-6","completed":false,"seq":6,"series":"X-Force","issue":"#38","date":"Sep 1994","notes":""},
+  {"id":"phc-7","completed":false,"seq":7,"series":"Excalibur","issue":"#82","date":"Sep 1994","notes":""},
+  {"id":"phc-8","completed":false,"seq":8,"series":"Wolverine","issue":"#85","date":"Sep 1994","notes":""},
+  {"id":"phc-9","completed":false,"seq":9,"series":"Cable","issue":"#16","date":"Sep 1994","notes":""}
+];
+
+const AOA_ITEMS = [
+  {"id":"aoa-1","completed":false,"seq":1,"series":"X-Men: Chronicles","issue":"#1","date":"Feb 1995","notes":""},
+  {"id":"aoa-2","completed":false,"seq":2,"series":"X-Men: Chronicles","issue":"#2","date":"Feb 1995","notes":""},
+  {"id":"aoa-3","completed":false,"seq":3,"series":"X-Men: Alpha","issue":"#1","date":"Feb 1995","notes":""},
+  {"id":"aoa-4","completed":false,"seq":4,"series":"Generation Next","issue":"#1","date":"Feb 1995","notes":""},
+  {"id":"aoa-5","completed":false,"seq":5,"series":"Astonishing X-Men","issue":"#1","date":"Feb 1995","notes":""},
+  {"id":"aoa-6","completed":false,"seq":6,"series":"X-Calibre","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-7","completed":false,"seq":7,"series":"Gambit and the X-Ternals","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-8","completed":false,"seq":8,"series":"Weapon X","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-9","completed":false,"seq":9,"series":"Amazing X-Men","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-10","completed":false,"seq":10,"series":"Factor X","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-11","completed":false,"seq":11,"series":"X-Man","issue":"#1","date":"Mar 1995","notes":""},
+  {"id":"aoa-12","completed":false,"seq":12,"series":"Amazing X-Men","issue":"#2","date":"Mar 1995","notes":""},
+  {"id":"aoa-13","completed":false,"seq":13,"series":"Factor X","issue":"#2","date":"Mar 1995","notes":""},
+  {"id":"aoa-14","completed":false,"seq":14,"series":"Generation Next","issue":"#2","date":"Mar 1995","notes":""},
+  {"id":"aoa-15","completed":false,"seq":15,"series":"Weapon X","issue":"#2","date":"Apr 1995","notes":""},
+  {"id":"aoa-16","completed":false,"seq":16,"series":"Gambit and the X-Ternals","issue":"#2","date":"Apr 1995","notes":""},
+  {"id":"aoa-17","completed":false,"seq":17,"series":"X-Calibre","issue":"#2","date":"Apr 1995","notes":""},
+  {"id":"aoa-18","completed":false,"seq":18,"series":"Astonishing X-Men","issue":"#2","date":"Apr 1995","notes":""},
+  {"id":"aoa-19","completed":false,"seq":19,"series":"X-Man","issue":"#2","date":"Apr 1995","notes":""},
+  {"id":"aoa-20","completed":false,"seq":20,"series":"Astonishing X-Men","issue":"#3","date":"Apr 1995","notes":""},
+  {"id":"aoa-21","completed":false,"seq":21,"series":"Factor X","issue":"#3","date":"Apr 1995","notes":""},
+  {"id":"aoa-22","completed":false,"seq":22,"series":"X-Universe","issue":"#1","date":"Apr 1995","notes":""},
+  {"id":"aoa-23","completed":false,"seq":23,"series":"Amazing X-Men","issue":"#3","date":"Apr 1995","notes":""},
+  {"id":"aoa-24","completed":false,"seq":24,"series":"X-Calibre","issue":"#3","date":"Apr 1995","notes":""},
+  {"id":"aoa-25","completed":false,"seq":25,"series":"Weapon X","issue":"#3","date":"May 1995","notes":""},
+  {"id":"aoa-26","completed":false,"seq":26,"series":"Gambit and the X-Ternals","issue":"#3","date":"May 1995","notes":""},
+  {"id":"aoa-27","completed":false,"seq":27,"series":"Generation Next","issue":"#3","date":"May 1995","notes":""},
+  {"id":"aoa-28","completed":false,"seq":28,"series":"X-Man","issue":"#3","date":"May 1995","notes":""},
+  {"id":"aoa-29","completed":false,"seq":29,"series":"Astonishing X-Men","issue":"#4","date":"May 1995","notes":""},
+  {"id":"aoa-30","completed":false,"seq":30,"series":"Generation Next","issue":"#4","date":"May 1995","notes":""},
+  {"id":"aoa-31","completed":false,"seq":31,"series":"X-Calibre","issue":"#4","date":"May 1995","notes":""},
+  {"id":"aoa-32","completed":false,"seq":32,"series":"X-Man","issue":"#4","date":"May 1995","notes":""},
+  {"id":"aoa-33","completed":false,"seq":33,"series":"Factor X","issue":"#4","date":"May 1995","notes":""},
+  {"id":"aoa-34","completed":false,"seq":34,"series":"Gambit and the X-Ternals","issue":"#4","date":"Jun 1995","notes":""},
+  {"id":"aoa-35","completed":false,"seq":35,"series":"Amazing X-Men","issue":"#4","date":"Jun 1995","notes":""},
+  {"id":"aoa-36","completed":false,"seq":36,"series":"Weapon X","issue":"#4","date":"Jun 1995","notes":""},
+  {"id":"aoa-37","completed":false,"seq":37,"series":"X-Universe","issue":"#2","date":"Jun 1995","notes":""},
+  {"id":"aoa-38","completed":false,"seq":38,"series":"X-Men: Omega","issue":"#1","date":"Jun 1995","notes":""}
+];
+
+const ONS_ITEMS = [
+  {"id":"ons-1","completed":false,"seq":1,"series":"X-Men","issue":"#53","date":"Aug 1996","notes":""},
+  {"id":"ons-2","completed":false,"seq":2,"series":"Uncanny X-Men","issue":"#333","date":"Aug 1996","notes":""},
+  {"id":"ons-3","completed":false,"seq":3,"series":"X-Men","issue":"#54","date":"Aug 1996","notes":""},
+  {"id":"ons-4","completed":false,"seq":4,"series":"Onslaught: X-Men","issue":"#1","date":"Aug 1996","notes":""},
+  {"id":"ons-5","completed":false,"seq":5,"series":"Uncanny X-Men","issue":"#335","date":"Aug 1996","notes":""},
+  {"id":"ons-6","completed":false,"seq":6,"series":"Cable","issue":"#34","date":"Sep 1996","notes":""},
+  {"id":"ons-7","completed":false,"seq":7,"series":"Excalibur","issue":"#100","date":"Sep 1996","notes":""},
+  {"id":"ons-8","completed":false,"seq":8,"series":"Wolverine","issue":"#104","date":"Sep 1996","notes":""},
+  {"id":"ons-9","completed":false,"seq":9,"series":"X-Factor","issue":"#125","date":"Sep 1996","notes":""},
+  {"id":"ons-10","completed":false,"seq":10,"series":"X-Factor","issue":"#126","date":"Sep 1996","notes":""},
+  {"id":"ons-11","completed":false,"seq":11,"series":"Generation X","issue":"#18","date":"Sep 1996","notes":""},
+  {"id":"ons-12","completed":false,"seq":12,"series":"X-Man","issue":"#18","date":"Sep 1996","notes":""},
+  {"id":"ons-13","completed":false,"seq":13,"series":"X-Force","issue":"#57","date":"Sep 1996","notes":""},
+  {"id":"ons-14","completed":false,"seq":14,"series":"X-Men","issue":"#55","date":"Sep 1996","notes":""},
+  {"id":"ons-15","completed":false,"seq":15,"series":"Uncanny X-Men","issue":"#336","date":"Oct 1996","notes":""},
+  {"id":"ons-16","completed":false,"seq":16,"series":"Cable","issue":"#35","date":"Oct 1996","notes":""},
+  {"id":"ons-17","completed":false,"seq":17,"series":"X-Force","issue":"#58","date":"Oct 1996","notes":""},
+  {"id":"ons-18","completed":false,"seq":18,"series":"X-Man","issue":"#19","date":"Oct 1996","notes":""},
+  {"id":"ons-19","completed":false,"seq":19,"series":"Generation X","issue":"#19","date":"Oct 1996","notes":""},
+  {"id":"ons-20","completed":false,"seq":20,"series":"Wolverine","issue":"#105","date":"Oct 1996","notes":""},
+  {"id":"ons-21","completed":false,"seq":21,"series":"X-Men","issue":"#56","date":"Oct 1996","notes":""},
+  {"id":"ons-22","completed":false,"seq":22,"series":"X-Men Unlimited","issue":"#12","date":"Oct 1996","notes":""},
+  {"id":"ons-23","completed":false,"seq":23,"series":"Onslaught: Marvel Universe","issue":"#1","date":"Nov 1996","notes":""},
+  {"id":"ons-24","completed":false,"seq":24,"series":"Cable","issue":"#36","date":"Nov 1996","notes":""},
+  {"id":"ons-25","completed":false,"seq":25,"series":"Uncanny X-Men","issue":"#337","date":"Nov 1996","notes":""},
+  {"id":"ons-26","completed":false,"seq":26,"series":"X-Men","issue":"#57","date":"Nov 1996","notes":""},
+  {"id":"ons-27","completed":false,"seq":27,"series":"Onslaught: Epilogue","issue":"#1","date":"Nov 1996","notes":""}
+];
+
+const OZT_ITEMS = [
+  {"id":"ozt-1","completed":false,"seq":1,"series":"Cable","issue":"#45","date":"Aug 1997","notes":""},
+  {"id":"ozt-2","completed":false,"seq":2,"series":"X-Force","issue":"#68","date":"Aug 1997","notes":""},
+  {"id":"ozt-3","completed":false,"seq":3,"series":"Cable","issue":"#46","date":"Aug 1997","notes":""},
+  {"id":"ozt-4","completed":false,"seq":4,"series":"X-Force","issue":"#69","date":"Sep 1997","notes":""},
+  {"id":"ozt-5","completed":false,"seq":5,"series":"Cable","issue":"#47","date":"Sep 1997","notes":""},
+  {"id":"ozt-6","completed":false,"seq":6,"series":"Uncanny X-Men","issue":"#346","date":"Sep 1997","notes":""},
+  {"id":"ozt-7","completed":false,"seq":7,"series":"Generation X","issue":"#29","date":"Sep 1997","notes":""},
+  {"id":"ozt-8","completed":false,"seq":8,"series":"X-Men","issue":"#66","date":"Sep 1997","notes":""},
+  {"id":"ozt-9","completed":false,"seq":9,"series":"Wolverine","issue":"#115","date":"Sep 1997","notes":""},
+  {"id":"ozt-10","completed":false,"seq":10,"series":"X-Men","issue":"#67","date":"Oct 1997","notes":""},
+  {"id":"ozt-11","completed":false,"seq":11,"series":"Wolverine","issue":"#116","date":"Oct 1997","notes":""},
+  {"id":"ozt-12","completed":false,"seq":12,"series":"Generation X","issue":"#30","date":"Oct 1997","notes":""},
+  {"id":"ozt-13","completed":false,"seq":13,"series":"Generation X","issue":"#31","date":"Oct 1997","notes":""},
+  {"id":"ozt-14","completed":false,"seq":14,"series":"X-Men","issue":"#68","date":"Oct 1997","notes":""},
+  {"id":"ozt-15","completed":false,"seq":15,"series":"Wolverine","issue":"#117","date":"Nov 1997","notes":""},
+  {"id":"ozt-16","completed":false,"seq":16,"series":"X-Men","issue":"#69","date":"Nov 1997","notes":""},
+  {"id":"ozt-17","completed":false,"seq":17,"series":"Wolverine","issue":"#118","date":"Nov 1997","notes":""}
+];
+
+const TWV_ITEMS = [
+  {"id":"twv-1","completed":false,"seq":1,"series":"Wolverine","issue":"#145","date":"Dec 1999","notes":""},
+  {"id":"twv-2","completed":false,"seq":2,"series":"Cable","issue":"#72","date":"Dec 1999","notes":""},
+  {"id":"twv-3","completed":false,"seq":3,"series":"Cable","issue":"#73","date":"Dec 1999","notes":""},
+  {"id":"twv-4","completed":false,"seq":4,"series":"Cable","issue":"#74","date":"Jan 2000","notes":""},
+  {"id":"twv-5","completed":false,"seq":5,"series":"X-Men: Phoenix","issue":"#1","date":"Jan 2000","notes":""},
+  {"id":"twv-6","completed":false,"seq":6,"series":"X-Men: Phoenix","issue":"#2","date":"Jan 2000","notes":""},
+  {"id":"twv-7","completed":false,"seq":7,"series":"X-Men: Phoenix","issue":"#3","date":"Jan 2000","notes":""},
+  {"id":"twv-8","completed":false,"seq":8,"series":"Uncanny X-Men","issue":"#376","date":"Jan 2000","notes":""},
+  {"id":"twv-9","completed":false,"seq":9,"series":"Cable","issue":"#75","date":"Jan 2000","notes":""},
+  {"id":"twv-10","completed":false,"seq":10,"series":"X-Man","issue":"#59","date":"Feb 2000","notes":""},
+  {"id":"twv-11","completed":false,"seq":11,"series":"X-Men","issue":"#96","date":"Feb 2000","notes":""},
+  {"id":"twv-12","completed":false,"seq":12,"series":"Wolverine","issue":"#146","date":"Feb 2000","notes":""},
+  {"id":"twv-13","completed":false,"seq":13,"series":"Wolverine","issue":"#147","date":"Feb 2000","notes":""},
+  {"id":"twv-14","completed":false,"seq":14,"series":"X-Man","issue":"#60","date":"Feb 2000","notes":""},
+  {"id":"twv-15","completed":false,"seq":15,"series":"Uncanny X-Men","issue":"#377","date":"Mar 2000","notes":""},
+  {"id":"twv-16","completed":false,"seq":16,"series":"Cable","issue":"#76","date":"Mar 2000","notes":""},
+  {"id":"twv-17","completed":false,"seq":17,"series":"X-Men","issue":"#97","date":"Mar 2000","notes":""}
+];
+
+const AAP_ITEMS = [
+  {"id":"aap-1","completed":false,"seq":1,"series":"Uncanny X-Men","issue":"#378","date":"Mar 2000","notes":""},
+  {"id":"aap-2","completed":false,"seq":2,"series":"Cable","issue":"#77","date":"Mar 2000","notes":""},
+  {"id":"aap-3","completed":false,"seq":3,"series":"Wolverine","issue":"#148","date":"Mar 2000","notes":""},
+  {"id":"aap-4","completed":false,"seq":4,"series":"X-Men Unlimited","issue":"#26","date":"Mar 2000","notes":""},
+  {"id":"aap-5","completed":false,"seq":5,"series":"X-Men","issue":"#98","date":"Apr 2000","notes":""},
+  {"id":"aap-6","completed":false,"seq":6,"series":"X-Man","issue":"#61","date":"Apr 2000","notes":""},
+  {"id":"aap-7","completed":false,"seq":7,"series":"X-Man","issue":"#62","date":"Apr 2000","notes":""},
+  {"id":"aap-8","completed":false,"seq":8,"series":"Gambit","issue":"#11","date":"Apr 2000","notes":""},
+  {"id":"aap-9","completed":false,"seq":9,"series":"Gambit","issue":"#12","date":"Apr 2000","notes":""},
+  {"id":"aap-10","completed":false,"seq":10,"series":"Gambit","issue":"#13","date":"Apr 2000","notes":""},
+  {"id":"aap-11","completed":false,"seq":11,"series":"Gambit","issue":"#14","date":"Apr 2000","notes":""},
+  {"id":"aap-12","completed":false,"seq":12,"series":"X-Men: Hellfire Club","issue":"#1","date":"May 2000","notes":""},
+  {"id":"aap-13","completed":false,"seq":13,"series":"X-Men: Hellfire Club","issue":"#2","date":"May 2000","notes":""},
+  {"id":"aap-14","completed":false,"seq":14,"series":"X-Men: Hellfire Club","issue":"#3","date":"May 2000","notes":""},
+  {"id":"aap-15","completed":false,"seq":15,"series":"X-Men: Hellfire Club","issue":"#4","date":"May 2000","notes":""},
+  {"id":"aap-16","completed":false,"seq":16,"series":"Gambit","issue":"#15","date":"May 2000","notes":""},
+  {"id":"aap-17","completed":false,"seq":17,"series":"Uncanny X-Men","issue":"#379","date":"May 2000","notes":""},
+  {"id":"aap-18","completed":false,"seq":18,"series":"X-Force","issue":"#101","date":"May 2000","notes":""},
+  {"id":"aap-19","completed":false,"seq":19,"series":"Cable","issue":"#78","date":"May 2000","notes":""},
+  {"id":"aap-20","completed":false,"seq":20,"series":"Wolverine","issue":"#149","date":"Jun 2000","notes":""},
+  {"id":"aap-21","completed":false,"seq":21,"series":"X-Men","issue":"#99","date":"Jun 2000","notes":""},
+  {"id":"aap-22","completed":false,"seq":22,"series":"Uncanny X-Men","issue":"#380","date":"Jun 2000","notes":""},
+  {"id":"aap-23","completed":false,"seq":23,"series":"Gambit","issue":"#16","date":"Jun 2000","notes":""}
+];
+
+const MAX_ITEMS = [
+  {"id":"max-1","completed":false,"seq":1,"series":"Maximum Security: Dangerous Planet","issue":"#1","date":"Nov 2000","notes":""},
+  {"id":"max-2","completed":false,"seq":2,"series":"Maximum Security","issue":"#1","date":"Nov 2000","notes":""},
+  {"id":"max-3","completed":false,"seq":3,"series":"Uncanny X-Men","issue":"#387","date":"Nov 2000","notes":""},
+  {"id":"max-4","completed":false,"seq":4,"series":"Maximum Security","issue":"#2","date":"Dec 2000","notes":""},
+  {"id":"max-5","completed":false,"seq":5,"series":"Bishop: The Last X-Man","issue":"#15","date":"Dec 2000","notes":""},
+  {"id":"max-6","completed":false,"seq":6,"series":"Gambit","issue":"#23","date":"Dec 2000","notes":""},
+  {"id":"max-7","completed":false,"seq":7,"series":"X-Men","issue":"#107","date":"Jan 2001","notes":""},
+  {"id":"max-8","completed":false,"seq":8,"series":"X-Men Unlimited","issue":"#29","date":"Jan 2001","notes":""},
+  {"id":"max-9","completed":false,"seq":9,"series":"Maximum Security","issue":"#3","date":"Jan 2001","notes":""}
+];
+
+const HOM_ITEMS = [
+  {"id":"hom-1","completed":false,"seq":1,"series":"House of M","issue":"#1","date":"Aug 2005","notes":""},
+  {"id":"hom-2","completed":false,"seq":2,"series":"House of M","issue":"#2","date":"Aug 2005","notes":""},
+  {"id":"hom-3","completed":false,"seq":3,"series":"Uncanny X-Men","issue":"#462","date":"Aug 2005","notes":""},
+  {"id":"hom-4","completed":false,"seq":4,"series":"Uncanny X-Men","issue":"#463","date":"Sep 2005","notes":""},
+  {"id":"hom-5","completed":false,"seq":5,"series":"Uncanny X-Men","issue":"#464","date":"Sep 2005","notes":""},
+  {"id":"hom-6","completed":false,"seq":6,"series":"Uncanny X-Men","issue":"#465","date":"Sep 2005","notes":""},
+  {"id":"hom-7","completed":false,"seq":7,"series":"New X-Men","issue":"#16","date":"Sep 2005","notes":""},
+  {"id":"hom-8","completed":false,"seq":8,"series":"New X-Men","issue":"#17","date":"Sep 2005","notes":""},
+  {"id":"hom-9","completed":false,"seq":9,"series":"New X-Men","issue":"#18","date":"Sep 2005","notes":""},
+  {"id":"hom-10","completed":false,"seq":10,"series":"New X-Men","issue":"#19","date":"Oct 2005","notes":""},
+  {"id":"hom-11","completed":false,"seq":11,"series":"Wolverine","issue":"#33","date":"Oct 2005","notes":""},
+  {"id":"hom-12","completed":false,"seq":12,"series":"Wolverine","issue":"#34","date":"Oct 2005","notes":""},
+  {"id":"hom-13","completed":false,"seq":13,"series":"Wolverine","issue":"#35","date":"Oct 2005","notes":""},
+  {"id":"hom-14","completed":false,"seq":14,"series":"House of M","issue":"#3","date":"Oct 2005","notes":""},
+  {"id":"hom-15","completed":false,"seq":15,"series":"House of M","issue":"#4","date":"Oct 2005","notes":""},
+  {"id":"hom-16","completed":false,"seq":16,"series":"House of M","issue":"#5","date":"Nov 2005","notes":""},
+  {"id":"hom-17","completed":false,"seq":17,"series":"Exiles","issue":"#69","date":"Nov 2005","notes":""},
+  {"id":"hom-18","completed":false,"seq":18,"series":"Exiles","issue":"#70","date":"Nov 2005","notes":""},
+  {"id":"hom-19","completed":false,"seq":19,"series":"Exiles","issue":"#71","date":"Nov 2005","notes":""},
+  {"id":"hom-20","completed":false,"seq":20,"series":"Cable & Deadpool","issue":"#17","date":"Nov 2005","notes":""},
+  {"id":"hom-21","completed":false,"seq":21,"series":"House of M","issue":"#6","date":"Nov 2005","notes":""},
+  {"id":"hom-22","completed":false,"seq":22,"series":"House of M","issue":"#7","date":"Dec 2005","notes":""},
+  {"id":"hom-23","completed":false,"seq":23,"series":"Mutopia X","issue":"#1","date":"Dec 2005","notes":""},
+  {"id":"hom-24","completed":false,"seq":24,"series":"Mutopia X","issue":"#2","date":"Dec 2005","notes":""},
+  {"id":"hom-25","completed":false,"seq":25,"series":"Mutopia X","issue":"#3","date":"Dec 2005","notes":""},
+  {"id":"hom-26","completed":false,"seq":26,"series":"Mutopia X","issue":"#4","date":"Dec 2005","notes":""},
+  {"id":"hom-27","completed":false,"seq":27,"series":"Mutopia X","issue":"#5","date":"Dec 2005","notes":""},
+  {"id":"hom-28","completed":false,"seq":28,"series":"House of M","issue":"#8","date":"Jan 2006","notes":""},
+  {"id":"hom-29","completed":false,"seq":29,"series":"Decimation: House of M - The Day After","issue":"#1","date":"Jan 2006","notes":""},
+  {"id":"hom-30","completed":false,"seq":30,"series":"X-Men: The 198 Files","issue":"#1","date":"Jan 2006","notes":""}
+];
+
+const MM_COLLECTION = {
+  id:'evt-mutant-massacre', name:"Mutant Massacre (1986)",
+  description:"The Marauders slaughter the Morlocks; Uncanny X-Men, X-Factor & New Mutants.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: MM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const FOM_COLLECTION = {
+  id:'evt-fall-mutants', name:"Fall of the Mutants (1988)",
+  description:"The X-Men 'die' defeating the Adversary; the line's tonal pivot.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: FOM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const INF_COLLECTION = {
+  id:'evt-inferno', name:"Inferno (1988)",
+  description:"Demons invade Manhattan; the Goblin Queen. X-Men, X-Factor, New Mutants, X-Terminators & Excalibur.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: INF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const DOFP_COLLECTION = {
+  id:'evt-dofp', name:"Days of Future Present (1990)",
+  description:"Ahab & the adult Franklin Richards; told across the summer annuals. First full Gambit (UXM Annual #14).",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: DOFP_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const XTA_COLLECTION = {
+  id:'evt-xtinction', name:"X-Tinction Agenda (1990)",
+  description:"Genosha captures the X-Men; Uncanny X-Men, New Mutants & X-Factor.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: XTA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MIS_COLLECTION = {
+  id:'evt-muir', name:"The Muir Island Saga (1991)",
+  description:"The Shadow King's endgame; Claremont's departure. Uncanny X-Men & X-Factor.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: MIS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const XCS_COLLECTION = {
+  id:'evt-xcutioner', name:"X-Cutioner's Song (1992)",
+  description:"Stryfe, Cable & the Summers family; the four X-titles cross over.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: XCS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const FA_COLLECTION = {
+  id:'evt-fatal', name:"Fatal Attractions (1993)",
+  description:"Magneto rips out Wolverine's adamantium; five hologram-cover chapters.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: FA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const PHC_COLLECTION = {
+  id:'evt-phalanx', name:"The Phalanx Covenant (1994)",
+  description:"The techno-organic Phalanx; introduces Generation X.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: PHC_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const AOA_COLLECTION = {
+  id:'evt-aoa', name:"Age of Apocalypse (1995)",
+  description:"Xavier dies in the past; Apocalypse rules. The X-line is replaced for four months.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: AOA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const ONS_COLLECTION = {
+  id:'evt-onslaught', name:"Onslaught (1996)",
+  description:"Xavier's psyche becomes Onslaught; the X-Men core chapters (Avengers/FF tie-ins excluded).",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: ONS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const OZT_COLLECTION = {
+  id:'evt-ozt', name:"Operation: Zero Tolerance (1997)",
+  description:"Bastion's anti-mutant task force; Cable, X-Force, Uncanny, X-Men, Generation X & Wolverine.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: OZT_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TWV_COLLECTION = {
+  id:'evt-twelve', name:"The Twelve (2000)",
+  description:"Apocalypse gathers the Twelve; the Cable/Phoenix/X-Man chapters.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: TWV_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const AAP_COLLECTION = {
+  id:'evt-ages-apoc', name:"Ages of Apocalypse (2000)",
+  description:"Reality warps into alternate 'Ages'; Uncanny, X-Men, Cable, Gambit & the Hellfire Club mini.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: AAP_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MAX_COLLECTION = {
+  id:'evt-max-security', name:"Maximum Security (2000)",
+  description:"Earth as a prison planet; the X-Men chapters of the Marvel-wide event.",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: MAX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const HOM_COLLECTION = {
+  id:'evt-house-of-m', name:"House of M (2005)",
+  description:"Scarlet Witch remakes reality; 'No More Mutants'. Core series + X-Men chapters (non-X tie-ins excluded).",
+  category:'reading', icon:'\U0001F4A5', checks: COMIC_CHECKS,
+  fields: EVENT_FIELDS, items: HOM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -4870,6 +5315,23 @@ function load() {
   if (!collections.find(c=>c.id==='xmen-ls-1980s')) { collections.push(LS80_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='xmen-ls-1990s')) { collections.push(LS90_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='xmen-ls-2000s')) { collections.push(LS00_COLLECTION); save(); }
+  // Seed crossover events (batch 4) if missing
+  if (!collections.find(c=>c.id==='evt-mutant-massacre')) { collections.push(MM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-fall-mutants')) { collections.push(FOM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-inferno')) { collections.push(INF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-dofp')) { collections.push(DOFP_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-xtinction')) { collections.push(XTA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-muir')) { collections.push(MIS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-xcutioner')) { collections.push(XCS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-fatal')) { collections.push(FA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-phalanx')) { collections.push(PHC_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-aoa')) { collections.push(AOA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-onslaught')) { collections.push(ONS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-ozt')) { collections.push(OZT_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-twelve')) { collections.push(TWV_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-ages-apoc')) { collections.push(AAP_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-max-security')) { collections.push(MAX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='evt-house-of-m')) { collections.push(HOM_COLLECTION); save(); }
   // Add dual "Read / Collected" checks to comic collections that predate them.
   // Any prior single check-off is carried over as "Read".
   for (const id of DUAL_CHECK_IDS) {
@@ -5021,7 +5483,7 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
   'Watching': {},
-  'Reading': { 'Marvel': { 'X-Men': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
+  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} } }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
   'Gaming': {}
 };
 const ROOT_ORDER = ['Watching','Reading','Gaming'];
@@ -5069,6 +5531,22 @@ const COLLECTION_PATHS = {
   'xmen-ls-1980s': ['Reading','Marvel','X-Men'],
   'xmen-ls-1990s': ['Reading','Marvel','X-Men'],
   'xmen-ls-2000s': ['Reading','Marvel','X-Men'],
+  'evt-mutant-massacre': ['Reading','Marvel','X-Men','Events'],
+  'evt-fall-mutants': ['Reading','Marvel','X-Men','Events'],
+  'evt-inferno': ['Reading','Marvel','X-Men','Events'],
+  'evt-dofp': ['Reading','Marvel','X-Men','Events'],
+  'evt-xtinction': ['Reading','Marvel','X-Men','Events'],
+  'evt-muir': ['Reading','Marvel','X-Men','Events'],
+  'evt-xcutioner': ['Reading','Marvel','X-Men','Events'],
+  'evt-fatal': ['Reading','Marvel','X-Men','Events'],
+  'evt-phalanx': ['Reading','Marvel','X-Men','Events'],
+  'evt-aoa': ['Reading','Marvel','X-Men','Events'],
+  'evt-onslaught': ['Reading','Marvel','X-Men','Events'],
+  'evt-ozt': ['Reading','Marvel','X-Men','Events'],
+  'evt-twelve': ['Reading','Marvel','X-Men','Events'],
+  'evt-ages-apoc': ['Reading','Marvel','X-Men','Events'],
+  'evt-max-security': ['Reading','Marvel','X-Men','Events'],
+  'evt-house-of-m': ['Reading','Marvel','X-Men','Events'],
   'mario-franchise':  ['Gaming'],
   'steam-library':    ['Gaming'],
   'wwf-ppv-history':  ['Watching'],
