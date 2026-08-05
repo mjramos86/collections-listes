@@ -5191,6 +5191,272 @@ const HOM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Marvel watching (films & TV) seed data ─────────────────────
+// ── Marvel watching fieldsets ──────────────────────────────────
+const FILM_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'title',label:'Title',type:'text'},
+  {key:'release',label:'Released',type:'text'},
+  {key:'phase',label:'Phase / Studio',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+const TV_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'title',label:'Title',type:'text'},
+  {key:'season',label:'Season',type:'text'},
+  {key:'premiere',label:'Premiered',type:'text'},
+  {key:'studio',label:'Network',type:'text'},
+  {key:'notes',label:'Notable',type:'text'},
+];
+
+const MCUF_ITEMS = [
+  {"id":"mcuf-1","completed":false,"seq":1,"title":"Iron Man","release":"May 2, 2008","phase":"Phase 1","notes":"The film that launched the MCU."},
+  {"id":"mcuf-2","completed":false,"seq":2,"title":"The Incredible Hulk","release":"Jun 13, 2008","phase":"Phase 1","notes":""},
+  {"id":"mcuf-3","completed":false,"seq":3,"title":"Iron Man 2","release":"May 7, 2010","phase":"Phase 1","notes":""},
+  {"id":"mcuf-4","completed":false,"seq":4,"title":"Thor","release":"May 6, 2011","phase":"Phase 1","notes":""},
+  {"id":"mcuf-5","completed":false,"seq":5,"title":"Captain America: The First Avenger","release":"Jul 22, 2011","phase":"Phase 1","notes":""},
+  {"id":"mcuf-6","completed":false,"seq":6,"title":"The Avengers","release":"May 4, 2012","phase":"Phase 1","notes":"The original team-up."},
+  {"id":"mcuf-7","completed":false,"seq":7,"title":"Iron Man 3","release":"May 3, 2013","phase":"Phase 2","notes":""},
+  {"id":"mcuf-8","completed":false,"seq":8,"title":"Thor: The Dark World","release":"Nov 8, 2013","phase":"Phase 2","notes":""},
+  {"id":"mcuf-9","completed":false,"seq":9,"title":"Captain America: The Winter Soldier","release":"Apr 4, 2014","phase":"Phase 2","notes":"S.H.I.E.L.D. falls to Hydra."},
+  {"id":"mcuf-10","completed":false,"seq":10,"title":"Guardians of the Galaxy","release":"Aug 1, 2014","phase":"Phase 2","notes":"Opens up the cosmic side of the MCU."},
+  {"id":"mcuf-11","completed":false,"seq":11,"title":"Avengers: Age of Ultron","release":"May 1, 2015","phase":"Phase 2","notes":""},
+  {"id":"mcuf-12","completed":false,"seq":12,"title":"Ant-Man","release":"Jul 17, 2015","phase":"Phase 2","notes":""},
+  {"id":"mcuf-13","completed":false,"seq":13,"title":"Captain America: Civil War","release":"May 6, 2016","phase":"Phase 3","notes":"The Avengers split; debut of Black Panther & Spider-Man."},
+  {"id":"mcuf-14","completed":false,"seq":14,"title":"Doctor Strange","release":"Nov 4, 2016","phase":"Phase 3","notes":""},
+  {"id":"mcuf-15","completed":false,"seq":15,"title":"Guardians of the Galaxy Vol. 2","release":"May 5, 2017","phase":"Phase 3","notes":""},
+  {"id":"mcuf-16","completed":false,"seq":16,"title":"Spider-Man: Homecoming","release":"Jul 7, 2017","phase":"Phase 3","notes":""},
+  {"id":"mcuf-17","completed":false,"seq":17,"title":"Thor: Ragnarok","release":"Nov 3, 2017","phase":"Phase 3","notes":""},
+  {"id":"mcuf-18","completed":false,"seq":18,"title":"Black Panther","release":"Feb 16, 2018","phase":"Phase 3","notes":"Best Picture nominee."},
+  {"id":"mcuf-19","completed":false,"seq":19,"title":"Avengers: Infinity War","release":"Apr 27, 2018","phase":"Phase 3","notes":"Thanos wins; the Snap."},
+  {"id":"mcuf-20","completed":false,"seq":20,"title":"Ant-Man and the Wasp","release":"Jul 6, 2018","phase":"Phase 3","notes":""},
+  {"id":"mcuf-21","completed":false,"seq":21,"title":"Captain Marvel","release":"Mar 8, 2019","phase":"Phase 3","notes":""},
+  {"id":"mcuf-22","completed":false,"seq":22,"title":"Avengers: Endgame","release":"Apr 26, 2019","phase":"Phase 3","notes":"Climax of the Infinity Saga."},
+  {"id":"mcuf-23","completed":false,"seq":23,"title":"Spider-Man: Far From Home","release":"Jul 2, 2019","phase":"Phase 3","notes":"Ends the Infinity Saga."},
+  {"id":"mcuf-24","completed":false,"seq":24,"title":"Black Widow","release":"Jul 9, 2021","phase":"Phase 4","notes":"Starts the Multiverse Saga."},
+  {"id":"mcuf-25","completed":false,"seq":25,"title":"Shang-Chi and the Legend of the Ten Rings","release":"Sep 3, 2021","phase":"Phase 4","notes":""},
+  {"id":"mcuf-26","completed":false,"seq":26,"title":"Eternals","release":"Nov 5, 2021","phase":"Phase 4","notes":""},
+  {"id":"mcuf-27","completed":false,"seq":27,"title":"Spider-Man: No Way Home","release":"Dec 17, 2021","phase":"Phase 4","notes":"The live-action Spider-Men unite."},
+  {"id":"mcuf-28","completed":false,"seq":28,"title":"Doctor Strange in the Multiverse of Madness","release":"May 6, 2022","phase":"Phase 4","notes":""},
+  {"id":"mcuf-29","completed":false,"seq":29,"title":"Thor: Love and Thunder","release":"Jul 8, 2022","phase":"Phase 4","notes":""},
+  {"id":"mcuf-30","completed":false,"seq":30,"title":"Black Panther: Wakanda Forever","release":"Nov 11, 2022","phase":"Phase 4","notes":""},
+  {"id":"mcuf-31","completed":false,"seq":31,"title":"Ant-Man and the Wasp: Quantumania","release":"Feb 17, 2023","phase":"Phase 5","notes":"Introduces Kang the Conqueror."},
+  {"id":"mcuf-32","completed":false,"seq":32,"title":"Guardians of the Galaxy Vol. 3","release":"May 5, 2023","phase":"Phase 5","notes":""},
+  {"id":"mcuf-33","completed":false,"seq":33,"title":"The Marvels","release":"Nov 10, 2023","phase":"Phase 5","notes":""},
+  {"id":"mcuf-34","completed":false,"seq":34,"title":"Deadpool & Wolverine","release":"Jul 26, 2024","phase":"Phase 5","notes":"Brings the Fox mutants into the MCU."},
+  {"id":"mcuf-35","completed":false,"seq":35,"title":"Captain America: Brave New World","release":"Feb 14, 2025","phase":"Phase 5","notes":""},
+  {"id":"mcuf-36","completed":false,"seq":36,"title":"Thunderbolts*","release":"May 2, 2025","phase":"Phase 5","notes":"Closes Phase 5; becomes 'The New Avengers'."},
+  {"id":"mcuf-37","completed":false,"seq":37,"title":"The Fantastic Four: First Steps","release":"Jul 25, 2025","phase":"Phase 6","notes":"Opens Phase 6."},
+  {"id":"mcuf-38","completed":false,"seq":38,"title":"Spider-Man: Brand New Day","release":"Jul 31, 2026","phase":"Phase 6","notes":""},
+  {"id":"mcuf-39","completed":false,"seq":39,"title":"Avengers: Doomsday","release":"Dec 18, 2026","phase":"Phase 6","notes":"Robert Downey Jr. as Doctor Doom."},
+  {"id":"mcuf-40","completed":false,"seq":40,"title":"Avengers: Secret Wars","release":"Dec 17, 2027","phase":"Phase 6","notes":"Concludes the Multiverse Saga."}
+];
+
+const MCUS_ITEMS = [
+  {"id":"mcus-1","completed":false,"seq":1,"title":"WandaVision","season":"Season 1","premiere":"Jan 2021","studio":"Marvel Studios / Disney+","notes":"First Marvel Studios series."},
+  {"id":"mcus-2","completed":false,"seq":2,"title":"The Falcon and the Winter Soldier","season":"Season 1","premiere":"Mar 2021","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-3","completed":false,"seq":3,"title":"Loki","season":"Season 1","premiere":"Jun 2021","studio":"Marvel Studios / Disney+","notes":"Introduces the TVA and He Who Remains."},
+  {"id":"mcus-4","completed":false,"seq":4,"title":"What If...?","season":"Season 1","premiere":"Aug 2021","studio":"Marvel Studios / Disney+","notes":"Animated."},
+  {"id":"mcus-5","completed":false,"seq":5,"title":"Hawkeye","season":"Season 1","premiere":"Nov 2021","studio":"Marvel Studios / Disney+","notes":"Introduces Kate Bishop & Echo."},
+  {"id":"mcus-6","completed":false,"seq":6,"title":"Moon Knight","season":"Season 1","premiere":"Mar 2022","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-7","completed":false,"seq":7,"title":"Ms. Marvel","season":"Season 1","premiere":"Jun 2022","studio":"Marvel Studios / Disney+","notes":"Introduces Kamala Khan."},
+  {"id":"mcus-8","completed":false,"seq":8,"title":"I Am Groot","season":"Season 1","premiere":"Aug 2022","studio":"Marvel Studios / Disney+","notes":"Animated shorts."},
+  {"id":"mcus-9","completed":false,"seq":9,"title":"She-Hulk: Attorney at Law","season":"Season 1","premiere":"Aug 2022","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-10","completed":false,"seq":10,"title":"Werewolf by Night","season":"Special","premiere":"Oct 2022","studio":"Marvel Studios / Disney+","notes":"Halloween special presentation."},
+  {"id":"mcus-11","completed":false,"seq":11,"title":"The Guardians of the Galaxy Holiday Special","season":"Special","premiere":"Nov 2022","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-12","completed":false,"seq":12,"title":"Secret Invasion","season":"Season 1","premiere":"Jun 2023","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-13","completed":false,"seq":13,"title":"I Am Groot","season":"Season 2","premiere":"Sep 2023","studio":"Marvel Studios / Disney+","notes":"Animated shorts."},
+  {"id":"mcus-14","completed":false,"seq":14,"title":"Loki","season":"Season 2","premiere":"Oct 2023","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-15","completed":false,"seq":15,"title":"What If...?","season":"Season 2","premiere":"Dec 2023","studio":"Marvel Studios / Disney+","notes":"Animated."},
+  {"id":"mcus-16","completed":false,"seq":16,"title":"Echo","season":"Season 1","premiere":"Jan 2024","studio":"Marvel Studios / Disney+","notes":"First Marvel Spotlight series."},
+  {"id":"mcus-17","completed":false,"seq":17,"title":"X-Men '97","season":"Season 1","premiere":"Mar 2024","studio":"Marvel Studios / Disney+","notes":"Animated; continues the 1992 series."},
+  {"id":"mcus-18","completed":false,"seq":18,"title":"Agatha All Along","season":"Season 1","premiere":"Sep 2024","studio":"Marvel Studios / Disney+","notes":"WandaVision spin-off."},
+  {"id":"mcus-19","completed":false,"seq":19,"title":"What If...?","season":"Season 3","premiere":"Dec 2024","studio":"Marvel Studios / Disney+","notes":"Animated."},
+  {"id":"mcus-20","completed":false,"seq":20,"title":"Your Friendly Neighborhood Spider-Man","season":"Season 1","premiere":"Jan 2025","studio":"Marvel Studios / Disney+","notes":"Animated."},
+  {"id":"mcus-21","completed":false,"seq":21,"title":"Daredevil: Born Again","season":"Season 1","premiere":"Mar 2025","studio":"Marvel Studios / Disney+","notes":"Charlie Cox returns as Daredevil."},
+  {"id":"mcus-22","completed":false,"seq":22,"title":"Ironheart","season":"Season 1","premiere":"Jun 2025","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-23","completed":false,"seq":23,"title":"Eyes of Wakanda","season":"Season 1","premiere":"Aug 2025","studio":"Marvel Studios / Disney+","notes":"Animated."},
+  {"id":"mcus-24","completed":false,"seq":24,"title":"Marvel Zombies","season":"Season 1","premiere":"Oct 2025","studio":"Marvel Studios / Disney+","notes":"Animated; adult-oriented."},
+  {"id":"mcus-25","completed":false,"seq":25,"title":"Wonder Man","season":"Season 1","premiere":"Jan 2026","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-26","completed":false,"seq":26,"title":"Daredevil: Born Again","season":"Season 2","premiere":"Mar 2026","studio":"Marvel Studios / Disney+","notes":""},
+  {"id":"mcus-27","completed":false,"seq":27,"title":"VisionQuest","season":"Season 1","premiere":"2026","studio":"Marvel Studios / Disney+","notes":"Concludes the WandaVision/Agatha trilogy."}
+];
+
+const MTV_ITEMS = [
+  {"id":"mtv-1","completed":false,"seq":1,"title":"Agents of S.H.I.E.L.D.","season":"Season 1","premiere":"Sep 2013","studio":"ABC","notes":"The first MCU-connected TV series."},
+  {"id":"mtv-2","completed":false,"seq":2,"title":"Agents of S.H.I.E.L.D.","season":"Season 2","premiere":"Sep 2014","studio":"ABC","notes":""},
+  {"id":"mtv-3","completed":false,"seq":3,"title":"Agent Carter","season":"Season 1","premiere":"Jan 2015","studio":"ABC","notes":""},
+  {"id":"mtv-4","completed":false,"seq":4,"title":"Daredevil","season":"Season 1","premiere":"Apr 2015","studio":"Netflix","notes":"Launches the Defenders saga."},
+  {"id":"mtv-5","completed":false,"seq":5,"title":"Jessica Jones","season":"Season 1","premiere":"Nov 2015","studio":"Netflix","notes":""},
+  {"id":"mtv-6","completed":false,"seq":6,"title":"Agents of S.H.I.E.L.D.","season":"Season 3","premiere":"Sep 2015","studio":"ABC","notes":""},
+  {"id":"mtv-7","completed":false,"seq":7,"title":"Agent Carter","season":"Season 2","premiere":"Jan 2016","studio":"ABC","notes":""},
+  {"id":"mtv-8","completed":false,"seq":8,"title":"Daredevil","season":"Season 2","premiere":"Mar 2016","studio":"Netflix","notes":"Introduces the Punisher & Elektra."},
+  {"id":"mtv-9","completed":false,"seq":9,"title":"Luke Cage","season":"Season 1","premiere":"Sep 2016","studio":"Netflix","notes":""},
+  {"id":"mtv-10","completed":false,"seq":10,"title":"Agents of S.H.I.E.L.D.","season":"Season 4","premiere":"Sep 2016","studio":"ABC","notes":""},
+  {"id":"mtv-11","completed":false,"seq":11,"title":"Iron Fist","season":"Season 1","premiere":"Mar 2017","studio":"Netflix","notes":""},
+  {"id":"mtv-12","completed":false,"seq":12,"title":"The Defenders","season":"Miniseries","premiere":"Aug 2017","studio":"Netflix","notes":"The four Netflix heroes team up."},
+  {"id":"mtv-13","completed":false,"seq":13,"title":"Inhumans","season":"Season 1","premiere":"Sep 2017","studio":"ABC","notes":""},
+  {"id":"mtv-14","completed":false,"seq":14,"title":"The Punisher","season":"Season 1","premiere":"Nov 2017","studio":"Netflix","notes":""},
+  {"id":"mtv-15","completed":false,"seq":15,"title":"Runaways","season":"Season 1","premiere":"Nov 2017","studio":"Hulu","notes":""},
+  {"id":"mtv-16","completed":false,"seq":16,"title":"Agents of S.H.I.E.L.D.","season":"Season 5","premiere":"Dec 2017","studio":"ABC","notes":""},
+  {"id":"mtv-17","completed":false,"seq":17,"title":"Jessica Jones","season":"Season 2","premiere":"Mar 2018","studio":"Netflix","notes":""},
+  {"id":"mtv-18","completed":false,"seq":18,"title":"Cloak & Dagger","season":"Season 1","premiere":"Jun 2018","studio":"Freeform","notes":""},
+  {"id":"mtv-19","completed":false,"seq":19,"title":"Luke Cage","season":"Season 2","premiere":"Jun 2018","studio":"Netflix","notes":""},
+  {"id":"mtv-20","completed":false,"seq":20,"title":"Iron Fist","season":"Season 2","premiere":"Sep 2018","studio":"Netflix","notes":""},
+  {"id":"mtv-21","completed":false,"seq":21,"title":"Daredevil","season":"Season 3","premiere":"Oct 2018","studio":"Netflix","notes":""},
+  {"id":"mtv-22","completed":false,"seq":22,"title":"Runaways","season":"Season 2","premiere":"Dec 2018","studio":"Hulu","notes":""},
+  {"id":"mtv-23","completed":false,"seq":23,"title":"The Punisher","season":"Season 2","premiere":"Jan 2019","studio":"Netflix","notes":""},
+  {"id":"mtv-24","completed":false,"seq":24,"title":"Cloak & Dagger","season":"Season 2","premiere":"Apr 2019","studio":"Freeform","notes":""},
+  {"id":"mtv-25","completed":false,"seq":25,"title":"Jessica Jones","season":"Season 3","premiere":"Jun 2019","studio":"Netflix","notes":"Last of the Netflix series."},
+  {"id":"mtv-26","completed":false,"seq":26,"title":"Agents of S.H.I.E.L.D.","season":"Season 6","premiere":"May 2019","studio":"ABC","notes":""},
+  {"id":"mtv-27","completed":false,"seq":27,"title":"Runaways","season":"Season 3","premiere":"Dec 2019","studio":"Hulu","notes":""},
+  {"id":"mtv-28","completed":false,"seq":28,"title":"Helstrom","season":"Season 1","premiere":"Oct 2020","studio":"Hulu","notes":"Final Marvel Television series."},
+  {"id":"mtv-29","completed":false,"seq":29,"title":"Agents of S.H.I.E.L.D.","season":"Season 7","premiere":"May 2020","studio":"ABC","notes":"Series finale."}
+];
+
+const LGF_ITEMS = [
+  {"id":"lgf-1","completed":false,"seq":1,"title":"Howard the Duck","release":"Aug 1, 1986","phase":"Universal","notes":"The first theatrical Marvel feature."},
+  {"id":"lgf-2","completed":false,"seq":2,"title":"The Punisher","release":"1989","phase":"New World","notes":"Dolph Lundgren; direct-to-video in the US."},
+  {"id":"lgf-3","completed":false,"seq":3,"title":"Captain America","release":"1990","phase":"21st Century","notes":"Largely unreleased theatrically."},
+  {"id":"lgf-4","completed":false,"seq":4,"title":"Blade","release":"Aug 21, 1998","phase":"New Line","notes":"Kick-started the modern Marvel movie era."},
+  {"id":"lgf-5","completed":false,"seq":5,"title":"X-Men","release":"Jul 14, 2000","phase":"20th Century Fox","notes":"Launched the Fox X-Men franchise."},
+  {"id":"lgf-6","completed":false,"seq":6,"title":"Blade II","release":"Mar 22, 2002","phase":"New Line","notes":"Directed by Guillermo del Toro."},
+  {"id":"lgf-7","completed":false,"seq":7,"title":"Spider-Man","release":"May 3, 2002","phase":"Sony","notes":"Sam Raimi's blockbuster."},
+  {"id":"lgf-8","completed":false,"seq":8,"title":"Daredevil","release":"Feb 14, 2003","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-9","completed":false,"seq":9,"title":"X2: X-Men United","release":"May 2, 2003","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-10","completed":false,"seq":10,"title":"Hulk","release":"Jun 20, 2003","phase":"Universal","notes":"Directed by Ang Lee."},
+  {"id":"lgf-11","completed":false,"seq":11,"title":"The Punisher","release":"Apr 16, 2004","phase":"Lionsgate","notes":"Thomas Jane."},
+  {"id":"lgf-12","completed":false,"seq":12,"title":"Spider-Man 2","release":"Jun 30, 2004","phase":"Sony","notes":""},
+  {"id":"lgf-13","completed":false,"seq":13,"title":"Blade: Trinity","release":"Dec 8, 2004","phase":"New Line","notes":""},
+  {"id":"lgf-14","completed":false,"seq":14,"title":"Elektra","release":"Jan 14, 2005","phase":"20th Century Fox","notes":"Daredevil spin-off."},
+  {"id":"lgf-15","completed":false,"seq":15,"title":"Fantastic Four","release":"Jul 8, 2005","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-16","completed":false,"seq":16,"title":"X-Men: The Last Stand","release":"May 26, 2006","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-17","completed":false,"seq":17,"title":"Ghost Rider","release":"Feb 16, 2007","phase":"Sony","notes":""},
+  {"id":"lgf-18","completed":false,"seq":18,"title":"Spider-Man 3","release":"May 4, 2007","phase":"Sony","notes":""},
+  {"id":"lgf-19","completed":false,"seq":19,"title":"Fantastic Four: Rise of the Silver Surfer","release":"Jun 15, 2007","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-20","completed":false,"seq":20,"title":"Punisher: War Zone","release":"Dec 5, 2008","phase":"Lionsgate","notes":""},
+  {"id":"lgf-21","completed":false,"seq":21,"title":"X-Men Origins: Wolverine","release":"May 1, 2009","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-22","completed":false,"seq":22,"title":"X-Men: First Class","release":"Jun 3, 2011","phase":"20th Century Fox","notes":"Prequel reboot."},
+  {"id":"lgf-23","completed":false,"seq":23,"title":"Ghost Rider: Spirit of Vengeance","release":"Feb 17, 2012","phase":"Sony","notes":""},
+  {"id":"lgf-24","completed":false,"seq":24,"title":"The Amazing Spider-Man","release":"Jul 3, 2012","phase":"Sony","notes":"Andrew Garfield reboot."},
+  {"id":"lgf-25","completed":false,"seq":25,"title":"The Wolverine","release":"Jul 26, 2013","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-26","completed":false,"seq":26,"title":"The Amazing Spider-Man 2","release":"May 2, 2014","phase":"Sony","notes":""},
+  {"id":"lgf-27","completed":false,"seq":27,"title":"X-Men: Days of Future Past","release":"May 23, 2014","phase":"20th Century Fox","notes":"Unites both X-Men casts."},
+  {"id":"lgf-28","completed":false,"seq":28,"title":"Fantastic Four","release":"Aug 7, 2015","phase":"20th Century Fox","notes":"The 'Fant4stic' reboot."},
+  {"id":"lgf-29","completed":false,"seq":29,"title":"Deadpool","release":"Feb 12, 2016","phase":"20th Century Fox","notes":"R-rated breakout hit."},
+  {"id":"lgf-30","completed":false,"seq":30,"title":"X-Men: Apocalypse","release":"May 27, 2016","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-31","completed":false,"seq":31,"title":"Logan","release":"Mar 3, 2017","phase":"20th Century Fox","notes":"Hugh Jackman's Wolverine farewell."},
+  {"id":"lgf-32","completed":false,"seq":32,"title":"Deadpool 2","release":"May 18, 2018","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-33","completed":false,"seq":33,"title":"Venom","release":"Oct 5, 2018","phase":"Sony","notes":"Starts Sony's Spider-Man Universe."},
+  {"id":"lgf-34","completed":false,"seq":34,"title":"Spider-Man: Into the Spider-Verse","release":"Dec 14, 2018","phase":"Sony","notes":"Animated; Academy Award winner."},
+  {"id":"lgf-35","completed":false,"seq":35,"title":"Dark Phoenix","release":"Jun 7, 2019","phase":"20th Century Fox","notes":""},
+  {"id":"lgf-36","completed":false,"seq":36,"title":"The New Mutants","release":"Aug 28, 2020","phase":"20th Century Fox","notes":"Final Fox X-Men film."},
+  {"id":"lgf-37","completed":false,"seq":37,"title":"Venom: Let There Be Carnage","release":"Oct 1, 2021","phase":"Sony","notes":""},
+  {"id":"lgf-38","completed":false,"seq":38,"title":"Morbius","release":"Apr 1, 2022","phase":"Sony","notes":""},
+  {"id":"lgf-39","completed":false,"seq":39,"title":"Spider-Man: Across the Spider-Verse","release":"Jun 2, 2023","phase":"Sony","notes":"Animated."},
+  {"id":"lgf-40","completed":false,"seq":40,"title":"Madame Web","release":"Feb 14, 2024","phase":"Sony","notes":""},
+  {"id":"lgf-41","completed":false,"seq":41,"title":"Venom: The Last Dance","release":"Oct 25, 2024","phase":"Sony","notes":""},
+  {"id":"lgf-42","completed":false,"seq":42,"title":"Kraven the Hunter","release":"Dec 13, 2024","phase":"Sony","notes":"Final film of Sony's Spider-Man Universe."}
+];
+
+const LGTV_ITEMS = [
+  {"id":"lgtv-1","completed":false,"seq":1,"title":"The Amazing Spider-Man","season":"Season 1","premiere":"Sep 1977","studio":"CBS","notes":"Live-action Spider-Man series."},
+  {"id":"lgtv-2","completed":false,"seq":2,"title":"The Incredible Hulk","season":"Season 1","premiere":"Mar 1978","studio":"CBS","notes":"Bill Bixby & Lou Ferrigno."},
+  {"id":"lgtv-3","completed":false,"seq":3,"title":"The Amazing Spider-Man","season":"Season 2","premiere":"Sep 1978","studio":"CBS","notes":""},
+  {"id":"lgtv-4","completed":false,"seq":4,"title":"The Incredible Hulk","season":"Season 2","premiere":"Sep 1978","studio":"CBS","notes":""},
+  {"id":"lgtv-5","completed":false,"seq":5,"title":"The Incredible Hulk","season":"Season 3","premiere":"Sep 1979","studio":"CBS","notes":""},
+  {"id":"lgtv-6","completed":false,"seq":6,"title":"The Incredible Hulk","season":"Season 4","premiere":"Nov 1980","studio":"CBS","notes":""},
+  {"id":"lgtv-7","completed":false,"seq":7,"title":"The Incredible Hulk","season":"Season 5","premiere":"Oct 1981","studio":"CBS","notes":""},
+  {"id":"lgtv-8","completed":false,"seq":8,"title":"The Incredible Hulk Returns","season":"TV movie","premiere":"May 1988","studio":"NBC","notes":"Features Thor."},
+  {"id":"lgtv-9","completed":false,"seq":9,"title":"The Trial of the Incredible Hulk","season":"TV movie","premiere":"May 1989","studio":"NBC","notes":"Features Daredevil."},
+  {"id":"lgtv-10","completed":false,"seq":10,"title":"The Death of the Incredible Hulk","season":"TV movie","premiere":"Feb 1990","studio":"NBC","notes":""},
+  {"id":"lgtv-11","completed":false,"seq":11,"title":"Generation X","season":"TV movie","premiere":"Feb 1996","studio":"Fox","notes":""},
+  {"id":"lgtv-12","completed":false,"seq":12,"title":"Nick Fury: Agent of S.H.I.E.L.D.","season":"TV movie","premiere":"May 1998","studio":"Fox","notes":"David Hasselhoff as Nick Fury."},
+  {"id":"lgtv-13","completed":false,"seq":13,"title":"Mutant X","season":"Season 1","premiere":"Oct 2001","studio":"Syndicated","notes":""},
+  {"id":"lgtv-14","completed":false,"seq":14,"title":"Mutant X","season":"Season 2","premiere":"Sep 2002","studio":"Syndicated","notes":""},
+  {"id":"lgtv-15","completed":false,"seq":15,"title":"Mutant X","season":"Season 3","premiere":"Sep 2003","studio":"Syndicated","notes":""},
+  {"id":"lgtv-16","completed":false,"seq":16,"title":"Blade: The Series","season":"Season 1","premiere":"Jun 2006","studio":"Spike","notes":""},
+  {"id":"lgtv-17","completed":false,"seq":17,"title":"Legion","season":"Season 1","premiere":"Feb 2017","studio":"FX","notes":"Noah Hawley's surreal X-Men series."},
+  {"id":"lgtv-18","completed":false,"seq":18,"title":"The Gifted","season":"Season 1","premiere":"Oct 2017","studio":"Fox","notes":""},
+  {"id":"lgtv-19","completed":false,"seq":19,"title":"Legion","season":"Season 2","premiere":"Apr 2018","studio":"FX","notes":""},
+  {"id":"lgtv-20","completed":false,"seq":20,"title":"The Gifted","season":"Season 2","premiere":"Sep 2018","studio":"Fox","notes":""},
+  {"id":"lgtv-21","completed":false,"seq":21,"title":"Legion","season":"Season 3","premiere":"Jun 2019","studio":"FX","notes":"Series finale."}
+];
+
+const ANIM_ITEMS = [
+  {"id":"anim-1","completed":false,"seq":1,"title":"Spider-Man","season":"1967–1970","premiere":"1967–1970","studio":"ABC","notes":"The classic 1967 cartoon (and its meme)."},
+  {"id":"anim-2","completed":false,"seq":2,"title":"The Marvel Super Heroes","season":"1966","premiere":"1966","studio":"Syndicated","notes":"Early limited-animation anthology."},
+  {"id":"anim-3","completed":false,"seq":3,"title":"Spider-Woman","season":"1979–1980","premiere":"1979–1980","studio":"ABC","notes":""},
+  {"id":"anim-4","completed":false,"seq":4,"title":"Spider-Man and His Amazing Friends","season":"1981–1983","premiere":"1981–1983","studio":"NBC","notes":""},
+  {"id":"anim-5","completed":false,"seq":5,"title":"X-Men: Pryde of the X-Men","season":"1989","premiere":"1989","studio":"Pilot","notes":"Unaired pilot."},
+  {"id":"anim-6","completed":false,"seq":6,"title":"X-Men: The Animated Series","season":"1992–1997","premiere":"1992–1997","studio":"Fox Kids","notes":"The definitive 90s X-Men cartoon."},
+  {"id":"anim-7","completed":false,"seq":7,"title":"Spider-Man: The Animated Series","season":"1994–1998","premiere":"1994–1998","studio":"Fox Kids","notes":""},
+  {"id":"anim-8","completed":false,"seq":8,"title":"Fantastic Four","season":"1994–1996","premiere":"1994–1996","studio":"Syndicated","notes":""},
+  {"id":"anim-9","completed":false,"seq":9,"title":"Iron Man","season":"1994–1996","premiere":"1994–1996","studio":"Syndicated","notes":""},
+  {"id":"anim-10","completed":false,"seq":10,"title":"The Incredible Hulk","season":"1996–1997","premiere":"1996–1997","studio":"UPN","notes":""},
+  {"id":"anim-11","completed":false,"seq":11,"title":"Silver Surfer","season":"1998","premiere":"1998","studio":"Fox Kids","notes":""},
+  {"id":"anim-12","completed":false,"seq":12,"title":"Spider-Man Unlimited","season":"1999–2001","premiere":"1999–2001","studio":"Fox Kids","notes":""},
+  {"id":"anim-13","completed":false,"seq":13,"title":"X-Men: Evolution","season":"2000–2003","premiere":"2000–2003","studio":"Kids' WB","notes":""},
+  {"id":"anim-14","completed":false,"seq":14,"title":"The Spectacular Spider-Man","season":"2008–2009","premiere":"2008–2009","studio":"The CW/Disney XD","notes":"Widely acclaimed."},
+  {"id":"anim-15","completed":false,"seq":15,"title":"Wolverine and the X-Men","season":"2009","premiere":"2009","studio":"Nicktoons","notes":""},
+  {"id":"anim-16","completed":false,"seq":16,"title":"The Avengers: Earth's Mightiest Heroes","season":"2010–2012","premiere":"2010–2012","studio":"Disney XD","notes":"Fan-favorite Avengers cartoon."},
+  {"id":"anim-17","completed":false,"seq":17,"title":"Ultimate Spider-Man","season":"2012–2017","premiere":"2012–2017","studio":"Disney XD","notes":""},
+  {"id":"anim-18","completed":false,"seq":18,"title":"Avengers Assemble","season":"2013–2019","premiere":"2013–2019","studio":"Disney XD","notes":""},
+  {"id":"anim-19","completed":false,"seq":19,"title":"Hulk and the Agents of S.M.A.S.H.","season":"2013–2015","premiere":"2013–2015","studio":"Disney XD","notes":""},
+  {"id":"anim-20","completed":false,"seq":20,"title":"Guardians of the Galaxy","season":"2015–2019","premiere":"2015–2019","studio":"Disney XD","notes":""},
+  {"id":"anim-21","completed":false,"seq":21,"title":"Spider-Man","season":"2017–2020","premiere":"2017–2020","studio":"Disney XD","notes":""},
+  {"id":"anim-22","completed":false,"seq":22,"title":"M.O.D.O.K.","season":"2021","premiere":"2021","studio":"Hulu","notes":"Stop-motion adult comedy."},
+  {"id":"anim-23","completed":false,"seq":23,"title":"Hit-Monkey","season":"2021–2024","premiere":"2021–2024","studio":"Hulu","notes":""}
+];
+
+const MCUF_COLLECTION = {
+  id:'mcu-films', name:"MCU Films (Phases 1–6)",
+  description:"Every Marvel Cinematic Universe feature film, Iron Man (2008) through Avengers: Secret Wars, in release order.",
+  category:'watching', icon:'🎬',
+  fields: FILM_FIELDS, items: MCUF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MCUS_COLLECTION = {
+  id:'mcu-series', name:"MCU Series (Disney+)",
+  description:"Marvel Studios' Disney+ series and specials, WandaVision (2021) onward, season by season in release order.",
+  category:'watching', icon:'📺',
+  fields: TV_FIELDS, items: MCUS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const MTV_COLLECTION = {
+  id:'marvel-television', name:"Marvel Television (ABC / Netflix / Hulu)",
+  description:"The pre-Disney+ Marvel Television era: Agents of S.H.I.E.L.D., Agent Carter, the Netflix Defenders saga, Runaways, Cloak & Dagger and Helstrom, season by season.",
+  category:'watching', icon:'📺',
+  fields: TV_FIELDS, items: MTV_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const LGF_COLLECTION = {
+  id:'marvel-films-legacy', name:"Legacy Marvel Films (non-MCU)",
+  description:"Marvel films outside the MCU — Howard the Duck, Blade, the Fox X-Men and Fantastic Four films, Raimi/Webb Spider-Man, Ghost Rider, the Punisher films and Sony's Spider-Man Universe — in release order.",
+  category:'watching', icon:'🎬',
+  fields: FILM_FIELDS, items: LGF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const LGTV_COLLECTION = {
+  id:'marvel-tv-legacy', name:"Legacy Marvel TV (non-MCU)",
+  description:"Live-action Marvel television outside the MCU — the 1970s Spider-Man and Incredible Hulk, the Hulk TV movies, Mutant X, Blade: The Series, Legion and The Gifted.",
+  category:'watching', icon:'📺',
+  fields: TV_FIELDS, items: LGTV_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const ANIM_COLLECTION = {
+  id:'marvel-animated', name:"Marvel Animated Series (classic)",
+  description:"Major Marvel animated series outside the MCU — the 1967 Spider-Man, X-Men: The Animated Series, Spider-Man TAS, X-Men: Evolution, Earth's Mightiest Heroes and more.",
+  category:'watching', icon:'📺',
+  fields: TV_FIELDS, items: ANIM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -5332,6 +5598,13 @@ function load() {
   if (!collections.find(c=>c.id==='evt-ages-apoc')) { collections.push(AAP_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='evt-max-security')) { collections.push(MAX_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='evt-house-of-m')) { collections.push(HOM_COLLECTION); save(); }
+  // Seed Marvel watching lists if missing
+  if (!collections.find(c=>c.id==='mcu-films')) { collections.push(MCUF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='mcu-series')) { collections.push(MCUS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='marvel-television')) { collections.push(MTV_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='marvel-films-legacy')) { collections.push(LGF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='marvel-tv-legacy')) { collections.push(LGTV_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='marvel-animated')) { collections.push(ANIM_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -5488,7 +5761,7 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
-  'Watching': {},
+  'Watching': { 'Marvel': { 'MCU': {}, 'Non-MCU': {} } },
   'Reading': { 'Marvel': { 'X-Men': { 'Events': {} } }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
   'Gaming': {}
 };
@@ -5556,6 +5829,12 @@ const COLLECTION_PATHS = {
   'mario-franchise':  ['Gaming'],
   'steam-library':    ['Gaming'],
   'wwf-ppv-history':  ['Watching'],
+  'mcu-films': ['Watching','Marvel','MCU'],
+  'mcu-series': ['Watching','Marvel','MCU'],
+  'marvel-television': ['Watching','Marvel','MCU'],
+  'marvel-films-legacy': ['Watching','Marvel','Non-MCU'],
+  'marvel-tv-legacy': ['Watching','Marvel','Non-MCU'],
+  'marvel-animated': ['Watching','Marvel','Non-MCU'],
   'wcw-ppv-history':  ['Watching'],
 };
 function pathOf(c) {
