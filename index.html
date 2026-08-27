@@ -78,6 +78,9 @@ input,select{font-family:inherit}
 .prog-count{font-size:1.5rem;font-weight:800}
 .prog-count span{font-size:0.9rem;font-weight:400;color:var(--text2)}
 .prog-pct{font-size:2rem;font-weight:900;color:var(--accent2)}
+.prog-value{font-size:0.82rem;font-weight:600;color:var(--green);margin-top:6px}
+.prog-value span{color:var(--text2);font-weight:400}
+.card-value{font-size:0.72rem;font-weight:600;color:var(--green);margin-bottom:6px}
 .progress-bar-lg{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden}
 .progress-fill-lg{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .5s}
 
@@ -5457,6 +5460,110 @@ const ANIM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Approximate market values ──────────────────────────────────
+// Rough RAW MID-GRADE (≈FN/VF) estimates in USD, used only to give a
+// ballpark total. Key issues are calibrated against public price-guide
+// data; everything else falls back to an era baseline. These are not
+// live sales figures and are no substitute for a real appraisal —
+// edit any row's Value to match what you actually paid//it's worth.
+const VALUE_KEYS = {
+  'uncanny-xmen': {
+    '#1':6000,'#2':1400,'#3':900,'#4':900,'#5':700,'#6':600,'#7':550,'#8':550,'#9':600,'#10':600,
+    '#11':450,'#12':500,'#13':400,'#14':450,'#15':300,'#16':280,'#17':250,'#18':240,'#19':230,'#20':220,
+    '#28':300,'#35':220,'#38':160,'#49':170,'#50':160,'#53':150,'#54':150,'#58':180,'#59':140,
+    '#62':130,'#63':130,'#64':140,'#65':140,'#66':140,
+    '#94':300,'#95':110,'#96':80,'#97':70,'#98':80,'#99':65,'#100':150,'#101':250,'#102':70,
+    '#103':60,'#104':70,'#105':55,'#106':50,'#107':70,'#108':60,'#109':50,'#110':40,
+    '#111':45,'#112':40,'#113':40,'#114':40,'#115':40,'#116':40,'#117':60,'#118':35,'#119':35,
+    '#120':70,'#121':80,'#122':35,'#123':35,'#124':30,'#125':35,'#126':30,'#127':28,'#128':28,
+    '#129':120,'#130':80,'#131':40,'#132':40,'#133':50,'#134':45,'#135':50,'#136':40,'#137':90,
+    '#138':30,'#139':30,'#140':25,'#141':34,'#142':30,'#143':25,'#144':15,'#145':15,
+    '#148':15,'#150':15,'#158':25,'#159':15,'#161':15,'#165':15,'#166':15,'#168':18,
+    '#171':20,'#172':12,'#173':12,'#175':15,'#186':12,'#190':10,'#191':12,
+    '#200':15,'#201':45,'#205':30,'#207':12,'#210':15,'#211':25,'#212':25,'#213':30,
+    '#221':60,'#222':12,'#225':10,'#226':10,'#227':12,'#229':12,'#235':10,
+    '#239':12,'#242':10,'#243':10,'#244':20,'#248':25,'#251':25,'#253':8,'#255':8,'#256':12,
+    '#266':60,'#267':25,'#268':25,'#269':10,'#270':8,'#272':8,'#275':8,'#277':6,'#278':6,'#280':6,
+    '#281':6,'#282':10,'#283':10,'#294':6,'#300':8,'#303':6,'#304':6,'#325':6,'#350':8,
+    '#375':5,'#400':5,'#500':6,'#544':6,
+    'Annual #1':180,'Annual #2':150,'Annual #3':30,'Annual #4':25,'Annual #5':20,'Annual #6':18,
+    'Annual #7':15,'Annual #8':15,'Annual #9':18,'Annual #10':25,'Annual #11':12,'Annual #12':10,
+    'Annual #13':10,'Annual #14':25,'Annual #15':8
+  },
+  'wolverine-comics': {
+    'LS #1':120,'LS #2':55,'LS #3':50,'LS #4':55,
+    '#1':40,'#2':18,'#3':15,'#4':15,'#5':12,'#6':12,'#7':12,'#8':12,'#9':12,'#10':15,
+    '#11':10,'#17':8,'#24':8,'#25':8,'#27':10,'#31':8,'#41':12,'#42':10,'#43':8,
+    '#50':12,'#75':15,'#88':20,'#90':10,'#100':12,'#101':6,'#125':6,'#145':5,'#150':5,'#189':5
+  },
+  'x-men-1991': {
+    '#1':15,'#2':8,'#3':8,'#4':6,'#5':6,'#8':6,'#9':6,'#10':6,'#11':6,'#12':6,
+    '#14':6,'#15':6,'#16':6,'#25':10,'#30':8,'#50':6,'#75':6,'#100':6,
+    '#114':25,'#115':10,'#116':10,'#117':8,'#118':8,'#119':8,'#120':8,'#121':15,
+    '#126':10,'#128':12,'#132':8,'#133':8,'#134':8,'#135':8,'#136':8,'#137':8,'#138':8,
+    '#139':8,'#140':8,'#141':8,'#142':8,'#143':8,'#144':8,'#145':8,'#146':10,'#147':8,
+    '#148':8,'#149':8,'#150':10,'#151':8,'#152':8,'#153':8,'#154':10,'#155':6,'#156':6,
+    '#157':5,'#166':5,'#188':5,'#200':5,'#207':6,'#208':5,'#275':5
+  },
+  'new-mutants': {
+    '#1':60,'#2':20,'#3':15,'#4':12,'#5':10,'#6':10,'#7':10,'#8':10,'#9':10,'#10':10,
+    '#13':12,'#16':12,'#18':45,'#19':20,'#20':18,'#21':25,'#25':12,'#26':12,'#28':12,
+    '#45':8,'#60':8,'#73':8,'#86':20,'#87':70,'#88':30,'#89':15,'#90':12,'#91':10,
+    '#92':10,'#93':10,'#94':10,'#95':10,'#96':10,'#97':12,'#98':100,'#99':25,'#100':18
+  },
+  'x-factor':{'#1':25,'#2':10,'#3':8,'#4':8,'#5':8,'#6':10,'#24':20,'#25':8,'#26':8,'#71':8,'#87':10,'#149':4},
+  'excalibur':{'#1':12,'#2':6,'#3':6,'#4':5,'#5':5,'#6':5,'#42':5,'#83':5,'#125':4},
+  'x-force':{'#1':8,'#2':6,'#3':6,'#4':5,'#5':5,'#8':5,'#11':5,'#15':5,'#116':6,'#129':4},
+  'cable':{'#1':8,'#2':5,'#3':5,'#4':4,'#5':4,'#107':4},
+  'x-man':{'#1':6,'#2':4,'#3':4,'#4':4,'#75':4},
+  'generation-x':{'#1':10,'#2':5,'#3':5,'#4':4,'#5':4,'#63':4,'#70':5,'#75':5},
+  'astonishing-xmen':{'#1':10,'#2':6,'#3':6,'#4':5,'#5':5,'#6':6,'#7':5,'#12':5,'#24':5,'Giant-Size #1':8},
+  'deadly-genesis':{'#1':12,'#2':6,'#3':6,'#4':6,'#5':6,'#6':6},
+  'x-treme-x-men':{'#1':6,'#2':4,'#46':4},
+  'deadpool-1997':{'#1':60,'#2':20,'#3':15,'#4':12,'#5':10,'#6':10,'#7':8,'#8':8,'#11':10,'#69':6},
+  'cable-deadpool':{'#1':10,'#2':6,'#3':5},
+  'exiles-2001':{'#1':8,'#2':5,'#3':5},
+  'x23-2005':{'#1':25,'#2':12,'#3':10,'#4':10,'#5':10,'#6':12},
+  'madrox':{'#1':10,'#2':6,'#3':6,'#4':6,'#5':6},
+  'new-x-men-academy':{'#1':10,'#2':6,'#3':5},
+  'x-statix':{'#1':6,'#2':4},
+  'wolverine-2003':{'#1':10,'#20':8,'#66':30,'#67':12,'#68':10,'#69':10,'#70':10,'#71':10,'#72':10,'#73':10,'#74':12}
+};
+
+// Era baselines (raw mid-grade) for anything not individually listed.
+const VALUE_ERAS = [[1965,450],[1969,140],[1975,40],[1979,30],[1983,14],[1986,9],[1989,7],[1993,5],[1999,4],[2005,4],[2100,4]];
+
+function valueYearOf(item){
+  const m = String(item.date||'').match(/(19|20)\d{2}/);
+  return m ? parseInt(m[0],10) : 0;
+}
+function valueBaseline(year){
+  if(!year) return 4;
+  for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
+  return 4;
+}
+function estimateValue(c,item){
+  const keys = VALUE_KEYS[c.id];
+  if (keys && keys[item.issue]!=null) return keys[item.issue];
+  return valueBaseline(valueYearOf(item));
+}
+// Collections that carry per-issue values: the comic lists (dual-check ones).
+function hasValues(c){ return isDual(c); }
+function collectedValue(c){
+  if(!hasValues(c)) return 0;
+  return c.items.reduce((s,i)=> s + (i.collected ? (Number(i.value)||0) : 0), 0);
+}
+function totalValue(c){
+  if(!hasValues(c)) return 0;
+  return c.items.reduce((s,i)=> s + (Number(i.value)||0), 0);
+}
+function grandCollectedValue(){
+  return collections.reduce((s,c)=> s + collectedValue(c), 0);
+}
+function fmtMoney(n){
+  return '$' + Math.round(n).toLocaleString('en-US');
+}
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -5621,6 +5728,22 @@ function load() {
       save();
     }
   }
+  // Stamp approximate values onto comic issues (and expose a Value column).
+  for (const c of collections) {
+    if (!hasValues(c)) continue;
+    let changed = false;
+    for (const it of c.items) {
+      if (it.value === undefined || it.value === null || it.value === '') {
+        it.value = estimateValue(c, it); changed = true;
+      }
+    }
+    if (!c.fields.some(f=>f.key==='value')) {
+      const at = Math.min(3, c.fields.length);
+      c.fields.splice(at, 0, {key:'value', label:'Value ($)', type:'number'});
+      changed = true;
+    }
+    if (changed) save();
+  }
 }
 
 function uid() { return Math.random().toString(36).slice(2)+Date.now().toString(36); }
@@ -5660,6 +5783,7 @@ function collectionCardEl(c) {
     <h3>${esc(c.name)}</h3>
     ${c.description?`<p class="desc">${esc(c.description)}</p>`:'<p class="desc">&nbsp;</p>'}
     <div class="card-stats"><span>${statsText}</span><span class="card-pct" style="color:${color}">${pct}%</span></div>
+    ${hasValues(c)?`<div class="card-value">Collected \u2248 ${fmtMoney(collectedValue(c))} / ${fmtMoney(totalValue(c))}</div>`:''}
     <div class="progress-bar"><div class="progress-fill" style="width:${pct}%;background:${color}"></div></div>
   `;
   return card;
@@ -5725,7 +5849,10 @@ function renderCatNode(name, subtree, path) {
 
 function renderHome() {
   const grid = document.getElementById('cards-grid');
-  document.getElementById('home-label').textContent = `Your Collections (${collections.length})`;
+  const gv = grandCollectedValue();
+  document.getElementById('home-label').innerHTML =
+    `Your Collections (${collections.length})` +
+    (gv>0 ? ` &nbsp;·&nbsp; <span style="color:var(--green)">Collected value \u2248 ${fmtMoney(gv)}</span>` : '');
   grid.className = 'cat-tree';
   grid.innerHTML = '';
   const tree = buildCategoryTree();
@@ -5875,8 +6002,9 @@ function updateProgress() {
       const d = c.items.filter(i=>i[ch.key]).length;
       return {label:ch.label, d, pct: total?Math.round(d/total*100):0};
     });
-    document.getElementById('lv-count').innerHTML =
-      stats.map(s=>`${s.d} <span>/ ${total} ${esc(s.label.toLowerCase())}</span>`).join(' &nbsp;·&nbsp; ');
+    let countHTML = stats.map(s=>`${s.d} <span>/ ${total} ${esc(s.label.toLowerCase())}</span>`).join(' &nbsp;·&nbsp; ');
+    if (hasValues(c)) countHTML += `<div class="prog-value">Collected value \u2248 ${fmtMoney(collectedValue(c))} <span>of ${fmtMoney(totalValue(c))} total</span></div>`;
+    document.getElementById('lv-count').innerHTML = countHTML;
     document.getElementById('lv-pct').textContent = stats.map(s=>s.pct+'%').join(' / ');
     document.getElementById('lv-fill').style.width = stats[0].pct+'%';
     return;
@@ -5916,8 +6044,8 @@ function getDisplayedItems() {
 function renderTable() {
   const c = getActive();
   const checks = checksOf(c);
-  const mainFields = c.fields.slice(0,5);
-  const extraFields = c.fields.slice(5);
+  const mainFields = c.fields.slice(0,6);
+  const extraFields = c.fields.slice(6);
   const items = getDisplayedItems();
   const leadCols = checks.length; // number of check columns before the data columns
 
