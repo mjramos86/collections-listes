@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire','tpb-dark-tower','tpb-sin-city','tpb-hellblazer','tpb-gotham-central','tpb-batman-morrison','tpb-sandman','tpb-jla-morrison','tpb-fourth-world','tpb-all-star-superman','tpb-animal-man','tpb-batman-miller','tpb-bprd','tpb-invincible','qc-academie-chasseurs','qc-magasin-general','hum-incal'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire','tpb-dark-tower','tpb-sin-city','tpb-hellblazer','tpb-gotham-central','tpb-batman-morrison','tpb-sandman','tpb-jla-morrison','tpb-fourth-world','tpb-all-star-superman','tpb-animal-man','tpb-batman-miller','tpb-bprd','tpb-invincible','qc-academie-chasseurs','qc-magasin-general','hum-incal','tpb-daredevil-miller'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -7048,6 +7048,32 @@ const HIN_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Daredevil by Frank Miller ──────────────────────────────────
+const TDM_ITEMS = [
+  {"id":"tdm-1","completed":false,"seq":1,"title":"Daredevil Visionaries: Frank Miller Vol. 1","collects":"Daredevil #158–161, #163–167, Spectacular Spider-Man #27–28","format":"TPB","year":"2000"},
+  {"id":"tdm-2","completed":false,"seq":2,"title":"Daredevil Visionaries: Frank Miller Vol. 2","collects":"Daredevil #168–182","format":"TPB","year":"2001"},
+  {"id":"tdm-3","completed":false,"seq":3,"title":"Daredevil Visionaries: Frank Miller Vol. 3","collects":"Daredevil #183–191","format":"TPB","year":"2002"},
+  {"id":"tdm-4","completed":false,"seq":4,"title":"Daredevil: Love and War","collects":"Marvel Graphic Novel #24","format":"HC","year":"1986"},
+  {"id":"tdm-5","completed":false,"seq":5,"title":"Daredevil: Born Again","collects":"Daredevil #227–233 (with David Mazzucchelli)","format":"TPB","year":"1987"},
+  {"id":"tdm-6","completed":false,"seq":6,"title":"Elektra: Assassin","collects":"Elektra: Assassin #1–8 (with Bill Sienkiewicz)","format":"TPB","year":"1987"},
+  {"id":"tdm-7","completed":false,"seq":7,"title":"Elektra Lives Again","collects":"Original graphic novel","format":"HC","year":"1990"},
+  {"id":"tdm-8","completed":false,"seq":8,"title":"Daredevil: The Man Without Fear","collects":"The Man Without Fear #1–5 (with John Romita Jr.)","format":"TPB","year":"1994"},
+  {"id":"tdm-9","completed":false,"seq":9,"title":"Daredevil Legends Vol. 2: Born Again","collects":"Daredevil #227–233","format":"TPB","year":"2001"},
+  {"id":"tdm-10","completed":false,"seq":10,"title":"Daredevil by Frank Miller & Klaus Janson Omnibus","collects":"Daredevil #158–161, #163–191, What If? #28 & related","format":"Omnibus","year":"2007"},
+  {"id":"tdm-11","completed":false,"seq":11,"title":"Daredevil by Frank Miller Omnibus Companion","collects":"Love and War, Man Without Fear, Elektra: Assassin, Elektra Lives Again","format":"Omnibus","year":"2008"},
+  {"id":"tdm-12","completed":false,"seq":12,"title":"Daredevil Epic Collection: Marked for Death","collects":"Daredevil #159–172","format":"Epic Collection","year":"2014"},
+  {"id":"tdm-13","completed":false,"seq":13,"title":"Daredevil Epic Collection: Gang War","collects":"Daredevil #173–184","format":"Epic Collection","year":"2015"},
+  {"id":"tdm-14","completed":false,"seq":14,"title":"Daredevil: Born Again (Marvel Premiere Classic)","collects":"Daredevil #226–233","format":"HC","year":"2010"}
+];
+
+const TDM_COLLECTION = {
+  id:'tpb-daredevil-miller', name:'Daredevil by Frank Miller',
+  description:"Collected editions of Frank Miller's Daredevil — his 1979–1983 run (#158–191), Born Again, Love and War, Elektra: Assassin, The Man Without Fear and the Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TDM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -7258,6 +7284,7 @@ function load() {
   if (!collections.find(c=>c.id==='qc-academie-chasseurs')) { collections.push(QAC_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='qc-magasin-general')) { collections.push(QMG_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='hum-incal')) { collections.push(HIN_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-daredevil-miller')) { collections.push(TDM_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -7517,6 +7544,7 @@ const COLLECTION_PATHS = {
   'qc-academie-chasseurs': ["Reading", "Québec"],
   'qc-magasin-general': ["Reading", "Québec"],
   'hum-incal': ["Reading", "Humanoïdes Associés"],
+  'tpb-daredevil-miller': ["Reading", "Marvel", "Collected Editions"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
