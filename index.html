@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire','tpb-dark-tower','tpb-sin-city','tpb-hellblazer'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire','tpb-dark-tower','tpb-sin-city','tpb-hellblazer','tpb-gotham-central','tpb-batman-morrison','tpb-sandman','tpb-jla-morrison','tpb-fourth-world','tpb-all-star-superman','tpb-animal-man','tpb-batman-miller','tpb-bprd','tpb-invincible','qc-academie-chasseurs','qc-magasin-general','hum-incal'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5542,7 +5542,7 @@ function valueBaseline(year){
   for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
   return 4;
 }
-const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'Masterworks':50,'Album':25,'Intégrale':45,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
+const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'Masterworks':50,'Album':25,'Intégrale':45,'Compendium':60,'Absolute':100,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
 function estimateValue(c,item){
   if (c.tpb) return TPB_FORMAT_VALUES[item.format] ?? 18;
   const keys = VALUE_KEYS[c.id];
@@ -6761,6 +6761,282 @@ const THL_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Collected editions, wave 6 ─────────────────────────────────
+const TGC_ITEMS = [
+  {"id":"tgc-1","completed":false,"seq":1,"title":"Gotham Central Vol. 1: In the Line of Duty","collects":"#1–10","format":"TPB","year":"2004"},
+  {"id":"tgc-2","completed":false,"seq":2,"title":"Gotham Central Vol. 2: Half a Life","collects":"#11–15, #19–22","format":"TPB","year":"2005"},
+  {"id":"tgc-3","completed":false,"seq":3,"title":"Gotham Central Vol. 3: Unresolved Targets","collects":"#16–18, #23–31","format":"TPB","year":"2006"},
+  {"id":"tgc-4","completed":false,"seq":4,"title":"Gotham Central Vol. 4: The Quick and the Dead","collects":"#32–36, #38–40","format":"TPB","year":"2007"},
+  {"id":"tgc-5","completed":false,"seq":5,"title":"Gotham Central Vol. 5: Dead Robin","collects":"#37, #41–40","format":"TPB","year":"2008"},
+  {"id":"tgc-6","completed":false,"seq":6,"title":"Gotham Central Book One: In the Line of Duty","collects":"#1–10","format":"HC","year":"2008"},
+  {"id":"tgc-7","completed":false,"seq":7,"title":"Gotham Central Book Two: Jokers and Madmen","collects":"#11–22","format":"HC","year":"2009"},
+  {"id":"tgc-8","completed":false,"seq":8,"title":"Gotham Central Book Three: On the Freak Beat","collects":"#23–31","format":"HC","year":"2010"},
+  {"id":"tgc-9","completed":false,"seq":9,"title":"Gotham Central Book Four: Corrigan","collects":"#32–40","format":"HC","year":"2011"},
+  {"id":"tgc-10","completed":false,"seq":10,"title":"Gotham Central Omnibus","collects":"#1–40 & related","format":"Omnibus","year":"2016"},
+  {"id":"tgc-11","completed":false,"seq":11,"title":"Gotham Central Compendium","collects":"The complete series","format":"Compendium","year":"2022"}
+];
+
+const TBGM_ITEMS = [
+  {"id":"tbgm-1","completed":false,"seq":1,"title":"Batman and Son","collects":"Batman #655–658, #663–666","format":"TPB","year":"2007"},
+  {"id":"tbgm-2","completed":false,"seq":2,"title":"Batman: The Black Glove","collects":"Batman #667–669, #672–675","format":"TPB","year":"2008"},
+  {"id":"tbgm-3","completed":false,"seq":3,"title":"Batman R.I.P.","collects":"Batman #676–681","format":"TPB","year":"2009"},
+  {"id":"tbgm-4","completed":false,"seq":4,"title":"Batman: Time and the Batman","collects":"Batman #700–703","format":"TPB","year":"2011"},
+  {"id":"tbgm-5","completed":false,"seq":5,"title":"Batman and Robin Vol. 1: Batman Reborn","collects":"Batman and Robin #1–6","format":"TPB","year":"2010"},
+  {"id":"tbgm-6","completed":false,"seq":6,"title":"Batman and Robin Vol. 2: Batman vs. Robin","collects":"#7–12","format":"TPB","year":"2011"},
+  {"id":"tbgm-7","completed":false,"seq":7,"title":"Batman and Robin Vol. 3: Batman & Robin Must Die!","collects":"#13–16","format":"TPB","year":"2011"},
+  {"id":"tbgm-8","completed":false,"seq":8,"title":"Batman: The Return of Bruce Wayne","collects":"The Return of Bruce Wayne #1–6","format":"TPB","year":"2011"},
+  {"id":"tbgm-9","completed":false,"seq":9,"title":"Batman Incorporated","collects":"Batman Incorporated (2011) #1–8","format":"TPB","year":"2012"},
+  {"id":"tbgm-10","completed":false,"seq":10,"title":"Batman Incorporated Vol. 1: Demon Star","collects":"Batman Incorporated (2012) #1–6","format":"TPB","year":"2013"},
+  {"id":"tbgm-11","completed":false,"seq":11,"title":"Batman Incorporated Vol. 2: Gotham's Most Wanted","collects":"(2012) #7–13","format":"TPB","year":"2014"},
+  {"id":"tbgm-12","completed":false,"seq":12,"title":"Batman by Grant Morrison Omnibus Vol. 1","collects":"Batman #655–681 & related","format":"Omnibus","year":"2018"},
+  {"id":"tbgm-13","completed":false,"seq":13,"title":"Batman by Grant Morrison Omnibus Vol. 2","collects":"Batman and Robin, Return of Bruce Wayne","format":"Omnibus","year":"2019"},
+  {"id":"tbgm-14","completed":false,"seq":14,"title":"Batman by Grant Morrison Omnibus Vol. 3","collects":"Batman Incorporated & finale","format":"Omnibus","year":"2020"}
+];
+
+const TSN_ITEMS = [
+  {"id":"tsn-1","completed":false,"seq":1,"title":"The Sandman Vol. 1: Preludes & Nocturnes","collects":"#1–8","format":"TPB","year":""},
+  {"id":"tsn-2","completed":false,"seq":2,"title":"The Sandman Vol. 2: The Doll's House","collects":"#9–16","format":"TPB","year":""},
+  {"id":"tsn-3","completed":false,"seq":3,"title":"The Sandman Vol. 3: Dream Country","collects":"#17–20","format":"TPB","year":""},
+  {"id":"tsn-4","completed":false,"seq":4,"title":"The Sandman Vol. 4: Season of Mists","collects":"#21–28","format":"TPB","year":""},
+  {"id":"tsn-5","completed":false,"seq":5,"title":"The Sandman Vol. 5: A Game of You","collects":"#32–37","format":"TPB","year":""},
+  {"id":"tsn-6","completed":false,"seq":6,"title":"The Sandman Vol. 6: Fables & Reflections","collects":"#29–31, #38–40, #50","format":"TPB","year":""},
+  {"id":"tsn-7","completed":false,"seq":7,"title":"The Sandman Vol. 7: Brief Lives","collects":"#41–49","format":"TPB","year":""},
+  {"id":"tsn-8","completed":false,"seq":8,"title":"The Sandman Vol. 8: Worlds' End","collects":"#51–56","format":"TPB","year":""},
+  {"id":"tsn-9","completed":false,"seq":9,"title":"The Sandman Vol. 9: The Kindly Ones","collects":"#57–69","format":"TPB","year":""},
+  {"id":"tsn-10","completed":false,"seq":10,"title":"The Sandman Vol. 10: The Wake","collects":"#70–75","format":"TPB","year":""},
+  {"id":"tsn-11","completed":false,"seq":11,"title":"The Sandman Vol. 11: Endless Nights","collects":"Original graphic novel","format":"TPB","year":"2003"},
+  {"id":"tsn-12","completed":false,"seq":12,"title":"The Sandman: Overture","collects":"Overture #1–6","format":"TPB","year":"2015"},
+  {"id":"tsn-13","completed":false,"seq":13,"title":"The Sandman: The Dream Hunters","collects":"Illustrated novella / comic adaptation","format":"TPB","year":"1999"},
+  {"id":"tsn-14","completed":false,"seq":14,"title":"Absolute Sandman Vol. 1","collects":"#1–20","format":"Absolute","year":""},
+  {"id":"tsn-15","completed":false,"seq":15,"title":"Absolute Sandman Vol. 2","collects":"#21–39","format":"Absolute","year":""},
+  {"id":"tsn-16","completed":false,"seq":16,"title":"Absolute Sandman Vol. 3","collects":"#40–56","format":"Absolute","year":""},
+  {"id":"tsn-17","completed":false,"seq":17,"title":"Absolute Sandman Vol. 4","collects":"#57–75","format":"Absolute","year":""},
+  {"id":"tsn-18","completed":false,"seq":18,"title":"Absolute Sandman Vol. 5","collects":"Extras & Endless Nights","format":"Absolute","year":""},
+  {"id":"tsn-19","completed":false,"seq":19,"title":"The Sandman Omnibus Vol. 1","collects":"#1–37","format":"Omnibus","year":""},
+  {"id":"tsn-20","completed":false,"seq":20,"title":"The Sandman Omnibus Vol. 2","collects":"#38–75","format":"Omnibus","year":""},
+  {"id":"tsn-21","completed":false,"seq":21,"title":"The Sandman Omnibus Vol. 3","collects":"Overture & extras","format":"Omnibus","year":""}
+];
+
+const TJL_ITEMS = [
+  {"id":"tjl-1","completed":false,"seq":1,"title":"JLA Vol. 1: New World Order","collects":"JLA #1–4","format":"TPB","year":"1997"},
+  {"id":"tjl-2","completed":false,"seq":2,"title":"JLA Vol. 2: American Dreams","collects":"#5–9","format":"TPB","year":"1998"},
+  {"id":"tjl-3","completed":false,"seq":3,"title":"JLA Vol. 3: Rock of Ages","collects":"#10–15","format":"TPB","year":"1998"},
+  {"id":"tjl-4","completed":false,"seq":4,"title":"JLA Vol. 4: Strength in Numbers","collects":"#16–23 & related","format":"TPB","year":"1998"},
+  {"id":"tjl-5","completed":false,"seq":5,"title":"JLA Vol. 6: World War III","collects":"#34–41","format":"TPB","year":"2000"},
+  {"id":"tjl-6","completed":false,"seq":6,"title":"JLA: Earth 2","collects":"Original graphic novel","format":"HC","year":"2000"},
+  {"id":"tjl-7","completed":false,"seq":7,"title":"JLA Deluxe Edition Vol. 1","collects":"JLA #1–9, Secret Files #1","format":"HC","year":"2011"},
+  {"id":"tjl-8","completed":false,"seq":8,"title":"JLA Deluxe Edition Vol. 2","collects":"#10–17, JLA/WildC.A.T.s","format":"HC","year":"2012"},
+  {"id":"tjl-9","completed":false,"seq":9,"title":"JLA Deluxe Edition Vol. 3","collects":"#22–31, JLA: Earth 2","format":"HC","year":"2013"},
+  {"id":"tjl-10","completed":false,"seq":10,"title":"JLA Deluxe Edition Vol. 4","collects":"#32–41 & related","format":"HC","year":"2013"},
+  {"id":"tjl-11","completed":false,"seq":11,"title":"JLA by Grant Morrison Omnibus","collects":"The complete run","format":"Omnibus","year":"2020"}
+];
+
+const TFW_ITEMS = [
+  {"id":"tfw-1","completed":false,"seq":1,"title":"Jack Kirby's Fourth World Omnibus Vol. 1","collects":"Jimmy Olsen #133–139, Forever People #1–3, New Gods #1–3, Mister Miracle #1–2","format":"Omnibus","year":"2007"},
+  {"id":"tfw-2","completed":false,"seq":2,"title":"Jack Kirby's Fourth World Omnibus Vol. 2","collects":"Continues the four titles","format":"Omnibus","year":"2007"},
+  {"id":"tfw-3","completed":false,"seq":3,"title":"Jack Kirby's Fourth World Omnibus Vol. 3","collects":"Continues the four titles","format":"Omnibus","year":"2008"},
+  {"id":"tfw-4","completed":false,"seq":4,"title":"Jack Kirby's Fourth World Omnibus Vol. 4","collects":"Concludes the saga & Hunger Dogs","format":"Omnibus","year":"2008"},
+  {"id":"tfw-5","completed":false,"seq":5,"title":"Jack Kirby's Fourth World Omnibus (one-volume edition)","collects":"The complete Fourth World","format":"Omnibus","year":"2017"},
+  {"id":"tfw-6","completed":false,"seq":6,"title":"New Gods by Jack Kirby","collects":"New Gods #1–11","format":"TPB","year":"1998"}
+];
+
+const TAS_ITEMS = [
+  {"id":"tas-1","completed":false,"seq":1,"title":"All-Star Superman Vol. 1","collects":"All-Star Superman #1–6","format":"TPB","year":"2007"},
+  {"id":"tas-2","completed":false,"seq":2,"title":"All-Star Superman Vol. 2","collects":"#7–12","format":"TPB","year":"2009"},
+  {"id":"tas-3","completed":false,"seq":3,"title":"All-Star Superman (complete edition)","collects":"#1–12 in one volume","format":"TPB","year":"2011"},
+  {"id":"tas-4","completed":false,"seq":4,"title":"Absolute All-Star Superman","collects":"#1–12 oversized","format":"Absolute","year":"2010"},
+  {"id":"tas-5","completed":false,"seq":5,"title":"All-Star Superman Deluxe Edition","collects":"#1–12","format":"HC","year":"2022"}
+];
+
+const TAM_ITEMS = [
+  {"id":"tam-1","completed":false,"seq":1,"title":"Animal Man Vol. 1","collects":"Animal Man #1–9","format":"TPB","year":"1991"},
+  {"id":"tam-2","completed":false,"seq":2,"title":"Animal Man Vol. 2: Origin of the Species","collects":"#10–17","format":"TPB","year":"2002"},
+  {"id":"tam-3","completed":false,"seq":3,"title":"Animal Man Vol. 3: Deus Ex Machina","collects":"#18–26","format":"TPB","year":"2003"},
+  {"id":"tam-4","completed":false,"seq":4,"title":"Animal Man by Grant Morrison Deluxe Edition Book One","collects":"#1–13","format":"HC","year":"2020"},
+  {"id":"tam-5","completed":false,"seq":5,"title":"Animal Man by Grant Morrison Deluxe Edition Book Two","collects":"#14–26","format":"HC","year":"2021"},
+  {"id":"tam-6","completed":false,"seq":6,"title":"Animal Man Omnibus","collects":"#1–26 & related","format":"Omnibus","year":"2013"}
+];
+
+const TBF_ITEMS = [
+  {"id":"tbf-1","completed":false,"seq":1,"title":"Batman: Year One","collects":"Batman #404–407","format":"TPB","year":"1988"},
+  {"id":"tbf-2","completed":false,"seq":2,"title":"Batman: The Dark Knight Returns","collects":"The Dark Knight Returns #1–4","format":"TPB","year":"1986"},
+  {"id":"tbf-3","completed":false,"seq":3,"title":"The Dark Knight Strikes Again","collects":"DK2 #1–3","format":"TPB","year":"2004"},
+  {"id":"tbf-4","completed":false,"seq":4,"title":"All-Star Batman & Robin, the Boy Wonder Vol. 1","collects":"All-Star Batman & Robin #1–9","format":"TPB","year":"2008"},
+  {"id":"tbf-5","completed":false,"seq":5,"title":"Dark Knight III: The Master Race","collects":"DKIII #1–9","format":"HC","year":"2017"},
+  {"id":"tbf-6","completed":false,"seq":6,"title":"The Dark Knight Returns: The Last Crusade","collects":"One-shot","format":"HC","year":"2016"},
+  {"id":"tbf-7","completed":false,"seq":7,"title":"Absolute Batman: Year One","collects":"Batman #404–407 oversized","format":"Absolute","year":"2005"},
+  {"id":"tbf-8","completed":false,"seq":8,"title":"Absolute The Dark Knight","collects":"DKR #1–4 and DK2","format":"Absolute","year":"2006"},
+  {"id":"tbf-9","completed":false,"seq":9,"title":"Batman Noir: The Dark Knight Returns","collects":"DKR in black and white","format":"HC","year":"2016"},
+  {"id":"tbf-10","completed":false,"seq":10,"title":"Batman: The Dark Knight Master Race Omnibus","collects":"The DKIII saga","format":"Omnibus","year":"2020"}
+];
+
+const TBP_ITEMS = [
+  {"id":"tbp-1","completed":false,"seq":1,"title":"B.P.R.D.: Plague of Frogs Hardcover Collection Vol. 1","collects":"Hollow Earth through The Dead","format":"HC","year":"2011"},
+  {"id":"tbp-2","completed":false,"seq":2,"title":"B.P.R.D.: Plague of Frogs Hardcover Collection Vol. 2","collects":"The Black Flame through Garden of Souls","format":"HC","year":"2011"},
+  {"id":"tbp-3","completed":false,"seq":3,"title":"B.P.R.D.: Plague of Frogs Hardcover Collection Vol. 3","collects":"Killing Ground through The Warning","format":"HC","year":"2012"},
+  {"id":"tbp-4","completed":false,"seq":4,"title":"B.P.R.D.: Plague of Frogs Hardcover Collection Vol. 4","collects":"King of Fear & related","format":"HC","year":"2012"},
+  {"id":"tbp-5","completed":false,"seq":5,"title":"B.P.R.D. Hell on Earth Vol. 1","collects":"New World, Gods and Monsters, Russia","format":"HC","year":"2017"},
+  {"id":"tbp-6","completed":false,"seq":6,"title":"B.P.R.D. Hell on Earth Vol. 2","collects":"The Devil's Engine, The Long Death, The Pickens County Horror","format":"HC","year":"2017"},
+  {"id":"tbp-7","completed":false,"seq":7,"title":"B.P.R.D. Hell on Earth Vol. 3","collects":"The Return of the Master, A Cold Day in Hell","format":"HC","year":"2018"},
+  {"id":"tbp-8","completed":false,"seq":8,"title":"B.P.R.D. Hell on Earth Vol. 4","collects":"The Reign of the Black Flame, The Devil's Wings","format":"HC","year":"2018"},
+  {"id":"tbp-9","completed":false,"seq":9,"title":"B.P.R.D. Hell on Earth Vol. 5","collects":"Cometh the Hour & the finale","format":"HC","year":"2019"},
+  {"id":"tbp-10","completed":false,"seq":10,"title":"B.P.R.D.: The Devil You Know","collects":"The complete Devil You Know cycle","format":"HC","year":"2020"},
+  {"id":"tbp-11","completed":false,"seq":11,"title":"B.P.R.D. Omnibus Vol. 1","collects":"The early series","format":"Omnibus","year":"2022"}
+];
+
+const TIV2_ITEMS = [
+  {"id":"tiv2-1","completed":false,"seq":1,"title":"Invincible Compendium One","collects":"Invincible #1–47","format":"Compendium","year":"2011"},
+  {"id":"tiv2-2","completed":false,"seq":2,"title":"Invincible Compendium Two","collects":"#48–96","format":"Compendium","year":"2013"},
+  {"id":"tiv2-3","completed":false,"seq":3,"title":"Invincible Compendium Three","collects":"#97–144","format":"Compendium","year":"2018"},
+  {"id":"tiv2-4","completed":false,"seq":4,"title":"Invincible Ultimate Collection Vol. 1","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-5","completed":false,"seq":5,"title":"Invincible Ultimate Collection Vol. 2","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-6","completed":false,"seq":6,"title":"Invincible Ultimate Collection Vol. 3","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-7","completed":false,"seq":7,"title":"Invincible Ultimate Collection Vol. 4","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-8","completed":false,"seq":8,"title":"Invincible Ultimate Collection Vol. 5","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-9","completed":false,"seq":9,"title":"Invincible Ultimate Collection Vol. 6","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-10","completed":false,"seq":10,"title":"Invincible Ultimate Collection Vol. 7","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-11","completed":false,"seq":11,"title":"Invincible Ultimate Collection Vol. 8","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-12","completed":false,"seq":12,"title":"Invincible Ultimate Collection Vol. 9","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-13","completed":false,"seq":13,"title":"Invincible Ultimate Collection Vol. 10","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-14","completed":false,"seq":14,"title":"Invincible Ultimate Collection Vol. 11","collects":"Hardcover collection","format":"HC","year":""},
+  {"id":"tiv2-15","completed":false,"seq":15,"title":"Invincible Ultimate Collection Vol. 12","collects":"Hardcover collection","format":"HC","year":""}
+];
+
+const QAC_ITEMS = [
+  {"id":"qac-1","completed":false,"seq":1,"title":"Académie des chasseurs de primes, tome 1 : La rentrée","publisher":"Les 400 coups","year":"2009","format":"Album","notes":""},
+  {"id":"qac-2","completed":false,"seq":2,"title":"Académie des chasseurs de primes, tome 2 : Princesses","publisher":"Les 400 coups","year":"2010","format":"Album","notes":""},
+  {"id":"qac-3","completed":false,"seq":3,"title":"Académie des chasseurs de primes, tome 2.5 : En vacances !","publisher":"Les 400 coups","year":"2011","format":"Album","notes":"Album intercalaire."},
+  {"id":"qac-4","completed":false,"seq":4,"title":"Académie des chasseurs de primes, tome 3","publisher":"Les 400 coups","year":"2011","format":"Album","notes":"Titre du tome à confirmer."}
+];
+
+const QMG_ITEMS = [
+  {"id":"qmg-1","completed":false,"seq":1,"title":"Magasin général, tome 1 : Marie","publisher":"Casterman","year":"2006","format":"Album","notes":""},
+  {"id":"qmg-2","completed":false,"seq":2,"title":"Magasin général, tome 2 : Serge","publisher":"Casterman","year":"2007","format":"Album","notes":""},
+  {"id":"qmg-3","completed":false,"seq":3,"title":"Magasin général, tome 3 : Les Hommes","publisher":"Casterman","year":"2007","format":"Album","notes":""},
+  {"id":"qmg-4","completed":false,"seq":4,"title":"Magasin général, tome 4 : Confessions","publisher":"Casterman","year":"2008","format":"Album","notes":""},
+  {"id":"qmg-5","completed":false,"seq":5,"title":"Magasin général, tome 5 : Montréal","publisher":"Casterman","year":"2009","format":"Album","notes":""},
+  {"id":"qmg-6","completed":false,"seq":6,"title":"Magasin général, tome 6 : Ernest Latulippe","publisher":"Casterman","year":"2010","format":"Album","notes":""},
+  {"id":"qmg-7","completed":false,"seq":7,"title":"Magasin général, tome 7 : Charleston","publisher":"Casterman","year":"2011","format":"Album","notes":""},
+  {"id":"qmg-8","completed":false,"seq":8,"title":"Magasin général, tome 8 : Les Femmes","publisher":"Casterman","year":"2012","format":"Album","notes":""},
+  {"id":"qmg-9","completed":false,"seq":9,"title":"Magasin général, tome 9 : Notre-Dame-des-Lacs","publisher":"Casterman","year":"2014","format":"Album","notes":""},
+  {"id":"qmg-10","completed":false,"seq":10,"title":"Magasin général — intégrale (coffret)","publisher":"Casterman","year":"2015","format":"Intégrale","notes":"Les neuf tomes réunis."}
+];
+
+const HIN_ITEMS = [
+  {"id":"hin-1","completed":false,"seq":1,"title":"L'Incal, tome 1 : L'Incal noir","publisher":"Les Humanoïdes Associés","year":"1981","format":"Album","notes":""},
+  {"id":"hin-2","completed":false,"seq":2,"title":"L'Incal, tome 2 : L'Incal lumière","publisher":"Les Humanoïdes Associés","year":"1982","format":"Album","notes":""},
+  {"id":"hin-3","completed":false,"seq":3,"title":"L'Incal, tome 3 : Ce qui est en bas","publisher":"Les Humanoïdes Associés","year":"1983","format":"Album","notes":""},
+  {"id":"hin-4","completed":false,"seq":4,"title":"L'Incal, tome 4 : Ce qui est en haut","publisher":"Les Humanoïdes Associés","year":"1985","format":"Album","notes":""},
+  {"id":"hin-5","completed":false,"seq":5,"title":"L'Incal, tome 5 : La Cinquième Essence – Galaxie qui songe","publisher":"Les Humanoïdes Associés","year":"1988","format":"Album","notes":""},
+  {"id":"hin-6","completed":false,"seq":6,"title":"L'Incal, tome 6 : La Cinquième Essence – La Planète Difool","publisher":"Les Humanoïdes Associés","year":"1988","format":"Album","notes":""},
+  {"id":"hin-7","completed":false,"seq":7,"title":"L'Incal — intégrale","publisher":"Les Humanoïdes Associés","year":"2011","format":"Intégrale","notes":"Les six tomes réunis."},
+  {"id":"hin-8","completed":false,"seq":8,"title":"L'Incal — édition noir et blanc","publisher":"Les Humanoïdes Associés","year":"2014","format":"Intégrale","notes":""}
+];
+
+const TGC_COLLECTION = {
+  id:'tpb-gotham-central', name:"Gotham Central",
+  description:"Collected editions of Gotham Central by Ed Brubaker, Greg Rucka & Michael Lark — the GCPD police procedural set in Batman's Gotham.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TGC_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBGM_COLLECTION = {
+  id:'tpb-batman-morrison', name:"Batman by Grant Morrison",
+  description:"Collected editions of Grant Morrison's seven-year Batman saga — Batman and Son through Batman Incorporated, plus the Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBGM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TSN_COLLECTION = {
+  id:'tpb-sandman', name:"The Sandman by Neil Gaiman",
+  description:"Collected editions of Neil Gaiman's The Sandman (#1–75) — the ten core volumes plus Endless Nights, Overture, The Dream Hunters and the Absolute/Omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TSN_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TJL_COLLECTION = {
+  id:'tpb-jla-morrison', name:"JLA by Grant Morrison",
+  description:"Collected editions of Grant Morrison's JLA (1997–2000) — the original trades, JLA: Earth 2 and the Deluxe Editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TJL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TFW_COLLECTION = {
+  id:'tpb-fourth-world', name:"Jack Kirby's Fourth World Omnibus",
+  description:"Jack Kirby's Fourth World Omnibus — New Gods, Mister Miracle, The Forever People and Superman's Pal Jimmy Olsen, collected in four volumes.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TFW_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TAS_COLLECTION = {
+  id:'tpb-all-star-superman', name:"All-Star Superman by Grant Morrison",
+  description:"Collected editions of Grant Morrison & Frank Quitely's All-Star Superman (#1–12).",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TAS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TAM_COLLECTION = {
+  id:'tpb-animal-man', name:"Animal Man by Grant Morrison",
+  description:"Collected editions of Grant Morrison's Animal Man (#1–26) — the trades plus the Deluxe and Omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TAM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBF_COLLECTION = {
+  id:'tpb-batman-miller', name:"Batman by Frank Miller",
+  description:"Collected editions of Frank Miller's Batman — Year One, The Dark Knight Returns and its sequels, plus All-Star Batman & Robin and the Absolute editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBP_COLLECTION = {
+  id:'tpb-bprd', name:"B.P.R.D. Hardcover Collections",
+  description:"Dark Horse's oversized B.P.R.D. hardcover collections — the Plague of Frogs cycle, Hell on Earth and The Devil You Know.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBP_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TIV2_COLLECTION = {
+  id:'tpb-invincible', name:"Invincible — Compendiums & Collections",
+  description:"Robert Kirkman's Invincible (#1–144) in its big collected formats — the three Compendiums plus the twelve Ultimate Collection hardcovers.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TIV2_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QAC_COLLECTION = {
+  id:'qc-academie-chasseurs', name:"L'Académie des chasseurs de primes",
+  description:"La série L'Académie des chasseurs de primes de Benoît Godbout (dessin), avec Michel Lacombe et Yanick Champoux au scénario — Les 400 coups.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QAC_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QMG_COLLECTION = {
+  id:'qc-magasin-general', name:"Magasin général — Loisel et Tripp",
+  description:"La série Magasin général de Régis Loisel et Jean-Louis Tripp (Casterman) : la vie d'un village québécois des années 1920, en neuf tomes.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QMG_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const HIN_COLLECTION = {
+  id:'hum-incal', name:"L'Incal — Moebius & Jodorowsky",
+  description:"L'Incal de Mœbius et Alejandro Jodorowsky (Les Humanoïdes Associés) : les six tomes du cycle original, plus les intégrales.",
+  category:'reading', icon:'🌀', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: HIN_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6957,6 +7233,20 @@ function load() {
   if (!collections.find(c=>c.id==='tpb-dark-tower')) { collections.push(TDT_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-sin-city')) { collections.push(TSC_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-hellblazer')) { collections.push(THL_COLLECTION); save(); }
+  // Seed collected editions, wave 6 if missing
+  if (!collections.find(c=>c.id==='tpb-gotham-central')) { collections.push(TGC_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-batman-morrison')) { collections.push(TBGM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-sandman')) { collections.push(TSN_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-jla-morrison')) { collections.push(TJL_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-fourth-world')) { collections.push(TFW_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-all-star-superman')) { collections.push(TAS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-animal-man')) { collections.push(TAM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-batman-miller')) { collections.push(TBF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-bprd')) { collections.push(TBP_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-invincible')) { collections.push(TIV2_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-academie-chasseurs')) { collections.push(QAC_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-magasin-general')) { collections.push(QMG_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='hum-incal')) { collections.push(HIN_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -7134,11 +7424,11 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
   'Watching': { 'Marvel': { 'MCU': {}, 'Non-MCU': {} } },
-  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {}, 'Dynamite': {}, 'Québec': {} },
+  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {}, 'Dynamite': {}, 'Québec': {}, 'Humanoïdes Associés': {} },
   'Gaming': {}
 };
 const ROOT_ORDER = ['Watching','Reading','Gaming'];
-const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW','Dynamite','Québec'] };
+const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW','Dynamite','Québec','Humanoïdes Associés'] };
 // Where each collection lives in the tree (deepest node). Falls back to its
 // root category (capitalized) for anything not listed here.
 const COLLECTION_PATHS = {
@@ -7185,6 +7475,19 @@ const COLLECTION_PATHS = {
   'tpb-dark-tower': ["Reading", "Marvel", "Collected Editions"],
   'tpb-sin-city': ["Reading", "Dark Horse"],
   'tpb-hellblazer': ["Reading", "DC"],
+  'tpb-gotham-central': ["Reading", "DC"],
+  'tpb-batman-morrison': ["Reading", "DC"],
+  'tpb-sandman': ["Reading", "DC"],
+  'tpb-jla-morrison': ["Reading", "DC"],
+  'tpb-fourth-world': ["Reading", "DC"],
+  'tpb-all-star-superman': ["Reading", "DC"],
+  'tpb-animal-man': ["Reading", "DC"],
+  'tpb-batman-miller': ["Reading", "DC"],
+  'tpb-bprd': ["Reading", "Dark Horse"],
+  'tpb-invincible': ["Reading", "Image"],
+  'qc-academie-chasseurs': ["Reading", "Québec"],
+  'qc-magasin-general': ["Reading", "Québec"],
+  'hum-incal': ["Reading", "Humanoïdes Associés"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
