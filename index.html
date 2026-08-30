@@ -6087,7 +6087,7 @@ const TGM_COLLECTION = {
 
 const TCR_COLLECTION = {
   id:'tpb-criminal', name:"Criminal by Ed Brubaker",
-  description:"Collected editions of Ed Brubaker & Sean Phillips's Criminal — begun at Marvel's Icon imprint (2006) and continued at Image, plus the Deluxe Editions.",
+  description:"Collected editions of Ed Brubaker & Sean Phillips's Criminal — published by Icon, Marvel's creator-owned imprint (2006–2011); the 2019 series and the Deluxe Editions moved to Image.",
   category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
   fields: TPB_FIELDS, items: TCR_ITEMS,
   sortField:'seq', sortDir:'asc'
@@ -7302,6 +7302,11 @@ function load() {
       save();
     }
   }
+  // Refresh descriptions that were corrected after release.
+  for (const [id, d] of [['tpb-criminal', TCR_COLLECTION.description]]) {
+    const c = collections.find(x=>x.id===id);
+    if (c && c.description !== d) { c.description = d; save(); }
+  }
   // Lists that were rebuilt/reordered after release: re-key an existing copy
   // by title so Read/Collected state (and edited values) survive.
   for (const [id, SRC] of [['tpb-spiderman-slott', TSS_ITEMS], ['tpb-hickman-ff', THF_ITEMS]]) {
@@ -7505,7 +7510,7 @@ const COLLECTION_PATHS = {
   'tpb-spiderman-slott': ["Reading", "Marvel", "Collected Editions"],
   'tpb-xmen-bendis': ["Reading", "Marvel", "Collected Editions"],
   'tpb-xmen-morrison': ["Reading", "Marvel", "Collected Editions"],
-  'tpb-criminal': ["Reading", "Image"],
+  'tpb-criminal': ["Reading", "Marvel", "Collected Editions"],
   'tpb-authority-ellis': ["Reading", "DC"],
   'tpb-planetary': ["Reading", "DC"],
   'tpb-invisibles': ["Reading", "DC"],
