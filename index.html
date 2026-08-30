@@ -7333,10 +7333,15 @@ function load() {
       save();
     }
   }
-  // Refresh descriptions that were corrected after release.
-  for (const [id, d] of [['tpb-criminal', TCR_COLLECTION.description]]) {
-    const c = collections.find(x=>x.id===id);
-    if (c && c.description !== d) { c.description = d; save(); }
+  // Refresh names/descriptions for lists renamed or corrected after release,
+  // so an already-saved copy doesn't keep showing the stale card title.
+  for (const C of [TCR_COLLECTION, TFB_COLLECTION, TBGM_COLLECTION, THF_COLLECTION, TSS_COLLECTION]) {
+    const c = collections.find(x=>x.id===C.id);
+    if (!c) continue;
+    let changed = false;
+    if (c.name !== C.name) { c.name = C.name; changed = true; }
+    if (c.description !== C.description) { c.description = C.description; changed = true; }
+    if (changed) save();
   }
   // Lists that were rebuilt/reordered after release: re-key an existing copy
   // by title so Read/Collected state (and edited values) survive.
