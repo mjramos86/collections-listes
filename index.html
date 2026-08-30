@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5542,7 +5542,9 @@ function valueBaseline(year){
   for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
   return 4;
 }
+const TPB_FORMAT_VALUES = {'TPB':18,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
 function estimateValue(c,item){
+  if (c.tpb) return TPB_FORMAT_VALUES[item.format] ?? 18;
   const keys = VALUE_KEYS[c.id];
   if (keys && keys[item.issue]!=null) return keys[item.issue];
   return valueBaseline(valueYearOf(item));
@@ -5563,6 +5565,330 @@ function grandCollectedValue(){
 function fmtMoney(n){
   return '$' + Math.round(n).toLocaleString('en-US');
 }
+
+// ── Marvel collected editions (TPB) seed data ──────────────────
+// ── Collected editions (TPB) fieldset ──────────────────────────
+const TPB_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'title',label:'Edition',type:'text'},
+  {key:'collects',label:'Collects',type:'text'},
+  {key:'format',label:'Format',type:'text'},
+  {key:'year',label:'Year',type:'text'},
+];
+
+const TDD_ITEMS = [
+  {"id":"tdd-1","completed":false,"seq":1,"title":"Daredevil Vol. 3: Wake Up","collects":"Daredevil (v2) #16–19","format":"TPB","year":"2002"},
+  {"id":"tdd-2","completed":false,"seq":2,"title":"Daredevil Vol. 4: Underboss","collects":"Daredevil (v2) #26–31","format":"TPB","year":"2002"},
+  {"id":"tdd-3","completed":false,"seq":3,"title":"Daredevil Vol. 5: Out","collects":"Daredevil (v2) #32–40","format":"TPB","year":"2003"},
+  {"id":"tdd-4","completed":false,"seq":4,"title":"Daredevil Vol. 6: Lowlife","collects":"Daredevil (v2) #41–45","format":"TPB","year":"2003"},
+  {"id":"tdd-5","completed":false,"seq":5,"title":"Daredevil Vol. 7: Hardcore","collects":"Daredevil (v2) #46–50","format":"TPB","year":"2004"},
+  {"id":"tdd-6","completed":false,"seq":6,"title":"Daredevil Vol. 9: King of Hell's Kitchen","collects":"Daredevil (v2) #56–60","format":"TPB","year":"2004"},
+  {"id":"tdd-7","completed":false,"seq":7,"title":"Daredevil Vol. 10: The Widow","collects":"Daredevil (v2) #61–65","format":"TPB","year":"2005"},
+  {"id":"tdd-8","completed":false,"seq":8,"title":"Daredevil Vol. 11: Golden Age","collects":"Daredevil (v2) #66–70","format":"TPB","year":"2005"},
+  {"id":"tdd-9","completed":false,"seq":9,"title":"Daredevil Vol. 12: Decalogue","collects":"Daredevil (v2) #71–75","format":"TPB","year":"2006"},
+  {"id":"tdd-10","completed":false,"seq":10,"title":"Daredevil Vol. 13: The Murdock Papers","collects":"Daredevil (v2) #76–81","format":"TPB","year":"2006"},
+  {"id":"tdd-11","completed":false,"seq":11,"title":"Daredevil by Bendis & Maleev Ultimate Collection Book 1","collects":"#16–19, #26–38","format":"Ultimate Collection","year":"2010"},
+  {"id":"tdd-12","completed":false,"seq":12,"title":"Daredevil by Bendis & Maleev Ultimate Collection Book 2","collects":"#39–50, #56–65","format":"Ultimate Collection","year":"2010"},
+  {"id":"tdd-13","completed":false,"seq":13,"title":"Daredevil by Bendis & Maleev Ultimate Collection Book 3","collects":"#66–81","format":"Ultimate Collection","year":"2010"},
+  {"id":"tdd-14","completed":false,"seq":14,"title":"Daredevil by Bendis & Maleev Omnibus Vol. 1","collects":"#16–19, #26–50","format":"Omnibus","year":"2010"},
+  {"id":"tdd-15","completed":false,"seq":15,"title":"Daredevil by Bendis & Maleev Omnibus Vol. 2","collects":"#51–81","format":"Omnibus","year":"2011"},
+  {"id":"tdd-16","completed":false,"seq":16,"title":"Daredevil Modern Era Epic Collection: Underboss","collects":"#16–19, #26–40","format":"Epic Collection","year":"2022"}
+];
+
+const TXF_ITEMS = [
+  {"id":"txf-1","completed":false,"seq":1,"title":"Madrox: Multiple Choice","collects":"Madrox #1–5","format":"TPB","year":"2005"},
+  {"id":"txf-2","completed":false,"seq":2,"title":"X-Factor Vol. 1: The Longest Night","collects":"X-Factor (v3) #1–6","format":"TPB","year":"2006"},
+  {"id":"txf-3","completed":false,"seq":3,"title":"X-Factor Vol. 2: Life and Death Matters","collects":"#7–12","format":"TPB","year":"2007"},
+  {"id":"txf-4","completed":false,"seq":4,"title":"X-Factor Vol. 3: Many Lives of Madrox","collects":"#13–17","format":"TPB","year":"2007"},
+  {"id":"txf-5","completed":false,"seq":5,"title":"X-Factor Vol. 4: Heart of Ice","collects":"#18–24","format":"TPB","year":"2008"},
+  {"id":"txf-6","completed":false,"seq":6,"title":"X-Factor Vol. 5: The Only Game in Town","collects":"#28–32, X-Factor: The Quick and the Dead","format":"TPB","year":"2008"},
+  {"id":"txf-7","completed":false,"seq":7,"title":"X-Factor Vol. 6: Secret Invasion","collects":"#33–38","format":"TPB","year":"2009"},
+  {"id":"txf-8","completed":false,"seq":8,"title":"X-Factor Vol. 7: Time and a Half","collects":"#39–45","format":"TPB","year":"2009"},
+  {"id":"txf-9","completed":false,"seq":9,"title":"X-Factor Vol. 8: Overtime","collects":"#46–50, #200","format":"TPB","year":"2010"},
+  {"id":"txf-10","completed":false,"seq":10,"title":"X-Factor Vol. 9: Invisible Woman Has Vanished","collects":"#201–207","format":"TPB","year":"2010"},
+  {"id":"txf-11","completed":false,"seq":11,"title":"X-Factor Vol. 10: Second Coming","collects":"Second Coming chapters & tie-ins","format":"TPB","year":"2011"},
+  {"id":"txf-12","completed":false,"seq":12,"title":"X-Factor Vol. 11: Happenings in Vegas","collects":"#208–212","format":"TPB","year":"2011"},
+  {"id":"txf-13","completed":false,"seq":13,"title":"X-Factor Vol. 12: Scar Tissue","collects":"#213–218","format":"TPB","year":"2011"},
+  {"id":"txf-14","completed":false,"seq":14,"title":"X-Factor Vol. 13: Hard Labor","collects":"#219–224","format":"TPB","year":"2012"},
+  {"id":"txf-15","completed":false,"seq":15,"title":"X-Factor Vol. 14: Super Unnatural","collects":"#225–230","format":"TPB","year":"2012"},
+  {"id":"txf-16","completed":false,"seq":16,"title":"X-Factor Vol. 15: They Keep Killing Madrox","collects":"#231–234","format":"TPB","year":"2012"},
+  {"id":"txf-17","completed":false,"seq":17,"title":"X-Factor Vol. 16: Together Again for the First Time","collects":"#235–239","format":"TPB","year":"2012"},
+  {"id":"txf-18","completed":false,"seq":18,"title":"X-Factor Vol. 17: The Road to Redemption","collects":"#240–244","format":"TPB","year":"2013"},
+  {"id":"txf-19","completed":false,"seq":19,"title":"X-Factor Vol. 18: Breaking Points","collects":"#245–247","format":"TPB","year":"2013"},
+  {"id":"txf-20","completed":false,"seq":20,"title":"X-Factor Vol. 19: Short Stories","collects":"#248–251","format":"TPB","year":"2013"},
+  {"id":"txf-21","completed":false,"seq":21,"title":"X-Factor Vol. 20: Hell on Earth War","collects":"#252–256","format":"TPB","year":"2013"},
+  {"id":"txf-22","completed":false,"seq":22,"title":"X-Factor Vol. 21: The End of X-Factor","collects":"#257–262","format":"TPB","year":"2013"},
+  {"id":"txf-23","completed":false,"seq":23,"title":"X-Factor by Peter David: The Complete Collection Vol. 1","collects":"Madrox #1–5, X-Factor #1–12","format":"Complete Collection","year":"2014"},
+  {"id":"txf-24","completed":false,"seq":24,"title":"X-Factor by Peter David: The Complete Collection Vol. 2","collects":"#13–24 & specials","format":"Complete Collection","year":"2015"},
+  {"id":"txf-25","completed":false,"seq":25,"title":"X-Factor by Peter David: The Complete Collection Vol. 3","collects":"#25–38 & tie-ins","format":"Complete Collection","year":"2016"},
+  {"id":"txf-26","completed":false,"seq":26,"title":"X-Factor by Peter David: The Complete Collection Vol. 4","collects":"#39–50, #200–207","format":"Complete Collection","year":"2017"},
+  {"id":"txf-27","completed":false,"seq":27,"title":"X-Factor by Peter David: The Complete Collection Vol. 5","collects":"#208–224","format":"Complete Collection","year":"2018"}
+];
+
+const TUA_ITEMS = [
+  {"id":"tua-1","completed":false,"seq":1,"title":"Uncanny Avengers Vol. 1: The Red Shadow","collects":"Uncanny Avengers #1–5","format":"TPB","year":"2013"},
+  {"id":"tua-2","completed":false,"seq":2,"title":"Uncanny Avengers Vol. 2: The Apocalypse Twins","collects":"#6–11","format":"TPB","year":"2013"},
+  {"id":"tua-3","completed":false,"seq":3,"title":"Uncanny Avengers Vol. 3: Ragnarok Now","collects":"#12–17","format":"TPB","year":"2014"},
+  {"id":"tua-4","completed":false,"seq":4,"title":"Uncanny Avengers Vol. 4: Avenge the Earth","collects":"#18–22","format":"TPB","year":"2014"},
+  {"id":"tua-5","completed":false,"seq":5,"title":"Uncanny Avengers Vol. 5: AXIS Prelude","collects":"#23–25, Marvel NOW! Point One","format":"TPB","year":"2015"},
+  {"id":"tua-6","completed":false,"seq":6,"title":"Uncanny Avengers: Counter-Evolutionary","collects":"Uncanny Avengers (2015) #1–5","format":"TPB","year":"2015"},
+  {"id":"tua-7","completed":false,"seq":7,"title":"Uncanny Avengers: Unity Vol. 1 – Lost Future","collects":"Uncanny Avengers (2015) #1–5","format":"TPB","year":"2016"},
+  {"id":"tua-8","completed":false,"seq":8,"title":"Uncanny Avengers: Unity Vol. 2 – The Man Who Fell to Earth","collects":"#6–13","format":"TPB","year":"2016"},
+  {"id":"tua-9","completed":false,"seq":9,"title":"Uncanny Avengers: Unity Vol. 3 – Civil War II","collects":"#14–19","format":"TPB","year":"2017"},
+  {"id":"tua-10","completed":false,"seq":10,"title":"Uncanny Avengers: Unity Vol. 4 – Red Skull","collects":"#20–25","format":"TPB","year":"2017"},
+  {"id":"tua-11","completed":false,"seq":11,"title":"Uncanny Avengers: Unity Vol. 5 – Stars and Garters","collects":"#26–30","format":"TPB","year":"2017"},
+  {"id":"tua-12","completed":false,"seq":12,"title":"Uncanny Avengers by Rick Remender Omnibus","collects":"Uncanny Avengers #1–25 & tie-ins","format":"Omnibus","year":"2021"}
+];
+
+const TCW_ITEMS = [
+  {"id":"tcw-1","completed":false,"seq":1,"title":"Road to Civil War","collects":"Amazing Spider-Man #529–531, New Avengers: Illuminati, Fantastic Four #536–537","format":"TPB","year":"2006"},
+  {"id":"tcw-2","completed":false,"seq":2,"title":"Civil War","collects":"Civil War #1–7","format":"TPB","year":"2007"},
+  {"id":"tcw-3","completed":false,"seq":3,"title":"Civil War: Front Line Book 1","collects":"Front Line #1–6","format":"TPB","year":"2007"},
+  {"id":"tcw-4","completed":false,"seq":4,"title":"Civil War: Front Line Book 2","collects":"Front Line #7–11","format":"TPB","year":"2007"},
+  {"id":"tcw-5","completed":false,"seq":5,"title":"Civil War: Amazing Spider-Man","collects":"Amazing Spider-Man #532–538","format":"TPB","year":"2007"},
+  {"id":"tcw-6","completed":false,"seq":6,"title":"Civil War: Captain America","collects":"Captain America #22–24","format":"TPB","year":"2007"},
+  {"id":"tcw-7","completed":false,"seq":7,"title":"Civil War: Iron Man","collects":"Iron Man #13–14, Iron Man/Captain America: Casualties of War","format":"TPB","year":"2007"},
+  {"id":"tcw-8","completed":false,"seq":8,"title":"Civil War: Fantastic Four","collects":"Fantastic Four #538–543","format":"TPB","year":"2007"},
+  {"id":"tcw-9","completed":false,"seq":9,"title":"Civil War: X-Men","collects":"Civil War: X-Men #1–4","format":"TPB","year":"2007"},
+  {"id":"tcw-10","completed":false,"seq":10,"title":"Civil War: Wolverine","collects":"Wolverine #42–48","format":"TPB","year":"2007"},
+  {"id":"tcw-11","completed":false,"seq":11,"title":"Civil War: Young Avengers & Runaways","collects":"Civil War: Young Avengers & Runaways #1–4","format":"TPB","year":"2007"},
+  {"id":"tcw-12","completed":false,"seq":12,"title":"Civil War: Thunderbolts","collects":"Thunderbolts #103–105","format":"TPB","year":"2007"},
+  {"id":"tcw-13","completed":false,"seq":13,"title":"Civil War: Heroes for Hire","collects":"Heroes for Hire #1–5","format":"TPB","year":"2007"},
+  {"id":"tcw-14","completed":false,"seq":14,"title":"Civil War: Ms. Marvel","collects":"Ms. Marvel #6–10","format":"TPB","year":"2007"},
+  {"id":"tcw-15","completed":false,"seq":15,"title":"Civil War: Punisher War Journal","collects":"Punisher War Journal #1–4","format":"TPB","year":"2007"},
+  {"id":"tcw-16","completed":false,"seq":16,"title":"Civil War: War Crimes","collects":"Underworld, Casualties of War & related","format":"TPB","year":"2007"},
+  {"id":"tcw-17","completed":false,"seq":17,"title":"Civil War: The Return","collects":"Civil War: The Return one-shot & related","format":"TPB","year":"2007"},
+  {"id":"tcw-18","completed":false,"seq":18,"title":"Civil War: The Initiative","collects":"Avengers: The Initiative & aftermath","format":"TPB","year":"2007"},
+  {"id":"tcw-19","completed":false,"seq":19,"title":"Civil War: The Confession","collects":"Civil War: The Confession, The Initiative","format":"TPB","year":"2007"},
+  {"id":"tcw-20","completed":false,"seq":20,"title":"Civil War: Casualties of War","collects":"Iron Man/Captain America one-shot & tie-ins","format":"TPB","year":"2007"},
+  {"id":"tcw-21","completed":false,"seq":21,"title":"Civil War Companion","collects":"Assorted tie-ins and specials","format":"TPB","year":"2007"},
+  {"id":"tcw-22","completed":false,"seq":22,"title":"Civil War Omnibus","collects":"Civil War #1–7 and the complete tie-ins","format":"Omnibus","year":"2016"}
+];
+
+const TBX_ITEMS = [
+  {"id":"tbx-1","completed":false,"seq":1,"title":"X-Men: Deadly Genesis","collects":"X-Men: Deadly Genesis #1–6","format":"TPB","year":"2006"},
+  {"id":"tbx-2","completed":false,"seq":2,"title":"Uncanny X-Men: Rise and Fall of the Shi'ar Empire","collects":"Uncanny X-Men #475–486","format":"TPB","year":"2007"},
+  {"id":"tbx-3","completed":false,"seq":3,"title":"Uncanny X-Men: The Extremists","collects":"Uncanny X-Men #487–491","format":"TPB","year":"2007"},
+  {"id":"tbx-4","completed":false,"seq":4,"title":"X-Men: Messiah Complex","collects":"The full 13-part crossover","format":"TPB","year":"2008"},
+  {"id":"tbx-5","completed":false,"seq":5,"title":"Uncanny X-Men: Divided We Stand","collects":"Uncanny X-Men #495–499","format":"TPB","year":"2008"},
+  {"id":"tbx-6","completed":false,"seq":6,"title":"Uncanny X-Men: Manifest Destiny","collects":"Uncanny X-Men #500–503 (with Matt Fraction)","format":"TPB","year":"2009"},
+  {"id":"tbx-7","completed":false,"seq":7,"title":"Uncanny X-Men: The Complete Collection by Ed Brubaker Vol. 1","collects":"#475–486 & Deadly Genesis","format":"Complete Collection","year":"2017"},
+  {"id":"tbx-8","completed":false,"seq":8,"title":"Uncanny X-Men: The Complete Collection by Ed Brubaker Vol. 2","collects":"#487–503 & tie-ins","format":"Complete Collection","year":"2018"},
+  {"id":"tbx-9","completed":false,"seq":9,"title":"Rise and Fall of the Shi'ar Empire Omnibus","collects":"#475–486 and related","format":"Omnibus","year":"2020"}
+];
+
+const TCX_ITEMS = [
+  {"id":"tcx-1","completed":false,"seq":1,"title":"X-Men: Supernovas","collects":"X-Men #188–193, #196–199","format":"TPB","year":"2007"},
+  {"id":"tcx-2","completed":false,"seq":2,"title":"X-Men: Blinded by the Light","collects":"X-Men #200–204","format":"TPB","year":"2008"},
+  {"id":"tcx-3","completed":false,"seq":3,"title":"X-Men: Messiah Complex","collects":"The full 13-part crossover","format":"TPB","year":"2008"},
+  {"id":"tcx-4","completed":false,"seq":4,"title":"X-Men: Endangered Species","collects":"Endangered Species & backups","format":"TPB","year":"2008"},
+  {"id":"tcx-5","completed":false,"seq":5,"title":"X-Men Legacy: Divided He Stands","collects":"X-Men: Legacy #208–212","format":"TPB","year":"2008"},
+  {"id":"tcx-6","completed":false,"seq":6,"title":"X-Men Legacy: Sins of the Father","collects":"#213–216","format":"TPB","year":"2009"},
+  {"id":"tcx-7","completed":false,"seq":7,"title":"X-Men Legacy: Original Sin","collects":"Original Sin crossover with Wolverine: Origins","format":"TPB","year":"2009"},
+  {"id":"tcx-8","completed":false,"seq":8,"title":"X-Men Legacy: Emplate","collects":"#217–220","format":"TPB","year":"2009"},
+  {"id":"tcx-9","completed":false,"seq":9,"title":"X-Men Legacy: Salvage","collects":"#221–225","format":"TPB","year":"2009"},
+  {"id":"tcx-10","completed":false,"seq":10,"title":"X-Men Legacy: Necrosha","collects":"Necrosha chapters","format":"TPB","year":"2010"},
+  {"id":"tcx-11","completed":false,"seq":11,"title":"X-Men Legacy: Collision","collects":"#226–230","format":"TPB","year":"2010"},
+  {"id":"tcx-12","completed":false,"seq":12,"title":"X-Men Legacy: Aftermath","collects":"Post-Second Coming issues","format":"TPB","year":"2011"},
+  {"id":"tcx-13","completed":false,"seq":13,"title":"X-Men Legacy: Second Coming","collects":"Second Coming chapters","format":"TPB","year":"2010"},
+  {"id":"tcx-14","completed":false,"seq":14,"title":"Age of X","collects":"Age of X: Alpha, X-Men: Legacy #245–247, New Mutants #22–24","format":"TPB","year":"2011"},
+  {"id":"tcx-15","completed":false,"seq":15,"title":"X-Men Legacy: Lost Legions","collects":"#248–253","format":"TPB","year":"2011"},
+  {"id":"tcx-16","completed":false,"seq":16,"title":"X-Men Legacy: Five Miles South of the Universe","collects":"#254–259","format":"TPB","year":"2012"},
+  {"id":"tcx-17","completed":false,"seq":17,"title":"X-Men Legacy by Mike Carey: The Complete Collection Vol. 1","collects":"X-Men #188–204 & related","format":"Complete Collection","year":"2018"},
+  {"id":"tcx-18","completed":false,"seq":18,"title":"X-Men Legacy by Mike Carey: The Complete Collection Vol. 2","collects":"X-Men: Legacy #208–230","format":"Complete Collection","year":"2019"}
+];
+
+const TAX_ITEMS = [
+  {"id":"tax-1","completed":false,"seq":1,"title":"Wolverine: Weapon X Vol. 1 – The Adamantium Men","collects":"Wolverine: Weapon X #1–5","format":"TPB","year":"2009"},
+  {"id":"tax-2","completed":false,"seq":2,"title":"Wolverine: Weapon X Vol. 2 – Insane in the Brain","collects":"#6–10","format":"TPB","year":"2010"},
+  {"id":"tax-3","completed":false,"seq":3,"title":"Wolverine: Weapon X Vol. 3 – Tomorrow Dies Today","collects":"#11–16","format":"TPB","year":"2010"},
+  {"id":"tax-4","completed":false,"seq":4,"title":"Wolverine: Wolverine Goes to Hell","collects":"Wolverine (2010) #1–5","format":"TPB","year":"2011"},
+  {"id":"tax-5","completed":false,"seq":5,"title":"Wolverine Vol. 2: Wolverine vs. the X-Men","collects":"Wolverine (2010) #6–9, #5.1","format":"TPB","year":"2011"},
+  {"id":"tax-6","completed":false,"seq":6,"title":"Wolverine Vol. 3: Wolverine's Revenge","collects":"Wolverine (2010) #10–16","format":"TPB","year":"2012"},
+  {"id":"tax-7","completed":false,"seq":7,"title":"Wolverine: Back in Japan","collects":"Wolverine (2010) #300–304","format":"TPB","year":"2012"},
+  {"id":"tax-8","completed":false,"seq":8,"title":"Wolverine: Covenant","collects":"Wolverine (2010) #305–309","format":"TPB","year":"2012"},
+  {"id":"tax-9","completed":false,"seq":9,"title":"Wolverine: Sabretooth Reborn","collects":"Wolverine (2010) #310–313","format":"TPB","year":"2013"},
+  {"id":"tax-10","completed":false,"seq":10,"title":"Astonishing Spider-Man & Wolverine","collects":"Astonishing Spider-Man & Wolverine #1–6","format":"TPB","year":"2011"},
+  {"id":"tax-11","completed":false,"seq":11,"title":"Wolverine by Jason Aaron: The Complete Collection Vol. 1","collects":"Weapon X #1–16 & related","format":"Complete Collection","year":"2013"},
+  {"id":"tax-12","completed":false,"seq":12,"title":"Wolverine by Jason Aaron: The Complete Collection Vol. 2","collects":"Wolverine (2010) #1–9 & related","format":"Complete Collection","year":"2013"},
+  {"id":"tax-13","completed":false,"seq":13,"title":"Wolverine by Jason Aaron: The Complete Collection Vol. 3","collects":"Wolverine (2010) #10–16, #300–304","format":"Complete Collection","year":"2014"},
+  {"id":"tax-14","completed":false,"seq":14,"title":"Wolverine by Jason Aaron: The Complete Collection Vol. 4","collects":"Wolverine (2010) #305–317","format":"Complete Collection","year":"2014"},
+  {"id":"tax-15","completed":false,"seq":15,"title":"X-Men: Schism","collects":"Schism #1–5","format":"TPB","year":"2012"},
+  {"id":"tax-16","completed":false,"seq":16,"title":"Wolverine & the X-Men Vol. 1","collects":"Wolverine and the X-Men #1–4","format":"TPB","year":"2012"},
+  {"id":"tax-17","completed":false,"seq":17,"title":"Wolverine & the X-Men Vol. 2","collects":"#5–8","format":"TPB","year":"2012"},
+  {"id":"tax-18","completed":false,"seq":18,"title":"Wolverine & the X-Men Vol. 3","collects":"#9–13","format":"TPB","year":"2012"},
+  {"id":"tax-19","completed":false,"seq":19,"title":"Wolverine & the X-Men Vol. 4","collects":"#14–18 (AvX)","format":"TPB","year":"2013"},
+  {"id":"tax-20","completed":false,"seq":20,"title":"Wolverine & the X-Men Vol. 5","collects":"#19–24","format":"TPB","year":"2013"},
+  {"id":"tax-21","completed":false,"seq":21,"title":"Wolverine & the X-Men Vol. 6","collects":"#25–29","format":"TPB","year":"2013"},
+  {"id":"tax-22","completed":false,"seq":22,"title":"Wolverine & the X-Men Vol. 7","collects":"#30–35","format":"TPB","year":"2013"},
+  {"id":"tax-23","completed":false,"seq":23,"title":"Wolverine & the X-Men Vol. 8","collects":"#36–42, Annual #1","format":"TPB","year":"2014"},
+  {"id":"tax-24","completed":false,"seq":24,"title":"Wolverine & the X-Men by Jason Aaron Omnibus","collects":"Wolverine and the X-Men #1–42 & related","format":"Omnibus","year":"2015"},
+  {"id":"tax-25","completed":false,"seq":25,"title":"Amazing X-Men Vol. 1: The Quest for Nightcrawler","collects":"Amazing X-Men #1–6","format":"TPB","year":"2014"}
+];
+
+const TXFO_ITEMS = [
+  {"id":"txfo-1","completed":false,"seq":1,"title":"Uncanny X-Force Vol. 1: The Apocalypse Solution","collects":"Uncanny X-Force #1–4","format":"TPB","year":"2011"},
+  {"id":"txfo-2","completed":false,"seq":2,"title":"Uncanny X-Force Vol. 2: Deathlok Nation","collects":"#5.1, #5–7","format":"TPB","year":"2011"},
+  {"id":"txfo-3","completed":false,"seq":3,"title":"Uncanny X-Force Vol. 3: The Dark Angel Saga Book 1","collects":"#8–13","format":"TPB","year":"2011"},
+  {"id":"txfo-4","completed":false,"seq":4,"title":"Uncanny X-Force Vol. 4: The Dark Angel Saga Book 2","collects":"#14–18","format":"TPB","year":"2012"},
+  {"id":"txfo-5","completed":false,"seq":5,"title":"Uncanny X-Force Vol. 5: Otherworld","collects":"#19–23","format":"TPB","year":"2012"},
+  {"id":"txfo-6","completed":false,"seq":6,"title":"Uncanny X-Force Vol. 6: Final Execution Book 1","collects":"#24–29","format":"TPB","year":"2012"},
+  {"id":"txfo-7","completed":false,"seq":7,"title":"Uncanny X-Force Vol. 7: Final Execution Book 2","collects":"#30–35","format":"TPB","year":"2013"},
+  {"id":"txfo-8","completed":false,"seq":8,"title":"Uncanny X-Force by Rick Remender: The Complete Collection Vol. 1","collects":"#1–18","format":"Complete Collection","year":"2014"},
+  {"id":"txfo-9","completed":false,"seq":9,"title":"Uncanny X-Force by Rick Remender: The Complete Collection Vol. 2","collects":"#19–35","format":"Complete Collection","year":"2015"},
+  {"id":"txfo-10","completed":false,"seq":10,"title":"Uncanny X-Force by Rick Remender Omnibus","collects":"#1–35 & related","format":"Omnibus","year":"2014"}
+];
+
+const TWX_ITEMS = [
+  {"id":"twx-1","completed":false,"seq":1,"title":"Astonishing X-Men Vol. 1: Gifted","collects":"Astonishing X-Men #1–6","format":"TPB","year":"2004"},
+  {"id":"twx-2","completed":false,"seq":2,"title":"Astonishing X-Men Vol. 2: Dangerous","collects":"#7–12","format":"TPB","year":"2005"},
+  {"id":"twx-3","completed":false,"seq":3,"title":"Astonishing X-Men Vol. 3: Torn","collects":"#13–18","format":"TPB","year":"2007"},
+  {"id":"twx-4","completed":false,"seq":4,"title":"Astonishing X-Men Vol. 4: Unstoppable","collects":"#19–24, Giant-Size Astonishing X-Men #1","format":"TPB","year":"2008"},
+  {"id":"twx-5","completed":false,"seq":5,"title":"Astonishing X-Men by Whedon & Cassaday Ultimate Collection Vol. 1","collects":"#1–12","format":"Ultimate Collection","year":"2009"},
+  {"id":"twx-6","completed":false,"seq":6,"title":"Astonishing X-Men by Whedon & Cassaday Ultimate Collection Vol. 2","collects":"#13–24, Giant-Size","format":"Ultimate Collection","year":"2010"},
+  {"id":"twx-7","completed":false,"seq":7,"title":"Astonishing X-Men by Whedon & Cassaday Omnibus","collects":"#1–24, Giant-Size","format":"Omnibus","year":"2013"}
+];
+
+const TUX_ITEMS = [
+  {"id":"tux-1","completed":false,"seq":1,"title":"Ultimate X-Men Vol. 1: The Tomorrow People","collects":"Ultimate X-Men #1–6","format":"TPB","year":"2002"},
+  {"id":"tux-2","completed":false,"seq":2,"title":"Ultimate X-Men Vol. 2: Return to Weapon X","collects":"#7–12","format":"TPB","year":"2002"},
+  {"id":"tux-3","completed":false,"seq":3,"title":"Ultimate X-Men Vol. 3: World Tour","collects":"#13–18","format":"TPB","year":"2003"},
+  {"id":"tux-4","completed":false,"seq":4,"title":"Ultimate X-Men Vol. 4: Hellfire and Brimstone","collects":"#19–25","format":"TPB","year":"2003"},
+  {"id":"tux-5","completed":false,"seq":5,"title":"Ultimate X-Men Vol. 5: Ultimate War","collects":"Ultimate War #1–4","format":"TPB","year":"2003"},
+  {"id":"tux-6","completed":false,"seq":6,"title":"Ultimate X-Men Vol. 6: Return of the King","collects":"#26–33","format":"TPB","year":"2004"},
+  {"id":"tux-7","completed":false,"seq":7,"title":"Ultimate X-Men Vol. 7: Blockbuster","collects":"#34–39","format":"TPB","year":"2004"},
+  {"id":"tux-8","completed":false,"seq":8,"title":"Ultimate X-Men Vol. 8: New Mutants","collects":"#40–45","format":"TPB","year":"2004"},
+  {"id":"tux-9","completed":false,"seq":9,"title":"Ultimate X-Men Vol. 9: The Tempest","collects":"#46–49","format":"TPB","year":"2005"},
+  {"id":"tux-10","completed":false,"seq":10,"title":"Ultimate X-Men Vol. 10: Cry Wolf","collects":"#50–53","format":"TPB","year":"2005"},
+  {"id":"tux-11","completed":false,"seq":11,"title":"Ultimate X-Men Vol. 11: The Most Dangerous Game","collects":"#54–57","format":"TPB","year":"2005"},
+  {"id":"tux-12","completed":false,"seq":12,"title":"Ultimate X-Men Vol. 12: Hard Lessons","collects":"#58–65","format":"TPB","year":"2006"},
+  {"id":"tux-13","completed":false,"seq":13,"title":"Ultimate X-Men Vol. 13: Magnetic North","collects":"#66–71","format":"TPB","year":"2006"},
+  {"id":"tux-14","completed":false,"seq":14,"title":"Ultimate X-Men Vol. 14: Phoenix?","collects":"#72–74 & related","format":"TPB","year":"2006"},
+  {"id":"tux-15","completed":false,"seq":15,"title":"Ultimate X-Men Vol. 15: Magical","collects":"#75–80","format":"TPB","year":"2007"},
+  {"id":"tux-16","completed":false,"seq":16,"title":"Ultimate X-Men Vol. 16: Cable","collects":"#81–88","format":"TPB","year":"2007"},
+  {"id":"tux-17","completed":false,"seq":17,"title":"Ultimate X-Men Vol. 17: Sentinels","collects":"#81–88 era","format":"TPB","year":"2008"},
+  {"id":"tux-18","completed":false,"seq":18,"title":"Ultimate X-Men Vol. 18: Apocalypse","collects":"#89–93","format":"TPB","year":"2008"},
+  {"id":"tux-19","completed":false,"seq":19,"title":"Ultimate X-Men Vol. 19: Absolute Power","collects":"#94–100","format":"TPB","year":"2009"},
+  {"id":"tux-20","completed":false,"seq":20,"title":"Ultimate X-Men Ultimate Collection Book 1","collects":"#1–12","format":"Ultimate Collection","year":"2010"},
+  {"id":"tux-21","completed":false,"seq":21,"title":"Ultimate X-Men Ultimate Collection Book 2","collects":"#13–25","format":"Ultimate Collection","year":"2010"},
+  {"id":"tux-22","completed":false,"seq":22,"title":"Ultimate X-Men Ultimate Collection Book 3","collects":"#26–45","format":"Ultimate Collection","year":"2011"},
+  {"id":"tux-23","completed":false,"seq":23,"title":"Ultimate X-Men Omnibus Vol. 1","collects":"#1–33 & Ultimate War","format":"Omnibus","year":"2022"},
+  {"id":"tux-24","completed":false,"seq":24,"title":"Ultimate X-Men Omnibus Vol. 2","collects":"#34–65 & related","format":"Omnibus","year":"2023"}
+];
+
+const TWM_ITEMS = [
+  {"id":"twm-1","completed":false,"seq":1,"title":"Wolverine by Claremont & Miller","collects":"Wolverine (1982) #1–4","format":"TPB","year":"1987"},
+  {"id":"twm-2","completed":false,"seq":2,"title":"Kitty Pryde and Wolverine","collects":"Kitty Pryde and Wolverine #1–6","format":"TPB","year":"2008"},
+  {"id":"twm-3","completed":false,"seq":3,"title":"Havok & Wolverine: Meltdown","collects":"Havok & Wolverine: Meltdown #1–4","format":"TPB","year":"2008"},
+  {"id":"twm-4","completed":false,"seq":4,"title":"Wolverine: Weapon X","collects":"Marvel Comics Presents #72–84 (Barry Windsor-Smith)","format":"TPB","year":"1991"},
+  {"id":"twm-5","completed":false,"seq":5,"title":"Wolverine: Bloodlust / Bloody Choices","collects":"Wolverine graphic novels","format":"TPB","year":"2013"},
+  {"id":"twm-6","completed":false,"seq":6,"title":"Wolverine/Gambit: Victims","collects":"Wolverine/Gambit: Victims #1–4","format":"TPB","year":"1996"},
+  {"id":"twm-7","completed":false,"seq":7,"title":"Wolverine: Blood Debt","collects":"Wolverine (v2) #150–153","format":"TPB","year":"2001"},
+  {"id":"twm-8","completed":false,"seq":8,"title":"Wolverine: The Origin","collects":"Origin #1–6","format":"TPB","year":"2002"},
+  {"id":"twm-9","completed":false,"seq":9,"title":"Wolverine: Xisle","collects":"Wolverine: Xisle #1–5","format":"TPB","year":"2003"},
+  {"id":"twm-10","completed":false,"seq":10,"title":"Wolverine: Snikt!","collects":"Wolverine: Snikt! #1–5","format":"TPB","year":"2003"},
+  {"id":"twm-11","completed":false,"seq":11,"title":"Wolverine: Netsuke","collects":"Wolverine: Netsuke #1–4","format":"TPB","year":"2003"},
+  {"id":"twm-12","completed":false,"seq":12,"title":"Wolverine/Hulk: Six Hours","collects":"Hulk/Wolverine: Six Hours #1–4","format":"TPB","year":"2004"},
+  {"id":"twm-13","completed":false,"seq":13,"title":"Wolverine: Enemy of the State","collects":"Wolverine (v3) #20–32","format":"TPB","year":"2005"},
+  {"id":"twm-14","completed":false,"seq":14,"title":"Wolverine: Soultaker","collects":"Wolverine: Soultaker #1–5","format":"TPB","year":"2005"},
+  {"id":"twm-15","completed":false,"seq":15,"title":"Wolverine: Old Man Logan","collects":"Wolverine (v3) #66–72, Giant-Size Old Man Logan","format":"TPB","year":"2010"},
+  {"id":"twm-16","completed":false,"seq":16,"title":"Wolverine: Logan","collects":"Logan #1–3 (Brian K. Vaughan)","format":"TPB","year":"2009"},
+  {"id":"twm-17","completed":false,"seq":17,"title":"Wolverine Noir","collects":"Wolverine Noir #1–4","format":"TPB","year":"2009"},
+  {"id":"twm-18","completed":false,"seq":18,"title":"Wolverine: Manifest Destiny","collects":"Wolverine: Manifest Destiny #1–4","format":"TPB","year":"2009"},
+  {"id":"twm-19","completed":false,"seq":19,"title":"Wolverine: Prodigal Son","collects":"Original graphic novel","format":"TPB","year":"2009"},
+  {"id":"twm-20","completed":false,"seq":20,"title":"Wolverine: The Best There Is – Contagion","collects":"Wolverine: The Best There Is #1–6","format":"TPB","year":"2011"},
+  {"id":"twm-21","completed":false,"seq":21,"title":"Wolverine: Season One","collects":"Original graphic novel","format":"HC","year":"2013"},
+  {"id":"twm-22","completed":false,"seq":22,"title":"Wolverine: Origin II","collects":"Origin II #1–5","format":"TPB","year":"2014"},
+  {"id":"twm-23","completed":false,"seq":23,"title":"Wolverine: Days of Future Past","collects":"Wolverine: Days of Future Past #1–3","format":"TPB","year":"2015"}
+];
+
+const TDD_COLLECTION = {
+  id:'tpb-daredevil-bendis', name:"Daredevil by Bendis & Maleev",
+  description:"Every collected edition of Brian Michael Bendis's Daredevil run (vol. 2 #16–19, #26–81) — the numbered Marvel Knights trades plus the Ultimate Collections and Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TDD_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TXF_COLLECTION = {
+  id:'tpb-xfactor-david', name:"X-Factor by Peter David",
+  description:"Every collected edition of Peter David's X-Factor (2005–2013) — the 21 numbered volumes, the Madrox prologue and the Complete Collection omnibus-style editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TXF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TUA_COLLECTION = {
+  id:'tpb-uncanny-avengers', name:"Uncanny Avengers",
+  description:"Collected editions of Uncanny Avengers — Rick Remender's Marvel NOW! run, the Counter-Evolutionary series and the Unity volumes.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TUA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TCW_COLLECTION = {
+  id:'tpb-civil-war', name:"Civil War (2006 event)",
+  description:"Collected editions of the Civil War event — the core series plus the full run of tie-in trades and the Omnibus.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TCW_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBX_COLLECTION = {
+  id:'tpb-brubaker-xmen', name:"Ed Brubaker's X-Men",
+  description:"Collected editions of Ed Brubaker's X-Men work — Deadly Genesis, Rise & Fall of the Shi'ar Empire and his Uncanny X-Men run (#475–503).",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TCX_COLLECTION = {
+  id:'tpb-carey-xmen', name:"Mike Carey's X-Men",
+  description:"Collected editions of Mike Carey's X-Men run — X-Men (vol. 2) #188–207 and X-Men: Legacy #208–260, plus Age of X.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TCX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TAX_COLLECTION = {
+  id:'tpb-aaron-wolverine-xmen', name:"Jason Aaron's Wolverine & X-Men",
+  description:"Collected editions of Jason Aaron's Wolverine (Weapon X and the 2010 series) and his X-Men work — Schism and Wolverine & the X-Men.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TAX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TXFO_COLLECTION = {
+  id:'tpb-uncanny-xforce', name:"Uncanny X-Force by Remender",
+  description:"Every collected edition of Rick Remender's Uncanny X-Force (#1–35) — the seven numbered volumes plus the Complete Collections and Omnibus.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TXFO_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TWX_COLLECTION = {
+  id:'tpb-whedon-xmen', name:"Joss Whedon's X-Men",
+  description:"Collected editions of Joss Whedon & John Cassaday's Astonishing X-Men (#1–24 + Giant-Size) — the four arc volumes plus the collected/omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TWX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TUX_COLLECTION = {
+  id:'tpb-ultimate-xmen', name:"Ultimate X-Men (2001)",
+  description:"Collected editions of Ultimate X-Men (2001–2009, Earth-1610) — the 19 numbered volumes plus the Ultimate Collections and Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TUX_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TWM_COLLECTION = {
+  id:'tpb-wolverine-minis', name:"Wolverine Limited Series (collected)",
+  description:"Collected editions of Wolverine's limited series and graphic novels — from the Claremont/Miller mini and Weapon X through Origin and Old Man Logan.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TWM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
 
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
@@ -5712,6 +6038,18 @@ function load() {
   if (!collections.find(c=>c.id==='marvel-films-legacy')) { collections.push(LGF_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-tv-legacy')) { collections.push(LGTV_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-animated')) { collections.push(ANIM_COLLECTION); save(); }
+  // Seed Marvel collected editions (TPB) if missing
+  if (!collections.find(c=>c.id==='tpb-daredevil-bendis')) { collections.push(TDD_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-xfactor-david')) { collections.push(TXF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-uncanny-avengers')) { collections.push(TUA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-civil-war')) { collections.push(TCW_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-brubaker-xmen')) { collections.push(TBX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-carey-xmen')) { collections.push(TCX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-aaron-wolverine-xmen')) { collections.push(TAX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-uncanny-xforce')) { collections.push(TXFO_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-whedon-xmen')) { collections.push(TWX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-ultimate-xmen')) { collections.push(TUX_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-wolverine-minis')) { collections.push(TWM_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -5889,7 +6227,7 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
   'Watching': { 'Marvel': { 'MCU': {}, 'Non-MCU': {} } },
-  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} } }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
+  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
   'Gaming': {}
 };
 const ROOT_ORDER = ['Watching','Reading','Gaming'];
@@ -5898,6 +6236,17 @@ const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW'] };
 // root category (capitalized) for anything not listed here.
 const COLLECTION_PATHS = {
   'marvel-top-100':   ['Reading','Marvel'],
+  'tpb-daredevil-bendis': ['Reading','Marvel','Collected Editions'],
+  'tpb-xfactor-david': ['Reading','Marvel','Collected Editions'],
+  'tpb-uncanny-avengers': ['Reading','Marvel','Collected Editions'],
+  'tpb-civil-war': ['Reading','Marvel','Collected Editions'],
+  'tpb-brubaker-xmen': ['Reading','Marvel','Collected Editions'],
+  'tpb-carey-xmen': ['Reading','Marvel','Collected Editions'],
+  'tpb-aaron-wolverine-xmen': ['Reading','Marvel','Collected Editions'],
+  'tpb-uncanny-xforce': ['Reading','Marvel','Collected Editions'],
+  'tpb-whedon-xmen': ['Reading','Marvel','Collected Editions'],
+  'tpb-ultimate-xmen': ['Reading','Marvel','Collected Editions'],
+  'tpb-wolverine-minis': ['Reading','Marvel','Collected Editions'],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
