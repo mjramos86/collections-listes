@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5542,7 +5542,7 @@ function valueBaseline(year){
   for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
   return 4;
 }
-const TPB_FORMAT_VALUES = {'TPB':18,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
+const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
 function estimateValue(c,item){
   if (c.tpb) return TPB_FORMAT_VALUES[item.format] ?? 18;
   const keys = VALUE_KEYS[c.id];
@@ -6114,6 +6114,307 @@ const TBG_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Collected editions, wave 3 ─────────────────────────────────
+const TWD_ITEMS = [
+  {"id":"twd-1","completed":false,"seq":1,"title":"The Walking Dead Vol. 1: Days Gone Bye","collects":"#1–6","format":"TPB","year":""},
+  {"id":"twd-2","completed":false,"seq":2,"title":"The Walking Dead Vol. 2: Miles Behind Us","collects":"#7–12","format":"TPB","year":""},
+  {"id":"twd-3","completed":false,"seq":3,"title":"The Walking Dead Vol. 3: Safety Behind Bars","collects":"#13–18","format":"TPB","year":""},
+  {"id":"twd-4","completed":false,"seq":4,"title":"The Walking Dead Vol. 4: The Heart's Desire","collects":"#19–24","format":"TPB","year":""},
+  {"id":"twd-5","completed":false,"seq":5,"title":"The Walking Dead Vol. 5: The Best Defense","collects":"#25–30","format":"TPB","year":""},
+  {"id":"twd-6","completed":false,"seq":6,"title":"The Walking Dead Vol. 6: This Sorrowful Life","collects":"#31–36","format":"TPB","year":""},
+  {"id":"twd-7","completed":false,"seq":7,"title":"The Walking Dead Vol. 7: The Calm Before","collects":"#37–42","format":"TPB","year":""},
+  {"id":"twd-8","completed":false,"seq":8,"title":"The Walking Dead Vol. 8: Made to Suffer","collects":"#43–48","format":"TPB","year":""},
+  {"id":"twd-9","completed":false,"seq":9,"title":"The Walking Dead Vol. 9: Here We Remain","collects":"#49–54","format":"TPB","year":""},
+  {"id":"twd-10","completed":false,"seq":10,"title":"The Walking Dead Vol. 10: What We Become","collects":"#55–60","format":"TPB","year":""},
+  {"id":"twd-11","completed":false,"seq":11,"title":"The Walking Dead Vol. 11: Fear the Hunters","collects":"#61–66","format":"TPB","year":""},
+  {"id":"twd-12","completed":false,"seq":12,"title":"The Walking Dead Vol. 12: Life Among Them","collects":"#67–72","format":"TPB","year":""},
+  {"id":"twd-13","completed":false,"seq":13,"title":"The Walking Dead Vol. 13: Too Far Gone","collects":"#73–78","format":"TPB","year":""},
+  {"id":"twd-14","completed":false,"seq":14,"title":"The Walking Dead Vol. 14: No Way Out","collects":"#79–84","format":"TPB","year":""},
+  {"id":"twd-15","completed":false,"seq":15,"title":"The Walking Dead Vol. 15: We Find Ourselves","collects":"#85–90","format":"TPB","year":""},
+  {"id":"twd-16","completed":false,"seq":16,"title":"The Walking Dead Vol. 16: A Larger World","collects":"#91–96","format":"TPB","year":""},
+  {"id":"twd-17","completed":false,"seq":17,"title":"The Walking Dead Vol. 17: Something to Fear","collects":"#97–102","format":"TPB","year":""},
+  {"id":"twd-18","completed":false,"seq":18,"title":"The Walking Dead Vol. 18: What Comes After","collects":"#103–108","format":"TPB","year":""},
+  {"id":"twd-19","completed":false,"seq":19,"title":"The Walking Dead Vol. 19: March to War","collects":"#109–114","format":"TPB","year":""},
+  {"id":"twd-20","completed":false,"seq":20,"title":"The Walking Dead Vol. 20: All Out War Part One","collects":"#115–120","format":"TPB","year":""},
+  {"id":"twd-21","completed":false,"seq":21,"title":"The Walking Dead Vol. 21: All Out War Part Two","collects":"#121–126","format":"TPB","year":""},
+  {"id":"twd-22","completed":false,"seq":22,"title":"The Walking Dead Vol. 22: A New Beginning","collects":"#127–132","format":"TPB","year":""},
+  {"id":"twd-23","completed":false,"seq":23,"title":"The Walking Dead Vol. 23: Whispers Into Screams","collects":"#133–138","format":"TPB","year":""},
+  {"id":"twd-24","completed":false,"seq":24,"title":"The Walking Dead Vol. 24: Life and Death","collects":"#139–144","format":"TPB","year":""},
+  {"id":"twd-25","completed":false,"seq":25,"title":"The Walking Dead Vol. 25: No Turning Back","collects":"#145–150","format":"TPB","year":""},
+  {"id":"twd-26","completed":false,"seq":26,"title":"The Walking Dead Vol. 26: Call to Arms","collects":"#151–156","format":"TPB","year":""},
+  {"id":"twd-27","completed":false,"seq":27,"title":"The Walking Dead Vol. 27: The Whisperer War","collects":"#157–162","format":"TPB","year":""},
+  {"id":"twd-28","completed":false,"seq":28,"title":"The Walking Dead Vol. 28: A Certain Doom","collects":"#163–168","format":"TPB","year":""},
+  {"id":"twd-29","completed":false,"seq":29,"title":"The Walking Dead Vol. 29: Lines We Cross","collects":"#169–174","format":"TPB","year":""},
+  {"id":"twd-30","completed":false,"seq":30,"title":"The Walking Dead Vol. 30: New World Order","collects":"#175–180","format":"TPB","year":""},
+  {"id":"twd-31","completed":false,"seq":31,"title":"The Walking Dead Vol. 31: The Rotten Core","collects":"#181–186","format":"TPB","year":""},
+  {"id":"twd-32","completed":false,"seq":32,"title":"The Walking Dead Vol. 32: Rest in Peace","collects":"#187–193","format":"TPB","year":""},
+  {"id":"twd-33","completed":false,"seq":33,"title":"The Walking Dead Compendium One","collects":"#1–48","format":"Omnibus","year":""},
+  {"id":"twd-34","completed":false,"seq":34,"title":"The Walking Dead Compendium Two","collects":"#49–96","format":"Omnibus","year":""},
+  {"id":"twd-35","completed":false,"seq":35,"title":"The Walking Dead Compendium Three","collects":"#97–144","format":"Omnibus","year":""},
+  {"id":"twd-36","completed":false,"seq":36,"title":"The Walking Dead Compendium Four","collects":"#145–193","format":"Omnibus","year":""},
+  {"id":"twd-37","completed":false,"seq":37,"title":"The Walking Dead Omnibus Vol. 1","collects":"#1–24","format":"Omnibus","year":""},
+  {"id":"twd-38","completed":false,"seq":38,"title":"The Walking Dead Omnibus Vol. 2","collects":"#25–48","format":"Omnibus","year":""},
+  {"id":"twd-39","completed":false,"seq":39,"title":"The Walking Dead Omnibus Vol. 3","collects":"#49–72","format":"Omnibus","year":""},
+  {"id":"twd-40","completed":false,"seq":40,"title":"The Walking Dead Omnibus Vol. 4","collects":"#73–96","format":"Omnibus","year":""},
+  {"id":"twd-41","completed":false,"seq":41,"title":"The Walking Dead Omnibus Vol. 5","collects":"#97–120","format":"Omnibus","year":""},
+  {"id":"twd-42","completed":false,"seq":42,"title":"The Walking Dead Omnibus Vol. 6","collects":"#121–144","format":"Omnibus","year":""},
+  {"id":"twd-43","completed":false,"seq":43,"title":"The Walking Dead Omnibus Vol. 7","collects":"#145–168","format":"Omnibus","year":""},
+  {"id":"twd-44","completed":false,"seq":44,"title":"The Walking Dead Omnibus Vol. 8","collects":"#169–193","format":"Omnibus","year":""}
+];
+
+const THF_ITEMS = [
+  {"id":"thf-1","completed":false,"seq":1,"title":"Fantastic Four by Jonathan Hickman Vol. 1","collects":"Fantastic Four #570–574","format":"TPB","year":"2010"},
+  {"id":"thf-2","completed":false,"seq":2,"title":"Fantastic Four by Jonathan Hickman Vol. 2","collects":"#575–578","format":"TPB","year":"2010"},
+  {"id":"thf-3","completed":false,"seq":3,"title":"Fantastic Four by Jonathan Hickman Vol. 3","collects":"#579–582","format":"TPB","year":"2011"},
+  {"id":"thf-4","completed":false,"seq":4,"title":"Fantastic Four by Jonathan Hickman Vol. 4","collects":"#583–588","format":"TPB","year":"2011"},
+  {"id":"thf-5","completed":false,"seq":5,"title":"Fantastic Four by Jonathan Hickman Vol. 5","collects":"Fantastic Four #600–605","format":"TPB","year":"2012"},
+  {"id":"thf-6","completed":false,"seq":6,"title":"Fantastic Four by Jonathan Hickman Vol. 6","collects":"#605.1, #606–611","format":"TPB","year":"2012"},
+  {"id":"thf-7","completed":false,"seq":7,"title":"FF by Jonathan Hickman Vol. 1","collects":"FF #1–5","format":"TPB","year":"2011"},
+  {"id":"thf-8","completed":false,"seq":8,"title":"FF by Jonathan Hickman Vol. 2","collects":"FF #6–11","format":"TPB","year":"2012"},
+  {"id":"thf-9","completed":false,"seq":9,"title":"FF by Jonathan Hickman Vol. 3","collects":"FF #12–16","format":"TPB","year":"2012"},
+  {"id":"thf-10","completed":false,"seq":10,"title":"FF by Jonathan Hickman Vol. 4","collects":"FF #17–23","format":"TPB","year":"2012"},
+  {"id":"thf-11","completed":false,"seq":11,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 1","collects":"FF #570–578 & related","format":"Complete Collection","year":"2013"},
+  {"id":"thf-12","completed":false,"seq":12,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 2","collects":"#579–588, FF #1–5","format":"Complete Collection","year":"2013"},
+  {"id":"thf-13","completed":false,"seq":13,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 3","collects":"FF #6–16, FF #600–603","format":"Complete Collection","year":"2014"},
+  {"id":"thf-14","completed":false,"seq":14,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 4","collects":"#604–611, FF #17–23","format":"Complete Collection","year":"2014"},
+  {"id":"thf-15","completed":false,"seq":15,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 1","collects":"FF #570–588, FF #1–11","format":"Omnibus","year":"2013"},
+  {"id":"thf-16","completed":false,"seq":16,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 2","collects":"FF #600–611, FF #12–23","format":"Omnibus","year":"2014"}
+];
+
+const TJM_ITEMS = [
+  {"id":"tjm-1","completed":false,"seq":1,"title":"Amazing Spider-Man Vol. 1: Coming Home","collects":"Amazing Spider-Man (v2) #30–35","format":"TPB","year":"2001"},
+  {"id":"tjm-2","completed":false,"seq":2,"title":"Amazing Spider-Man Vol. 2: Revelations","collects":"#36–39","format":"TPB","year":"2002"},
+  {"id":"tjm-3","completed":false,"seq":3,"title":"Amazing Spider-Man Vol. 3: Until the Stars Turn Cold","collects":"#40–45","format":"TPB","year":"2002"},
+  {"id":"tjm-4","completed":false,"seq":4,"title":"Amazing Spider-Man Vol. 4: The Life and Death of Spiders","collects":"#46–50","format":"TPB","year":"2003"},
+  {"id":"tjm-5","completed":false,"seq":5,"title":"Amazing Spider-Man Vol. 5: Unintended Consequences","collects":"#51–56","format":"TPB","year":"2003"},
+  {"id":"tjm-6","completed":false,"seq":6,"title":"Amazing Spider-Man Vol. 6: Happy Birthday","collects":"#57–58, #500–502","format":"TPB","year":"2004"},
+  {"id":"tjm-7","completed":false,"seq":7,"title":"Amazing Spider-Man Vol. 7: The Book of Ezekiel","collects":"#503–508","format":"TPB","year":"2004"},
+  {"id":"tjm-8","completed":false,"seq":8,"title":"Amazing Spider-Man Vol. 8: Sins Past","collects":"#509–514","format":"TPB","year":"2005"},
+  {"id":"tjm-9","completed":false,"seq":9,"title":"Amazing Spider-Man Vol. 9: Skin Deep","collects":"#515–518","format":"TPB","year":"2005"},
+  {"id":"tjm-10","completed":false,"seq":10,"title":"Amazing Spider-Man Vol. 10: New Avengers","collects":"#519–524","format":"TPB","year":"2006"},
+  {"id":"tjm-11","completed":false,"seq":11,"title":"Spider-Man: The Other","collects":"The Other crossover","format":"TPB","year":"2006"},
+  {"id":"tjm-12","completed":false,"seq":12,"title":"Civil War: Amazing Spider-Man","collects":"#532–538","format":"TPB","year":"2007"},
+  {"id":"tjm-13","completed":false,"seq":13,"title":"Spider-Man: Back in Black","collects":"#539–543","format":"TPB","year":"2007"},
+  {"id":"tjm-14","completed":false,"seq":14,"title":"Spider-Man: One More Day","collects":"#544–545 & tie-ins","format":"TPB","year":"2008"},
+  {"id":"tjm-15","completed":false,"seq":15,"title":"Amazing Spider-Man by JMS Ultimate Collection Book 1","collects":"(v2) #30–45","format":"Ultimate Collection","year":"2009"},
+  {"id":"tjm-16","completed":false,"seq":16,"title":"Amazing Spider-Man by JMS Ultimate Collection Book 2","collects":"(v2) #46–58, #500–502","format":"Ultimate Collection","year":"2009"},
+  {"id":"tjm-17","completed":false,"seq":17,"title":"Amazing Spider-Man by JMS Ultimate Collection Book 3","collects":"#503–518","format":"Ultimate Collection","year":"2010"},
+  {"id":"tjm-18","completed":false,"seq":18,"title":"Amazing Spider-Man by JMS Ultimate Collection Book 4","collects":"#519–532","format":"Ultimate Collection","year":"2010"},
+  {"id":"tjm-19","completed":false,"seq":19,"title":"Amazing Spider-Man by JMS Ultimate Collection Book 5","collects":"#533–545","format":"Ultimate Collection","year":"2011"},
+  {"id":"tjm-20","completed":false,"seq":20,"title":"Amazing Spider-Man by JMS Omnibus Vol. 1","collects":"(v2) #30–58, #500–514","format":"Omnibus","year":"2017"},
+  {"id":"tjm-21","completed":false,"seq":21,"title":"Amazing Spider-Man by JMS Omnibus Vol. 2","collects":"#515–545 & related","format":"Omnibus","year":"2018"}
+];
+
+const TES_ITEMS = [
+  {"id":"tes-1","completed":false,"seq":1,"title":"Essential Classic X-Men Vol. 1","collects":"X-Men #1–24","format":"Essential","year":""},
+  {"id":"tes-2","completed":false,"seq":2,"title":"Essential Classic X-Men Vol. 2","collects":"#25–53","format":"Essential","year":""},
+  {"id":"tes-3","completed":false,"seq":3,"title":"Essential Classic X-Men Vol. 3","collects":"#54–66, Amazing Adventures","format":"Essential","year":""},
+  {"id":"tes-4","completed":false,"seq":4,"title":"Essential X-Men Vol. 1","collects":"Giant-Size X-Men #1, Uncanny X-Men #94–119","format":"Essential","year":""},
+  {"id":"tes-5","completed":false,"seq":5,"title":"Essential X-Men Vol. 2","collects":"#120–144, Annual #3–4","format":"Essential","year":""},
+  {"id":"tes-6","completed":false,"seq":6,"title":"Essential X-Men Vol. 3","collects":"#145–161, Annual #5–6","format":"Essential","year":""},
+  {"id":"tes-7","completed":false,"seq":7,"title":"Essential X-Men Vol. 4","collects":"#162–179, Annual #7","format":"Essential","year":""},
+  {"id":"tes-8","completed":false,"seq":8,"title":"Essential X-Men Vol. 5","collects":"#180–198, Annual #8","format":"Essential","year":""},
+  {"id":"tes-9","completed":false,"seq":9,"title":"Essential X-Men Vol. 6","collects":"#199–213, Annual #9","format":"Essential","year":""},
+  {"id":"tes-10","completed":false,"seq":10,"title":"Essential X-Men Vol. 7","collects":"#214–228, Annual #10–11","format":"Essential","year":""},
+  {"id":"tes-11","completed":false,"seq":11,"title":"Essential X-Men Vol. 8","collects":"#229–243, Annual #12","format":"Essential","year":""},
+  {"id":"tes-12","completed":false,"seq":12,"title":"Essential X-Men Vol. 9","collects":"#244–255, Annual #13","format":"Essential","year":""},
+  {"id":"tes-13","completed":false,"seq":13,"title":"Essential X-Men Vol. 10","collects":"#256–264, X-Factor & annuals","format":"Essential","year":""},
+  {"id":"tes-14","completed":false,"seq":14,"title":"Essential X-Men Vol. 11","collects":"#265–277, Annual #15","format":"Essential","year":""},
+  {"id":"tes-15","completed":false,"seq":15,"title":"Essential Wolverine Vol. 1","collects":"Wolverine (v2) #1–23","format":"Essential","year":""},
+  {"id":"tes-16","completed":false,"seq":16,"title":"Essential Wolverine Vol. 2","collects":"#24–47","format":"Essential","year":""},
+  {"id":"tes-17","completed":false,"seq":17,"title":"Essential Wolverine Vol. 3","collects":"#48–70","format":"Essential","year":""},
+  {"id":"tes-18","completed":false,"seq":18,"title":"Essential Wolverine Vol. 4","collects":"#71–90","format":"Essential","year":""},
+  {"id":"tes-19","completed":false,"seq":19,"title":"Essential Wolverine Vol. 5","collects":"#91–112","format":"Essential","year":""},
+  {"id":"tes-20","completed":false,"seq":20,"title":"Essential Wolverine Vol. 6","collects":"#113–128","format":"Essential","year":""},
+  {"id":"tes-21","completed":false,"seq":21,"title":"Essential X-Factor Vol. 1","collects":"X-Factor #1–16","format":"Essential","year":""},
+  {"id":"tes-22","completed":false,"seq":22,"title":"Essential X-Factor Vol. 2","collects":"#17–37","format":"Essential","year":""},
+  {"id":"tes-23","completed":false,"seq":23,"title":"Essential X-Factor Vol. 3","collects":"#38–56","format":"Essential","year":""},
+  {"id":"tes-24","completed":false,"seq":24,"title":"Essential X-Factor Vol. 4","collects":"#57–74","format":"Essential","year":""},
+  {"id":"tes-25","completed":false,"seq":25,"title":"Essential X-Factor Vol. 5","collects":"#75–92","format":"Essential","year":""},
+  {"id":"tes-26","completed":false,"seq":26,"title":"Essential New Mutants Vol. 1","collects":"Marvel Graphic Novel #4, New Mutants #1–20","format":"Essential","year":""},
+  {"id":"tes-27","completed":false,"seq":27,"title":"Essential New Mutants Vol. 2","collects":"#21–47, Annual #1–2","format":"Essential","year":""},
+  {"id":"tes-28","completed":false,"seq":28,"title":"Essential New Mutants Vol. 3","collects":"#48–66","format":"Essential","year":""},
+  {"id":"tes-29","completed":false,"seq":29,"title":"Essential X-Men: Excalibur Vol. 1","collects":"Excalibur #1–24","format":"Essential","year":""},
+  {"id":"tes-30","completed":false,"seq":30,"title":"Essential Excalibur Vol. 2","collects":"#25–41","format":"Essential","year":""},
+  {"id":"tes-31","completed":false,"seq":31,"title":"Essential Excalibur Vol. 3","collects":"#42–57","format":"Essential","year":""},
+  {"id":"tes-32","completed":false,"seq":32,"title":"Essential Excalibur Vol. 4","collects":"#58–72","format":"Essential","year":""}
+];
+
+const TPW_ITEMS = [
+  {"id":"tpw-1","completed":false,"seq":1,"title":"Powers Vol. 1: Who Killed Retro Girl?","collects":"Powers #1–6","format":"TPB","year":"2000"},
+  {"id":"tpw-2","completed":false,"seq":2,"title":"Powers Vol. 2: Roleplay","collects":"#7–11","format":"TPB","year":"2001"},
+  {"id":"tpw-3","completed":false,"seq":3,"title":"Powers Vol. 3: Little Deaths","collects":"#12–15, Annual","format":"TPB","year":"2002"},
+  {"id":"tpw-4","completed":false,"seq":4,"title":"Powers Vol. 4: Supergroup","collects":"#16–21","format":"TPB","year":"2002"},
+  {"id":"tpw-5","completed":false,"seq":5,"title":"Powers Vol. 5: Anarchy","collects":"#22–30","format":"TPB","year":"2003"},
+  {"id":"tpw-6","completed":false,"seq":6,"title":"Powers Vol. 6: The Sellouts","collects":"#31–37","format":"TPB","year":"2004"},
+  {"id":"tpw-7","completed":false,"seq":7,"title":"Powers Vol. 7: Forever","collects":"Powers (v2) #1–6","format":"TPB","year":"2004"},
+  {"id":"tpw-8","completed":false,"seq":8,"title":"Powers Vol. 8: Legends","collects":"(v2) #7–12","format":"TPB","year":"2005"},
+  {"id":"tpw-9","completed":false,"seq":9,"title":"Powers Vol. 9: Psychotic","collects":"(v2) #13–18","format":"TPB","year":"2006"},
+  {"id":"tpw-10","completed":false,"seq":10,"title":"Powers Vol. 10: Cosmic","collects":"(v2) #19–24","format":"TPB","year":"2007"},
+  {"id":"tpw-11","completed":false,"seq":11,"title":"Powers Vol. 11: Secret Identity","collects":"(v2) #25–30","format":"TPB","year":"2008"},
+  {"id":"tpw-12","completed":false,"seq":12,"title":"Powers Vol. 12: The 25 Coolest Dead Superheroes of All Time","collects":"(v3) #1–6","format":"TPB","year":"2010"},
+  {"id":"tpw-13","completed":false,"seq":13,"title":"Powers Vol. 13: Z","collects":"(v3) #7–12","format":"TPB","year":"2012"},
+  {"id":"tpw-14","completed":false,"seq":14,"title":"Powers Vol. 14: Gods","collects":"Powers: Bureau #1–6","format":"TPB","year":"2013"},
+  {"id":"tpw-15","completed":false,"seq":15,"title":"Powers: The Definitive Hardcover Collection Vol. 1","collects":"#1–11","format":"HC","year":"2006"},
+  {"id":"tpw-16","completed":false,"seq":16,"title":"Powers: The Definitive Hardcover Collection Vol. 2","collects":"#12–24","format":"HC","year":"2007"},
+  {"id":"tpw-17","completed":false,"seq":17,"title":"Powers: The Definitive Hardcover Collection Vol. 3","collects":"#25–37","format":"HC","year":"2008"},
+  {"id":"tpw-18","completed":false,"seq":18,"title":"Powers: The Definitive Hardcover Collection Vol. 4","collects":"(v2) #1–12","format":"HC","year":"2009"},
+  {"id":"tpw-19","completed":false,"seq":19,"title":"Powers: The Definitive Hardcover Collection Vol. 5","collects":"(v2) #13–24","format":"HC","year":"2010"},
+  {"id":"tpw-20","completed":false,"seq":20,"title":"Powers: The Definitive Hardcover Collection Vol. 6","collects":"(v2) #25–30 & related","format":"HC","year":"2011"},
+  {"id":"tpw-21","completed":false,"seq":21,"title":"Powers: The Definitive Hardcover Collection Vol. 7","collects":"(v3) #1–12","format":"HC","year":"2013"}
+];
+
+const TFB_ITEMS = [
+  {"id":"tfb-1","completed":false,"seq":1,"title":"Fables Vol. 1: Legends in Exile","collects":"#1–5","format":"TPB","year":""},
+  {"id":"tfb-2","completed":false,"seq":2,"title":"Fables Vol. 2: Animal Farm","collects":"#6–10","format":"TPB","year":""},
+  {"id":"tfb-3","completed":false,"seq":3,"title":"Fables Vol. 3: Storybook Love","collects":"#11–18","format":"TPB","year":""},
+  {"id":"tfb-4","completed":false,"seq":4,"title":"Fables Vol. 4: March of the Wooden Soldiers","collects":"#19–21, #23–27","format":"TPB","year":""},
+  {"id":"tfb-5","completed":false,"seq":5,"title":"Fables Vol. 5: The Mean Seasons","collects":"#22, #28–33","format":"TPB","year":""},
+  {"id":"tfb-6","completed":false,"seq":6,"title":"Fables Vol. 6: Homelands","collects":"#34–41","format":"TPB","year":""},
+  {"id":"tfb-7","completed":false,"seq":7,"title":"Fables Vol. 7: Arabian Nights (and Days)","collects":"#42–47","format":"TPB","year":""},
+  {"id":"tfb-8","completed":false,"seq":8,"title":"Fables Vol. 8: Wolves","collects":"#48–51","format":"TPB","year":""},
+  {"id":"tfb-9","completed":false,"seq":9,"title":"Fables Vol. 9: Sons of Empire","collects":"#52–59","format":"TPB","year":""},
+  {"id":"tfb-10","completed":false,"seq":10,"title":"Fables Vol. 10: The Good Prince","collects":"#60–63, #65–69","format":"TPB","year":""},
+  {"id":"tfb-11","completed":false,"seq":11,"title":"Fables Vol. 11: War and Pieces","collects":"#70–75","format":"TPB","year":""},
+  {"id":"tfb-12","completed":false,"seq":12,"title":"Fables Vol. 12: The Dark Ages","collects":"#76–82","format":"TPB","year":""},
+  {"id":"tfb-13","completed":false,"seq":13,"title":"Fables Vol. 13: The Great Fables Crossover","collects":"#83–85 & Jack of Fables","format":"TPB","year":""},
+  {"id":"tfb-14","completed":false,"seq":14,"title":"Fables Vol. 14: Witches","collects":"#86–93","format":"TPB","year":""},
+  {"id":"tfb-15","completed":false,"seq":15,"title":"Fables Vol. 15: Rose Red","collects":"#94–100","format":"TPB","year":""},
+  {"id":"tfb-16","completed":false,"seq":16,"title":"Fables Vol. 16: Super Team","collects":"#101–107","format":"TPB","year":""},
+  {"id":"tfb-17","completed":false,"seq":17,"title":"Fables Vol. 17: Inherit the Wind","collects":"#108–113","format":"TPB","year":""},
+  {"id":"tfb-18","completed":false,"seq":18,"title":"Fables Vol. 18: Cubs in Toyland","collects":"#114–121","format":"TPB","year":""},
+  {"id":"tfb-19","completed":false,"seq":19,"title":"Fables Vol. 19: Snow White","collects":"#124–129","format":"TPB","year":""},
+  {"id":"tfb-20","completed":false,"seq":20,"title":"Fables Vol. 20: Camelot","collects":"#130–140","format":"TPB","year":""},
+  {"id":"tfb-21","completed":false,"seq":21,"title":"Fables Vol. 21: Happily Ever After","collects":"#141–145","format":"TPB","year":""},
+  {"id":"tfb-22","completed":false,"seq":22,"title":"Fables Vol. 22: Farewell","collects":"#146–150","format":"TPB","year":""},
+  {"id":"tfb-23","completed":false,"seq":23,"title":"Fables Deluxe Edition Book 1","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-24","completed":false,"seq":24,"title":"Fables Deluxe Edition Book 2","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-25","completed":false,"seq":25,"title":"Fables Deluxe Edition Book 3","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-26","completed":false,"seq":26,"title":"Fables Deluxe Edition Book 4","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-27","completed":false,"seq":27,"title":"Fables Deluxe Edition Book 5","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-28","completed":false,"seq":28,"title":"Fables Deluxe Edition Book 6","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-29","completed":false,"seq":29,"title":"Fables Deluxe Edition Book 7","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-30","completed":false,"seq":30,"title":"Fables Deluxe Edition Book 8","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-31","completed":false,"seq":31,"title":"Fables Deluxe Edition Book 9","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-32","completed":false,"seq":32,"title":"Fables Deluxe Edition Book 10","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-33","completed":false,"seq":33,"title":"Fables Deluxe Edition Book 11","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-34","completed":false,"seq":34,"title":"Fables Deluxe Edition Book 12","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-35","completed":false,"seq":35,"title":"Fables Deluxe Edition Book 13","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-36","completed":false,"seq":36,"title":"Fables Deluxe Edition Book 14","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-37","completed":false,"seq":37,"title":"Fables Deluxe Edition Book 15","collects":"Collected in oversized hardcover","format":"HC","year":""},
+  {"id":"tfb-38","completed":false,"seq":38,"title":"Fables Compendium One","collects":"#1–34","format":"Omnibus","year":""},
+  {"id":"tfb-39","completed":false,"seq":39,"title":"Fables Compendium Two","collects":"#35–75","format":"Omnibus","year":""},
+  {"id":"tfb-40","completed":false,"seq":40,"title":"Fables Compendium Three","collects":"#76–113","format":"Omnibus","year":""},
+  {"id":"tfb-41","completed":false,"seq":41,"title":"Fables Compendium Four","collects":"#114–150","format":"Omnibus","year":""}
+];
+
+const THB_ITEMS = [
+  {"id":"thb-1","completed":false,"seq":1,"title":"100 Bullets Vol. 1: First Shot, Last Call","collects":"#1–5","format":"TPB","year":""},
+  {"id":"thb-2","completed":false,"seq":2,"title":"100 Bullets Vol. 2: Split Second Chance","collects":"#6–14","format":"TPB","year":""},
+  {"id":"thb-3","completed":false,"seq":3,"title":"100 Bullets Vol. 3: Hang Up on the Hang Low","collects":"#15–19","format":"TPB","year":""},
+  {"id":"thb-4","completed":false,"seq":4,"title":"100 Bullets Vol. 4: A Foregone Tomorrow","collects":"#20–30","format":"TPB","year":""},
+  {"id":"thb-5","completed":false,"seq":5,"title":"100 Bullets Vol. 5: The Counterfifth Detective","collects":"#31–36","format":"TPB","year":""},
+  {"id":"thb-6","completed":false,"seq":6,"title":"100 Bullets Vol. 6: Six Feet Under the Gun","collects":"#37–42","format":"TPB","year":""},
+  {"id":"thb-7","completed":false,"seq":7,"title":"100 Bullets Vol. 7: Samurai","collects":"#43–49","format":"TPB","year":""},
+  {"id":"thb-8","completed":false,"seq":8,"title":"100 Bullets Vol. 8: The Hard Way","collects":"#50–58","format":"TPB","year":""},
+  {"id":"thb-9","completed":false,"seq":9,"title":"100 Bullets Vol. 9: Strychnine Lives","collects":"#59–67","format":"TPB","year":""},
+  {"id":"thb-10","completed":false,"seq":10,"title":"100 Bullets Vol. 10: Decayed","collects":"#68–75","format":"TPB","year":""},
+  {"id":"thb-11","completed":false,"seq":11,"title":"100 Bullets Vol. 11: Once Upon a Crime","collects":"#76–83","format":"TPB","year":""},
+  {"id":"thb-12","completed":false,"seq":12,"title":"100 Bullets Vol. 12: Dirty","collects":"#84–88","format":"TPB","year":""},
+  {"id":"thb-13","completed":false,"seq":13,"title":"100 Bullets Vol. 13: Wilt","collects":"#89–100","format":"TPB","year":""},
+  {"id":"thb-14","completed":false,"seq":14,"title":"100 Bullets Book 1 (Deluxe Edition)","collects":"#1–19","format":"HC","year":""},
+  {"id":"thb-15","completed":false,"seq":15,"title":"100 Bullets Book 2 (Deluxe Edition)","collects":"#20–36","format":"HC","year":""},
+  {"id":"thb-16","completed":false,"seq":16,"title":"100 Bullets Book 3 (Deluxe Edition)","collects":"#37–58","format":"HC","year":""},
+  {"id":"thb-17","completed":false,"seq":17,"title":"100 Bullets Book 4 (Deluxe Edition)","collects":"#59–80","format":"HC","year":""},
+  {"id":"thb-18","completed":false,"seq":18,"title":"100 Bullets Book 5 (Deluxe Edition)","collects":"#81–100","format":"HC","year":""},
+  {"id":"thb-19","completed":false,"seq":19,"title":"100 Bullets Omnibus Vol. 1","collects":"#1–50","format":"Omnibus","year":""},
+  {"id":"thb-20","completed":false,"seq":20,"title":"100 Bullets Omnibus Vol. 2","collects":"#51–100","format":"Omnibus","year":""}
+];
+
+const TEM_ITEMS = [
+  {"id":"tem-1","completed":false,"seq":1,"title":"Ex Machina Vol. 1: The First Hundred Days","collects":"#1–5","format":"TPB","year":""},
+  {"id":"tem-2","completed":false,"seq":2,"title":"Ex Machina Vol. 2: Tag","collects":"#6–10","format":"TPB","year":""},
+  {"id":"tem-3","completed":false,"seq":3,"title":"Ex Machina Vol. 3: Fact v. Fiction","collects":"#11–16","format":"TPB","year":""},
+  {"id":"tem-4","completed":false,"seq":4,"title":"Ex Machina Vol. 4: March to War","collects":"#17–20","format":"TPB","year":""},
+  {"id":"tem-5","completed":false,"seq":5,"title":"Ex Machina Vol. 5: Smoke Smoke","collects":"#21–25","format":"TPB","year":""},
+  {"id":"tem-6","completed":false,"seq":6,"title":"Ex Machina Vol. 6: Power Down","collects":"#26–29","format":"TPB","year":""},
+  {"id":"tem-7","completed":false,"seq":7,"title":"Ex Machina Vol. 7: Ex Cathedra","collects":"#30–34","format":"TPB","year":""},
+  {"id":"tem-8","completed":false,"seq":8,"title":"Ex Machina Vol. 8: Dirty Tricks","collects":"#35–39","format":"TPB","year":""},
+  {"id":"tem-9","completed":false,"seq":9,"title":"Ex Machina Vol. 9: Ring Out the Old","collects":"#40–44","format":"TPB","year":""},
+  {"id":"tem-10","completed":false,"seq":10,"title":"Ex Machina Vol. 10: Term Limits","collects":"#45–50","format":"TPB","year":""},
+  {"id":"tem-11","completed":false,"seq":11,"title":"Ex Machina Deluxe Edition Book 1","collects":"#1–10","format":"HC","year":""},
+  {"id":"tem-12","completed":false,"seq":12,"title":"Ex Machina Deluxe Edition Book 2","collects":"#11–20","format":"HC","year":""},
+  {"id":"tem-13","completed":false,"seq":13,"title":"Ex Machina Deluxe Edition Book 3","collects":"#21–29","format":"HC","year":""},
+  {"id":"tem-14","completed":false,"seq":14,"title":"Ex Machina Deluxe Edition Book 4","collects":"#30–39","format":"HC","year":""},
+  {"id":"tem-15","completed":false,"seq":15,"title":"Ex Machina Deluxe Edition Book 5","collects":"#40–50","format":"HC","year":""},
+  {"id":"tem-16","completed":false,"seq":16,"title":"Ex Machina Compendium One","collects":"#1–25","format":"Omnibus","year":""},
+  {"id":"tem-17","completed":false,"seq":17,"title":"Ex Machina Compendium Two","collects":"#26–50","format":"Omnibus","year":""}
+];
+
+const TWD_COLLECTION = {
+  id:'tpb-walking-dead', name:"The Walking Dead",
+  description:"Every collected edition of Robert Kirkman & Charlie Adlard's The Walking Dead (#1–193) — all 32 trade paperbacks plus the four Compendiums and eight Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TWD_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const THF_COLLECTION = {
+  id:'tpb-hickman-ff', name:"Fantastic Four / FF by Jonathan Hickman",
+  description:"Collected editions of Jonathan Hickman's Fantastic Four (#570–588, #600–611) and FF / Future Foundation (#1–23).",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: THF_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TJM_COLLECTION = {
+  id:'tpb-spiderman-jms', name:"Spider-Man by J. Michael Straczynski",
+  description:"Collected editions of J. Michael Straczynski's Amazing Spider-Man (vol. 2 #30–58 / vol. 1 #500–545) — the numbered volumes plus the Ultimate Collections and Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TJM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TES_COLLECTION = {
+  id:'tpb-xmen-essentials', name:"X-Men Essential Collections",
+  description:"Marvel's black-and-white Essential phone books for the X-Men family — Essential Classic X-Men, Essential X-Men, Wolverine, X-Factor, New Mutants and Excalibur.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TES_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TPW_COLLECTION = {
+  id:'tpb-powers', name:"Powers by Brian Michael Bendis",
+  description:"Collected editions of Brian Michael Bendis & Michael Avon Oeming's Powers — begun at Image (2000) and continued at Marvel's Icon imprint, plus the Definitive Collections.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TPW_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TFB_COLLECTION = {
+  id:'tpb-fables', name:"Fables by Bill Willingham",
+  description:"Collected editions of Bill Willingham's Fables (Vertigo, #1–150) — the 22 numbered trades plus the Deluxe Edition hardcovers and the Compendiums.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TFB_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const THB_COLLECTION = {
+  id:'tpb-100-bullets', name:"100 Bullets by Brian Azzarello",
+  description:"Collected editions of Brian Azzarello & Eduardo Risso's 100 Bullets (Vertigo, #1–100) — the 13 numbered trades plus the Deluxe Edition books and Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: THB_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TEM_COLLECTION = {
+  id:'tpb-ex-machina', name:"Ex Machina by Brian K. Vaughan",
+  description:"Collected editions of Brian K. Vaughan & Tony Harris's Ex Machina (WildStorm, #1–50) — the 10 numbered trades plus the Deluxe books and Compendiums.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TEM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6284,6 +6585,15 @@ function load() {
   if (!collections.find(c=>c.id==='tpb-planetary')) { collections.push(TPL_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-invisibles')) { collections.push(TIV_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-bsg')) { collections.push(TBG_COLLECTION); save(); }
+  // Seed collected editions, wave 3 if missing
+  if (!collections.find(c=>c.id==='tpb-walking-dead')) { collections.push(TWD_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-hickman-ff')) { collections.push(THF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-spiderman-jms')) { collections.push(TJM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-xmen-essentials')) { collections.push(TES_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-powers')) { collections.push(TPW_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-fables')) { collections.push(TFB_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-100-bullets')) { collections.push(THB_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-ex-machina')) { collections.push(TEM_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -6490,6 +6800,14 @@ const COLLECTION_PATHS = {
   'tpb-planetary': ["Reading", "DC"],
   'tpb-invisibles': ["Reading", "DC"],
   'tpb-bsg': ["Reading", "Dynamite"],
+  'tpb-walking-dead': ["Reading", "Image"],
+  'tpb-hickman-ff': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-spiderman-jms': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-xmen-essentials': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-powers': ["Reading", "Image"],
+  'tpb-fables': ["Reading", "DC"],
+  'tpb-100-bullets': ["Reading", "DC"],
+  'tpb-ex-machina': ["Reading", "DC"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
