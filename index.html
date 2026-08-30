@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5890,6 +5890,230 @@ const TWM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Collected editions, wave 2 (multi-publisher) ───────────────
+const TDW_ITEMS = [
+  {"id":"tdw-1","completed":false,"seq":1,"title":"Daredevil by Mark Waid Vol. 1","collects":"Daredevil (v3) #1–6","format":"TPB","year":"2012"},
+  {"id":"tdw-2","completed":false,"seq":2,"title":"Daredevil by Mark Waid Vol. 2","collects":"#7–10, #10.1","format":"TPB","year":"2012"},
+  {"id":"tdw-3","completed":false,"seq":3,"title":"Daredevil by Mark Waid Vol. 3","collects":"#11–15","format":"TPB","year":"2013"},
+  {"id":"tdw-4","completed":false,"seq":4,"title":"Daredevil by Mark Waid Vol. 4","collects":"#16–21","format":"TPB","year":"2013"},
+  {"id":"tdw-5","completed":false,"seq":5,"title":"Daredevil by Mark Waid Vol. 5","collects":"#22–27","format":"TPB","year":"2013"},
+  {"id":"tdw-6","completed":false,"seq":6,"title":"Daredevil by Mark Waid Vol. 6","collects":"#28–32","format":"TPB","year":"2014"},
+  {"id":"tdw-7","completed":false,"seq":7,"title":"Daredevil by Mark Waid Vol. 7","collects":"#33–36, End of Days","format":"TPB","year":"2014"},
+  {"id":"tdw-8","completed":false,"seq":8,"title":"Daredevil Vol. 1: Devil at Bay","collects":"Daredevil (v4) #1–5","format":"TPB","year":"2014"},
+  {"id":"tdw-9","completed":false,"seq":9,"title":"Daredevil Vol. 2: West-Case Scenario","collects":"Daredevil (v4) #6–10","format":"TPB","year":"2015"},
+  {"id":"tdw-10","completed":false,"seq":10,"title":"Daredevil Vol. 3: The Daredevil You Know","collects":"Daredevil (v4) #11–15","format":"TPB","year":"2015"},
+  {"id":"tdw-11","completed":false,"seq":11,"title":"Daredevil Vol. 4: The Autobiography of Matt Murdock","collects":"Daredevil (v4) #15.1, #16–18","format":"TPB","year":"2016"},
+  {"id":"tdw-12","completed":false,"seq":12,"title":"Daredevil by Mark Waid Omnibus Vol. 1","collects":"Daredevil (v3) #1–27 & related","format":"Omnibus","year":"2018"},
+  {"id":"tdw-13","completed":false,"seq":13,"title":"Daredevil by Mark Waid Omnibus Vol. 2","collects":"Daredevil (v3) #28–36, (v4) #1–18","format":"Omnibus","year":"2019"}
+];
+
+const TSS_ITEMS = [
+  {"id":"tss-1","completed":false,"seq":1,"title":"Spider-Man: Brand New Day – The Complete Collection Vol. 1","collects":"Amazing Spider-Man #546–564","format":"Complete Collection","year":"2017"},
+  {"id":"tss-2","completed":false,"seq":2,"title":"Spider-Man: Brand New Day – The Complete Collection Vol. 2","collects":"#565–582","format":"Complete Collection","year":"2018"},
+  {"id":"tss-3","completed":false,"seq":3,"title":"Spider-Man: Brand New Day – The Complete Collection Vol. 3","collects":"#583–601","format":"Complete Collection","year":"2018"},
+  {"id":"tss-4","completed":false,"seq":4,"title":"Spider-Man: Big Time – The Complete Collection Vol. 1","collects":"#648–662, #654.1","format":"Complete Collection","year":"2016"},
+  {"id":"tss-5","completed":false,"seq":5,"title":"Spider-Man: Big Time – The Complete Collection Vol. 2","collects":"#663–677 & tie-ins","format":"Complete Collection","year":"2016"},
+  {"id":"tss-6","completed":false,"seq":6,"title":"Spider-Man: Big Time – The Complete Collection Vol. 3","collects":"#677–687, #679.1, Ends of the Earth","format":"Complete Collection","year":"2017"},
+  {"id":"tss-7","completed":false,"seq":7,"title":"Spider-Man: Big Time – The Complete Collection Vol. 4","collects":"#688–697, Alpha: Big Time #1–5","format":"Complete Collection","year":"2017"},
+  {"id":"tss-8","completed":false,"seq":8,"title":"Spider-Island","collects":"Amazing Spider-Man #666–673","format":"TPB","year":"2012"},
+  {"id":"tss-9","completed":false,"seq":9,"title":"Spider-Man: Ends of the Earth","collects":"#682–687, Ends of the Earth #1","format":"TPB","year":"2012"},
+  {"id":"tss-10","completed":false,"seq":10,"title":"Spider-Man: Dying Wish","collects":"#698–700","format":"TPB","year":"2013"},
+  {"id":"tss-11","completed":false,"seq":11,"title":"Superior Spider-Man Vol. 1: My Own Worst Enemy","collects":"Superior Spider-Man #1–5","format":"TPB","year":"2013"},
+  {"id":"tss-12","completed":false,"seq":12,"title":"Superior Spider-Man Vol. 2: A Troubled Mind","collects":"#6–10","format":"TPB","year":"2013"},
+  {"id":"tss-13","completed":false,"seq":13,"title":"Superior Spider-Man Vol. 3: No Escape","collects":"#11–16","format":"TPB","year":"2013"},
+  {"id":"tss-14","completed":false,"seq":14,"title":"Superior Spider-Man Vol. 4: Necessary Evil","collects":"#17–21","format":"TPB","year":"2014"},
+  {"id":"tss-15","completed":false,"seq":15,"title":"Superior Spider-Man Vol. 5: The Superior Venom","collects":"#22–26","format":"TPB","year":"2014"},
+  {"id":"tss-16","completed":false,"seq":16,"title":"Superior Spider-Man Vol. 6: Goblin Nation","collects":"#27–31, Annual #2","format":"TPB","year":"2014"},
+  {"id":"tss-17","completed":false,"seq":17,"title":"Amazing Spider-Man Vol. 1: The Parker Luck","collects":"Amazing Spider-Man (2014) #1–6","format":"TPB","year":"2014"},
+  {"id":"tss-18","completed":false,"seq":18,"title":"Amazing Spider-Man Vol. 2: Spider-Verse","collects":"#7–15, Spider-Verse","format":"TPB","year":"2015"},
+  {"id":"tss-19","completed":false,"seq":19,"title":"Amazing Spider-Man Vol. 3: Spider-Verse","collects":"Spider-Verse #1–2 & tie-ins","format":"TPB","year":"2015"},
+  {"id":"tss-20","completed":false,"seq":20,"title":"Amazing Spider-Man: Worldwide Vol. 1","collects":"Amazing Spider-Man (2015) #1–5","format":"TPB","year":"2016"},
+  {"id":"tss-21","completed":false,"seq":21,"title":"Amazing Spider-Man: Worldwide Vol. 2","collects":"#6–11","format":"TPB","year":"2016"},
+  {"id":"tss-22","completed":false,"seq":22,"title":"Amazing Spider-Man: Worldwide Vol. 3","collects":"#12–15, Annual","format":"TPB","year":"2017"},
+  {"id":"tss-23","completed":false,"seq":23,"title":"Amazing Spider-Man: Worldwide Vol. 4","collects":"#16–19","format":"TPB","year":"2017"},
+  {"id":"tss-24","completed":false,"seq":24,"title":"Amazing Spider-Man: Worldwide Vol. 5","collects":"#20–24","format":"TPB","year":"2017"},
+  {"id":"tss-25","completed":false,"seq":25,"title":"Amazing Spider-Man: Worldwide Vol. 6","collects":"#25–28","format":"TPB","year":"2017"},
+  {"id":"tss-26","completed":false,"seq":26,"title":"Amazing Spider-Man: Worldwide Vol. 7","collects":"#789–791 & related","format":"TPB","year":"2018"},
+  {"id":"tss-27","completed":false,"seq":27,"title":"Amazing Spider-Man: Worldwide Vol. 8 – Threat Level Red","collects":"#792–796","format":"TPB","year":"2018"},
+  {"id":"tss-28","completed":false,"seq":28,"title":"Amazing Spider-Man: Worldwide Vol. 9 – Go Down Swinging","collects":"#797–800","format":"TPB","year":"2018"},
+  {"id":"tss-29","completed":false,"seq":29,"title":"Amazing Spider-Man by Dan Slott Omnibus Vol. 1","collects":"Slott's early ASM run","format":"Omnibus","year":"2021"}
+];
+
+const TBM_ITEMS = [
+  {"id":"tbm-1","completed":false,"seq":1,"title":"All-New X-Men Vol. 1: Yesterday's X-Men","collects":"All-New X-Men #1–5","format":"TPB","year":"2013"},
+  {"id":"tbm-2","completed":false,"seq":2,"title":"All-New X-Men Vol. 2: Here to Stay","collects":"#6–10","format":"TPB","year":"2013"},
+  {"id":"tbm-3","completed":false,"seq":3,"title":"All-New X-Men Vol. 3: Out of Their Depth","collects":"#11–15","format":"TPB","year":"2013"},
+  {"id":"tbm-4","completed":false,"seq":4,"title":"All-New X-Men Vol. 4: All-Different","collects":"#18–21","format":"TPB","year":"2014"},
+  {"id":"tbm-5","completed":false,"seq":5,"title":"All-New X-Men Vol. 5: One Down","collects":"#22–27","format":"TPB","year":"2014"},
+  {"id":"tbm-6","completed":false,"seq":6,"title":"All-New X-Men Vol. 6: The Ultimate Adventure","collects":"#31–36","format":"TPB","year":"2015"},
+  {"id":"tbm-7","completed":false,"seq":7,"title":"All-New X-Men Vol. 7: The Utopians","collects":"#37–41","format":"TPB","year":"2015"},
+  {"id":"tbm-8","completed":false,"seq":8,"title":"X-Men: Battle of the Atom","collects":"The full 10-part crossover","format":"TPB","year":"2014"},
+  {"id":"tbm-9","completed":false,"seq":9,"title":"Uncanny X-Men Vol. 1: Revolution","collects":"Uncanny X-Men (2013) #1–5","format":"TPB","year":"2013"},
+  {"id":"tbm-10","completed":false,"seq":10,"title":"Uncanny X-Men Vol. 2: Broken","collects":"#6–11","format":"TPB","year":"2014"},
+  {"id":"tbm-11","completed":false,"seq":11,"title":"Uncanny X-Men Vol. 3: The Good, the Bad, the Inhuman","collects":"#12–17","format":"TPB","year":"2014"},
+  {"id":"tbm-12","completed":false,"seq":12,"title":"Uncanny X-Men Vol. 4: Vs. S.H.I.E.L.D.","collects":"#19–25","format":"TPB","year":"2015"},
+  {"id":"tbm-13","completed":false,"seq":13,"title":"Uncanny X-Men Vol. 5: The Omega Mutant","collects":"#26–31","format":"TPB","year":"2015"},
+  {"id":"tbm-14","completed":false,"seq":14,"title":"Uncanny X-Men Vol. 6: Storyville","collects":"#32–35","format":"TPB","year":"2016"},
+  {"id":"tbm-15","completed":false,"seq":15,"title":"All-New X-Men by Brian Michael Bendis: The Complete Collection Vol. 1","collects":"All-New X-Men #1–16","format":"Complete Collection","year":"2019"},
+  {"id":"tbm-16","completed":false,"seq":16,"title":"Uncanny X-Men by Brian Michael Bendis: The Complete Collection Vol. 1","collects":"Uncanny X-Men (2013) #1–17","format":"Complete Collection","year":"2019"}
+];
+
+const TGM_ITEMS = [
+  {"id":"tgm-1","completed":false,"seq":1,"title":"New X-Men Vol. 1: E is for Extinction","collects":"New X-Men #114–117","format":"TPB","year":"2001"},
+  {"id":"tgm-2","completed":false,"seq":2,"title":"New X-Men Vol. 2: Imperial","collects":"#118–126","format":"TPB","year":"2002"},
+  {"id":"tgm-3","completed":false,"seq":3,"title":"New X-Men Vol. 3: New Worlds","collects":"#127–133","format":"TPB","year":"2002"},
+  {"id":"tgm-4","completed":false,"seq":4,"title":"New X-Men Vol. 4: Riot at Xavier's","collects":"#134–138","format":"TPB","year":"2003"},
+  {"id":"tgm-5","completed":false,"seq":5,"title":"New X-Men Vol. 5: Assault on Weapon Plus","collects":"#139–145","format":"TPB","year":"2003"},
+  {"id":"tgm-6","completed":false,"seq":6,"title":"New X-Men Vol. 6: Planet X","collects":"#146–150","format":"TPB","year":"2004"},
+  {"id":"tgm-7","completed":false,"seq":7,"title":"New X-Men Vol. 7: Here Comes Tomorrow","collects":"#151–154","format":"TPB","year":"2004"},
+  {"id":"tgm-8","completed":false,"seq":8,"title":"New X-Men by Grant Morrison Ultimate Collection Book 1","collects":"#114–126","format":"Ultimate Collection","year":"2008"},
+  {"id":"tgm-9","completed":false,"seq":9,"title":"New X-Men by Grant Morrison Ultimate Collection Book 2","collects":"#127–141","format":"Ultimate Collection","year":"2008"},
+  {"id":"tgm-10","completed":false,"seq":10,"title":"New X-Men by Grant Morrison Ultimate Collection Book 3","collects":"#142–154","format":"Ultimate Collection","year":"2009"},
+  {"id":"tgm-11","completed":false,"seq":11,"title":"New X-Men by Grant Morrison Omnibus","collects":"#114–154 & related","format":"Omnibus","year":"2006"}
+];
+
+const TCR_ITEMS = [
+  {"id":"tcr-1","completed":false,"seq":1,"title":"Criminal Vol. 1: Coward","collects":"Criminal #1–5","format":"TPB","year":"2007"},
+  {"id":"tcr-2","completed":false,"seq":2,"title":"Criminal Vol. 2: Lawless","collects":"Criminal #6–10","format":"TPB","year":"2007"},
+  {"id":"tcr-3","completed":false,"seq":3,"title":"Criminal Vol. 3: The Dead and the Dying","collects":"Criminal (v2) #1–3","format":"TPB","year":"2008"},
+  {"id":"tcr-4","completed":false,"seq":4,"title":"Criminal Vol. 4: Bad Night","collects":"Criminal (v2) #4–7","format":"TPB","year":"2009"},
+  {"id":"tcr-5","completed":false,"seq":5,"title":"Criminal Vol. 5: The Sinners","collects":"The Sinners #1–5","format":"TPB","year":"2010"},
+  {"id":"tcr-6","completed":false,"seq":6,"title":"Criminal Vol. 6: The Last of the Innocent","collects":"The Last of the Innocent #1–4","format":"TPB","year":"2011"},
+  {"id":"tcr-7","completed":false,"seq":7,"title":"Criminal: My Heroes Have Always Been Junkies","collects":"Original graphic novel","format":"HC","year":"2018"},
+  {"id":"tcr-8","completed":false,"seq":8,"title":"Criminal: Bad Weekend","collects":"Criminal (2019) #2–3 / OGN","format":"HC","year":"2019"},
+  {"id":"tcr-9","completed":false,"seq":9,"title":"Criminal Vol. 7: Wrong Time, Wrong Place","collects":"Criminal (2019) #1, #4–7","format":"TPB","year":"2019"},
+  {"id":"tcr-10","completed":false,"seq":10,"title":"Criminal: Cruel Summer","collects":"Criminal (2019) #8–12","format":"HC","year":"2020"},
+  {"id":"tcr-11","completed":false,"seq":11,"title":"Criminal Deluxe Edition Vol. 1","collects":"Coward, Lawless, The Dead and the Dying","format":"HC","year":"2015"},
+  {"id":"tcr-12","completed":false,"seq":12,"title":"Criminal Deluxe Edition Vol. 2","collects":"Bad Night, The Sinners, Last of the Innocent","format":"HC","year":"2016"},
+  {"id":"tcr-13","completed":false,"seq":13,"title":"Criminal Deluxe Edition Vol. 3","collects":"The 2019 series & specials","format":"HC","year":"2021"}
+];
+
+const TAU_ITEMS = [
+  {"id":"tau-1","completed":false,"seq":1,"title":"The Authority Vol. 1: Relentless","collects":"The Authority #1–8","format":"TPB","year":"2000"},
+  {"id":"tau-2","completed":false,"seq":2,"title":"The Authority Vol. 2: Under New Management","collects":"#9–16 (Ellis on #9–12)","format":"TPB","year":"2000"},
+  {"id":"tau-3","completed":false,"seq":3,"title":"Absolute Authority Vol. 1","collects":"#1–12 (Ellis & Hitch)","format":"HC","year":"2002"},
+  {"id":"tau-4","completed":false,"seq":4,"title":"The Authority Book One","collects":"#1–12 & Stormwatch material","format":"TPB","year":"2013"},
+  {"id":"tau-5","completed":false,"seq":5,"title":"Stormwatch by Warren Ellis Vol. 1","collects":"Stormwatch #37–42 (the run that led to The Authority)","format":"TPB","year":"2015"},
+  {"id":"tau-6","completed":false,"seq":6,"title":"The Authority Omnibus","collects":"The Ellis/Hitch and Millar/Quitely runs","format":"Omnibus","year":"2019"}
+];
+
+const TPL_ITEMS = [
+  {"id":"tpl-1","completed":false,"seq":1,"title":"Planetary Vol. 1: All Over the World and Other Stories","collects":"Planetary #1–6","format":"TPB","year":"2000"},
+  {"id":"tpl-2","completed":false,"seq":2,"title":"Planetary Vol. 2: The Fourth Man","collects":"#7–12","format":"TPB","year":"2001"},
+  {"id":"tpl-3","completed":false,"seq":3,"title":"Planetary Vol. 3: Leaving the 20th Century","collects":"#13–18","format":"TPB","year":"2004"},
+  {"id":"tpl-4","completed":false,"seq":4,"title":"Planetary Vol. 4: Spacetime Archaeology","collects":"#19–27","format":"TPB","year":"2010"},
+  {"id":"tpl-5","completed":false,"seq":5,"title":"Planetary: Crossing Worlds","collects":"Planetary/Batman, /JLA, /The Authority crossovers","format":"TPB","year":"2004"},
+  {"id":"tpl-6","completed":false,"seq":6,"title":"Absolute Planetary Book One","collects":"#1–12","format":"HC","year":"2005"},
+  {"id":"tpl-7","completed":false,"seq":7,"title":"Absolute Planetary Book Two","collects":"#13–27","format":"HC","year":"2010"},
+  {"id":"tpl-8","completed":false,"seq":8,"title":"Planetary Omnibus","collects":"#1–27 and the crossovers","format":"Omnibus","year":"2014"}
+];
+
+const TIV_ITEMS = [
+  {"id":"tiv-1","completed":false,"seq":1,"title":"The Invisibles Vol. 1: Say You Want a Revolution","collects":"The Invisibles (v1) #1–8","format":"TPB","year":"1996"},
+  {"id":"tiv-2","completed":false,"seq":2,"title":"The Invisibles Vol. 2: Apocalipstick","collects":"(v1) #9–16","format":"TPB","year":"2001"},
+  {"id":"tiv-3","completed":false,"seq":3,"title":"The Invisibles Vol. 3: Entropy in the U.K.","collects":"(v1) #17–25","format":"TPB","year":"2001"},
+  {"id":"tiv-4","completed":false,"seq":4,"title":"The Invisibles Vol. 4: Bloody Hell in America","collects":"(v2) #1–4","format":"TPB","year":"1998"},
+  {"id":"tiv-5","completed":false,"seq":5,"title":"The Invisibles Vol. 5: Counting to None","collects":"(v2) #5–13","format":"TPB","year":"1999"},
+  {"id":"tiv-6","completed":false,"seq":6,"title":"The Invisibles Vol. 6: Kissing Mister Quimper","collects":"(v2) #14–22","format":"TPB","year":"2000"},
+  {"id":"tiv-7","completed":false,"seq":7,"title":"The Invisibles Vol. 7: The Invisible Kingdom","collects":"(v3) #12–1 (countdown)","format":"TPB","year":"2002"},
+  {"id":"tiv-8","completed":false,"seq":8,"title":"The Invisibles Deluxe Edition Book One","collects":"(v1) #1–12","format":"HC","year":"2014"},
+  {"id":"tiv-9","completed":false,"seq":9,"title":"The Invisibles Deluxe Edition Book Two","collects":"(v1) #13–25 & Vol. 2 opening","format":"HC","year":"2015"},
+  {"id":"tiv-10","completed":false,"seq":10,"title":"The Invisibles Deluxe Edition Book Three","collects":"(v2) #5–22","format":"HC","year":"2015"},
+  {"id":"tiv-11","completed":false,"seq":11,"title":"The Invisibles Deluxe Edition Book Four","collects":"(v3) the final countdown","format":"HC","year":"2016"},
+  {"id":"tiv-12","completed":false,"seq":12,"title":"The Invisibles Omnibus","collects":"The complete series","format":"Omnibus","year":"2012"}
+];
+
+const TBG_ITEMS = [
+  {"id":"tbg-1","completed":false,"seq":1,"title":"New Battlestar Galactica Vol. 1","collects":"Battlestar Galactica (2006) #0–4","format":"TPB","year":"2007"},
+  {"id":"tbg-2","completed":false,"seq":2,"title":"New Battlestar Galactica Vol. 2","collects":"#5–8","format":"TPB","year":"2007"},
+  {"id":"tbg-3","completed":false,"seq":3,"title":"New Battlestar Galactica Vol. 3","collects":"#9–12","format":"TPB","year":"2008"},
+  {"id":"tbg-4","completed":false,"seq":4,"title":"Battlestar Galactica: Zarek","collects":"Zarek #1–4","format":"TPB","year":"2007"},
+  {"id":"tbg-5","completed":false,"seq":5,"title":"Battlestar Galactica: Season Zero Vol. 1","collects":"Season Zero #1–6","format":"TPB","year":"2008"},
+  {"id":"tbg-6","completed":false,"seq":6,"title":"Battlestar Galactica: Season Zero Vol. 2","collects":"Season Zero #7–12","format":"TPB","year":"2008"},
+  {"id":"tbg-7","completed":false,"seq":7,"title":"Battlestar Galactica: Origins Vol. 1 – Baltar","collects":"Origins #1–5","format":"TPB","year":"2008"},
+  {"id":"tbg-8","completed":false,"seq":8,"title":"Battlestar Galactica: Origins Vol. 2 – Adama & Tigh","collects":"Origins #6–11","format":"TPB","year":"2009"},
+  {"id":"tbg-9","completed":false,"seq":9,"title":"Battlestar Galactica: Cylon Apocalypse","collects":"Cylon Apocalypse #1–4","format":"TPB","year":"2008"},
+  {"id":"tbg-10","completed":false,"seq":10,"title":"Battlestar Galactica: Ghosts","collects":"Ghosts #1–5","format":"TPB","year":"2009"},
+  {"id":"tbg-11","completed":false,"seq":11,"title":"Battlestar Galactica: The Final Five","collects":"The Final Five #1–4","format":"TPB","year":"2009"},
+  {"id":"tbg-12","completed":false,"seq":12,"title":"Battlestar Galactica: Cylon War","collects":"The Cylon War #1–4","format":"TPB","year":"2010"},
+  {"id":"tbg-13","completed":false,"seq":13,"title":"Battlestar Galactica: Death & Honor","collects":"Death & Honor #1–4","format":"TPB","year":"2010"},
+  {"id":"tbg-14","completed":false,"seq":14,"title":"Battlestar Galactica: Six","collects":"Six #1–5","format":"TPB","year":"2015"},
+  {"id":"tbg-15","completed":false,"seq":15,"title":"Battlestar Galactica: Gods & Monsters","collects":"Gods & Monsters #1–5","format":"TPB","year":"2017"},
+  {"id":"tbg-16","completed":false,"seq":16,"title":"Battlestar Galactica: Season Zero Omnibus","collects":"The complete Season Zero","format":"Omnibus","year":"2015"}
+];
+
+const TDW_COLLECTION = {
+  id:'tpb-daredevil-waid', name:"Daredevil by Mark Waid",
+  description:"Collected editions of Mark Waid's Eisner-winning Daredevil (2011–2015) — vol. 3 #1–36 and vol. 4 #1–18, plus the hardcovers and omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TDW_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TSS_COLLECTION = {
+  id:'tpb-spiderman-slott', name:"Spider-Man by Dan Slott",
+  description:"Collected editions of Dan Slott's decade-long Spider-Man run — Brand New Day, Big Time, Spider-Island, Superior Spider-Man, Spider-Verse and Worldwide through Go Down Swinging.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TSS_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBM_COLLECTION = {
+  id:'tpb-xmen-bendis', name:"X-Men by Brian Michael Bendis",
+  description:"Collected editions of Brian Michael Bendis's X-Men — All-New X-Men (2012–2015) and Uncanny X-Men (2013–2015), plus Battle of the Atom.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TGM_COLLECTION = {
+  id:'tpb-xmen-morrison', name:"X-Men by Grant Morrison",
+  description:"Collected editions of Grant Morrison's New X-Men (#114–154) — the seven arc volumes plus the Ultimate Collections and Omnibus.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TGM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TCR_COLLECTION = {
+  id:'tpb-criminal', name:"Criminal by Ed Brubaker",
+  description:"Collected editions of Ed Brubaker & Sean Phillips's Criminal — begun at Marvel's Icon imprint (2006) and continued at Image, plus the Deluxe Editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TCR_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TAU_COLLECTION = {
+  id:'tpb-authority-ellis', name:"The Authority by Warren Ellis",
+  description:"Collected editions of Warren Ellis & Bryan Hitch's The Authority (#1–12, WildStorm) and the Absolute/omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TAU_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TPL_COLLECTION = {
+  id:'tpb-planetary', name:"Planetary by Warren Ellis",
+  description:"Collected editions of Warren Ellis & John Cassaday's Planetary (#1–27), including the crossovers and the Absolute/Omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TPL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TIV_COLLECTION = {
+  id:'tpb-invisibles', name:"The Invisibles by Grant Morrison",
+  description:"Collected editions of Grant Morrison's The Invisibles (Vertigo, 1994–2000) — the seven numbered volumes plus the Deluxe and Omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TIV_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBG_COLLECTION = {
+  id:'tpb-bsg', name:"Battlestar Galactica (Dynamite)",
+  description:"Collected editions of Dynamite's Battlestar Galactica comics based on the 2003 re-imagined series — the ongoing plus Season Zero, Origins, The Final Five, Cylon War and the other minis.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBG_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6050,6 +6274,16 @@ function load() {
   if (!collections.find(c=>c.id==='tpb-whedon-xmen')) { collections.push(TWX_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-ultimate-xmen')) { collections.push(TUX_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-wolverine-minis')) { collections.push(TWM_COLLECTION); save(); }
+  // Seed collected editions, wave 2 if missing
+  if (!collections.find(c=>c.id==='tpb-daredevil-waid')) { collections.push(TDW_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-spiderman-slott')) { collections.push(TSS_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-xmen-bendis')) { collections.push(TBM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-xmen-morrison')) { collections.push(TGM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-criminal')) { collections.push(TCR_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-authority-ellis')) { collections.push(TAU_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-planetary')) { collections.push(TPL_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-invisibles')) { collections.push(TIV_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-bsg')) { collections.push(TBG_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -6227,11 +6461,11 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
   'Watching': { 'Marvel': { 'MCU': {}, 'Non-MCU': {} } },
-  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {} },
+  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {}, 'Dynamite': {} },
   'Gaming': {}
 };
 const ROOT_ORDER = ['Watching','Reading','Gaming'];
-const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW'] };
+const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW','Dynamite'] };
 // Where each collection lives in the tree (deepest node). Falls back to its
 // root category (capitalized) for anything not listed here.
 const COLLECTION_PATHS = {
@@ -6247,6 +6481,15 @@ const COLLECTION_PATHS = {
   'tpb-whedon-xmen': ['Reading','Marvel','Collected Editions'],
   'tpb-ultimate-xmen': ['Reading','Marvel','Collected Editions'],
   'tpb-wolverine-minis': ['Reading','Marvel','Collected Editions'],
+  'tpb-daredevil-waid': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-spiderman-slott': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-xmen-bendis': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-xmen-morrison': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-criminal': ["Reading", "Image"],
+  'tpb-authority-ellis': ["Reading", "DC"],
+  'tpb-planetary': ["Reading", "DC"],
+  'tpb-invisibles': ["Reading", "DC"],
+  'tpb-bsg': ["Reading", "Dynamite"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
