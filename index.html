@@ -6789,20 +6789,25 @@ const TGC_ITEMS = [
 ];
 
 const TBGM_ITEMS = [
-  {"id":"tbgm-1","completed":false,"seq":1,"title":"Batman and Son","collects":"Batman #655–658, #663–666","format":"TPB","year":"2007"},
-  {"id":"tbgm-2","completed":false,"seq":2,"title":"Batman: The Black Glove","collects":"Batman #667–669, #672–675","format":"TPB","year":"2008"},
-  {"id":"tbgm-3","completed":false,"seq":3,"title":"Batman R.I.P.","collects":"Batman #676–681","format":"TPB","year":"2009"},
-  {"id":"tbgm-4","completed":false,"seq":4,"title":"Batman: Time and the Batman","collects":"Batman #700–703","format":"TPB","year":"2011"},
-  {"id":"tbgm-5","completed":false,"seq":5,"title":"Batman and Robin Vol. 1: Batman Reborn","collects":"Batman and Robin #1–6","format":"TPB","year":"2010"},
-  {"id":"tbgm-6","completed":false,"seq":6,"title":"Batman and Robin Vol. 2: Batman vs. Robin","collects":"#7–12","format":"TPB","year":"2011"},
-  {"id":"tbgm-7","completed":false,"seq":7,"title":"Batman and Robin Vol. 3: Batman & Robin Must Die!","collects":"#13–16","format":"TPB","year":"2011"},
-  {"id":"tbgm-8","completed":false,"seq":8,"title":"Batman: The Return of Bruce Wayne","collects":"The Return of Bruce Wayne #1–6","format":"TPB","year":"2011"},
-  {"id":"tbgm-9","completed":false,"seq":9,"title":"Batman Incorporated","collects":"Batman Incorporated (2011) #1–8","format":"TPB","year":"2012"},
-  {"id":"tbgm-10","completed":false,"seq":10,"title":"Batman Incorporated Vol. 1: Demon Star","collects":"Batman Incorporated (2012) #1–6","format":"TPB","year":"2013"},
-  {"id":"tbgm-11","completed":false,"seq":11,"title":"Batman Incorporated Vol. 2: Gotham's Most Wanted","collects":"(2012) #7–13","format":"TPB","year":"2014"},
-  {"id":"tbgm-12","completed":false,"seq":12,"title":"Batman by Grant Morrison Omnibus Vol. 1","collects":"Batman #655–681 & related","format":"Omnibus","year":"2018"},
-  {"id":"tbgm-13","completed":false,"seq":13,"title":"Batman by Grant Morrison Omnibus Vol. 2","collects":"Batman and Robin, Return of Bruce Wayne","format":"Omnibus","year":"2019"},
-  {"id":"tbgm-14","completed":false,"seq":14,"title":"Batman by Grant Morrison Omnibus Vol. 3","collects":"Batman Incorporated & finale","format":"Omnibus","year":"2020"}
+  {"id":"tbgm-1","completed":false,"seq":1,"title":"Arkham Asylum: A Serious House on Serious Earth","collects":"Original graphic novel (with Dave McKean)","format":"HC","year":"1989"},
+  {"id":"tbgm-2","completed":false,"seq":2,"title":"Batman: Gothic","collects":"Legends of the Dark Knight #6–10 (with Klaus Janson)","format":"TPB","year":"1990"},
+  {"id":"tbgm-3","completed":false,"seq":3,"title":"Arkham Asylum: 15th Anniversary Edition","collects":"The graphic novel plus Morrison's annotated script","format":"TPB","year":"2004"},
+  {"id":"tbgm-4","completed":false,"seq":4,"title":"Absolute Arkham Asylum","collects":"Oversized slipcased edition","format":"Absolute","year":"2008"},
+  {"id":"tbgm-5","completed":false,"seq":5,"title":"Arkham Asylum: 25th Anniversary Deluxe Edition","collects":"The graphic novel with additional material","format":"HC","year":"2014"},
+  {"id":"tbgm-6","completed":false,"seq":6,"title":"Batman and Son","collects":"Batman #655–658, #663–666","format":"TPB","year":"2007"},
+  {"id":"tbgm-7","completed":false,"seq":7,"title":"Batman: The Black Glove","collects":"Batman #667–669, #672–675","format":"TPB","year":"2008"},
+  {"id":"tbgm-8","completed":false,"seq":8,"title":"Batman R.I.P.","collects":"Batman #676–681","format":"TPB","year":"2009"},
+  {"id":"tbgm-9","completed":false,"seq":9,"title":"Batman and Robin Vol. 1: Batman Reborn","collects":"Batman and Robin #1–6","format":"TPB","year":"2010"},
+  {"id":"tbgm-10","completed":false,"seq":10,"title":"Batman and Robin Vol. 2: Batman vs. Robin","collects":"#7–12","format":"TPB","year":"2011"},
+  {"id":"tbgm-11","completed":false,"seq":11,"title":"Batman and Robin Vol. 3: Batman & Robin Must Die!","collects":"#13–16","format":"TPB","year":"2011"},
+  {"id":"tbgm-12","completed":false,"seq":12,"title":"Batman: The Return of Bruce Wayne","collects":"The Return of Bruce Wayne #1–6","format":"TPB","year":"2011"},
+  {"id":"tbgm-13","completed":false,"seq":13,"title":"Batman: Time and the Batman","collects":"Batman #700–703","format":"TPB","year":"2011"},
+  {"id":"tbgm-14","completed":false,"seq":14,"title":"Batman Incorporated","collects":"Batman Incorporated (2011) #1–8","format":"TPB","year":"2012"},
+  {"id":"tbgm-15","completed":false,"seq":15,"title":"Batman Incorporated Vol. 1: Demon Star","collects":"Batman Incorporated (2012) #1–6","format":"TPB","year":"2013"},
+  {"id":"tbgm-16","completed":false,"seq":16,"title":"Batman Incorporated Vol. 2: Gotham's Most Wanted","collects":"(2012) #7–13","format":"TPB","year":"2014"},
+  {"id":"tbgm-17","completed":false,"seq":17,"title":"Batman by Grant Morrison Omnibus Vol. 1","collects":"Batman #655–681 & related","format":"Omnibus","year":"2018"},
+  {"id":"tbgm-18","completed":false,"seq":18,"title":"Batman by Grant Morrison Omnibus Vol. 2","collects":"Batman and Robin, Return of Bruce Wayne","format":"Omnibus","year":"2019"},
+  {"id":"tbgm-19","completed":false,"seq":19,"title":"Batman by Grant Morrison Omnibus Vol. 3","collects":"Batman Incorporated & finale","format":"Omnibus","year":"2020"}
 ];
 
 const TSN_ITEMS = [
@@ -6955,7 +6960,7 @@ const TGC_COLLECTION = {
 
 const TBGM_COLLECTION = {
   id:'tpb-batman-morrison', name:"Batman by Grant Morrison",
-  description:"Collected editions of Grant Morrison's seven-year Batman saga — Batman and Son through Batman Incorporated, plus the Omnibuses.",
+  description:"Collected editions of Grant Morrison's Batman — Arkham Asylum and Gothic, then the seven-year saga from Batman and Son through Batman Incorporated, plus the Omnibuses.",
   category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
   fields: TPB_FIELDS, items: TBGM_ITEMS,
   sortField:'seq', sortDir:'asc'
@@ -7309,7 +7314,7 @@ function load() {
   }
   // Lists that were rebuilt/reordered after release: re-key an existing copy
   // by title so Read/Collected state (and edited values) survive.
-  for (const [id, SRC] of [['tpb-spiderman-slott', TSS_ITEMS], ['tpb-hickman-ff', THF_ITEMS]]) {
+  for (const [id, SRC] of [['tpb-spiderman-slott', TSS_ITEMS], ['tpb-hickman-ff', THF_ITEMS], ['tpb-batman-morrison', TBGM_ITEMS]]) {
     const c = collections.find(x=>x.id===id);
     if (c && c.items.length < SRC.length) {
       const prev = new Map(c.items.map(it=>[it.title, it]));
