@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5542,7 +5542,7 @@ function valueBaseline(year){
   for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
   return 4;
 }
-const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'Masterworks':50,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
+const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'Masterworks':50,'Album':25,'Intégrale':45,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
 function estimateValue(c,item){
   if (c.tpb) return TPB_FORMAT_VALUES[item.format] ?? 18;
   const keys = VALUE_KEYS[c.id];
@@ -6559,6 +6559,116 @@ const TSG_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Section Québec ─────────────────────────────────────────────
+// ── Bande dessinée (Québec) fieldset ───────────────────────────
+const BD_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'title',label:'Titre',type:'text'},
+  {key:'publisher',label:'Éditeur',type:'text'},
+  {key:'year',label:'Année',type:'text'},
+  {key:'format',label:'Format',type:'text'},
+  {key:'notes',label:'Notes',type:'text'},
+];
+
+const QPA_ITEMS = [
+  {"id":"qpa-1","completed":false,"seq":1,"title":"Paul à la campagne","publisher":"La Pastèque","year":"1999","format":"Album","notes":"Premier album de la série."},
+  {"id":"qpa-2","completed":false,"seq":2,"title":"Paul a un travail d'été","publisher":"La Pastèque","year":"2002","format":"Album","notes":"Prix du meilleur album québécois."},
+  {"id":"qpa-3","completed":false,"seq":3,"title":"Paul en appartement","publisher":"La Pastèque","year":"2004","format":"Album","notes":""},
+  {"id":"qpa-4","completed":false,"seq":4,"title":"Paul dans le métro","publisher":"La Pastèque","year":"2005","format":"Album","notes":""},
+  {"id":"qpa-5","completed":false,"seq":5,"title":"Paul à la pêche","publisher":"La Pastèque","year":"2006","format":"Album","notes":""},
+  {"id":"qpa-6","completed":false,"seq":6,"title":"Paul à Québec","publisher":"La Pastèque","year":"2009","format":"Album","notes":"Fauve du public, Angoulême 2010; adapté au cinéma."},
+  {"id":"qpa-7","completed":false,"seq":7,"title":"Paul au parc","publisher":"La Pastèque","year":"2011","format":"Album","notes":""},
+  {"id":"qpa-8","completed":false,"seq":8,"title":"Paul dans le Nord","publisher":"La Pastèque","year":"2015","format":"Album","notes":""},
+  {"id":"qpa-9","completed":false,"seq":9,"title":"Paul à la maison","publisher":"La Pastèque","year":"2019","format":"Album","notes":"Neuvième et dernier album à ce jour."},
+  {"id":"qpa-10","completed":false,"seq":10,"title":"Rose à l'île","publisher":"La Pastèque","year":"2023","format":"Album","notes":"Roman illustré : Paul et sa fille Rose."},
+  {"id":"qpa-11","completed":false,"seq":11,"title":"Paul formule vacances","publisher":"La Pastèque","year":"2023","format":"Intégrale","notes":"Recueil thématique."}
+];
+
+const QSC_ITEMS = [
+  {"id":"qsc-1","completed":false,"seq":1,"title":"Vil et misérable","publisher":"Pow Pow","year":"2013","format":"Album","notes":"Premier livre; traduit en anglais (Vile & Miserable)."},
+  {"id":"qsc-2","completed":false,"seq":2,"title":"Phobie des moments seuls","publisher":"Pow Pow","year":"2015","format":"Album","notes":""},
+  {"id":"qsc-3","completed":false,"seq":3,"title":"Whitehorse, tome 1","publisher":"Pow Pow","year":"2016","format":"Album","notes":""},
+  {"id":"qsc-4","completed":false,"seq":4,"title":"Whitehorse, tome 2","publisher":"Pow Pow","year":"2017","format":"Album","notes":"Conclusion du diptyque."},
+  {"id":"qsc-5","completed":false,"seq":5,"title":"Le chalet","publisher":"Pow Pow","year":"2021","format":"Album","notes":""}
+];
+
+const QGD_ITEMS = [
+  {"id":"qgd-1","completed":false,"seq":1,"title":"Aline et les autres","publisher":"L'Association","year":"1999","format":"Album","notes":""},
+  {"id":"qgd-2","completed":false,"seq":2,"title":"Shenzhen","publisher":"L'Association","year":"2000","format":"Album","notes":"Carnet de voyage en Chine."},
+  {"id":"qgd-3","completed":false,"seq":3,"title":"Albert et les autres","publisher":"L'Association","year":"2001","format":"Album","notes":""},
+  {"id":"qgd-4","completed":false,"seq":4,"title":"Pyongyang","publisher":"L'Association","year":"2003","format":"Album","notes":"Carnet de voyage en Corée du Nord."},
+  {"id":"qgd-5","completed":false,"seq":5,"title":"Louis au ski","publisher":"Delcourt (Shampooing)","year":"2005","format":"Album","notes":""},
+  {"id":"qgd-6","completed":false,"seq":6,"title":"Chroniques birmanes","publisher":"Delcourt (Shampooing)","year":"2007","format":"Album","notes":"Prix de la BD du Point."},
+  {"id":"qgd-7","completed":false,"seq":7,"title":"Louis à la plage","publisher":"Delcourt (Shampooing)","year":"2008","format":"Album","notes":""},
+  {"id":"qgd-8","completed":false,"seq":8,"title":"Chroniques de Jérusalem","publisher":"Delcourt (Shampooing)","year":"2011","format":"Album","notes":"Fauve d'or, Angoulême 2012."},
+  {"id":"qgd-9","completed":false,"seq":9,"title":"Le Guide du mauvais père, tome 1","publisher":"Delcourt (Shampooing)","year":"2013","format":"Album","notes":""},
+  {"id":"qgd-10","completed":false,"seq":10,"title":"Le Guide du mauvais père, tome 2","publisher":"Delcourt (Shampooing)","year":"2014","format":"Album","notes":""},
+  {"id":"qgd-11","completed":false,"seq":11,"title":"Le Guide du mauvais père, tome 3","publisher":"Delcourt (Shampooing)","year":"2015","format":"Album","notes":""},
+  {"id":"qgd-12","completed":false,"seq":12,"title":"S'enfuir : récit d'un otage","publisher":"Dargaud","year":"2016","format":"Album","notes":"Récit de la captivité de Christophe André."},
+  {"id":"qgd-13","completed":false,"seq":13,"title":"Le Guide du mauvais père, tome 4","publisher":"Delcourt (Shampooing)","year":"2018","format":"Album","notes":""},
+  {"id":"qgd-14","completed":false,"seq":14,"title":"Chroniques de jeunesse","publisher":"Delcourt (Shampooing)","year":"2021","format":"Album","notes":"Ses étés à l'usine de papier de Québec."}
+];
+
+const QZV_ITEMS = [
+  {"id":"qzv-1","completed":false,"seq":1,"title":"Le point B","publisher":"Mécanique générale","year":"2007","format":"Album","notes":""},
+  {"id":"qzv-2","completed":false,"seq":2,"title":"Apnée","publisher":"Pow Pow","year":"2010","format":"Album","notes":""},
+  {"id":"qzv-3","completed":false,"seq":3,"title":"Les deuxièmes","publisher":"Mécanique générale","year":"2011","format":"Album","notes":""},
+  {"id":"qzv-4","completed":false,"seq":4,"title":"L'ostie d'chat, tome 1","publisher":"Delcourt","year":"2011","format":"Album","notes":"Avec Iris."},
+  {"id":"qzv-5","completed":false,"seq":5,"title":"L'ostie d'chat, tome 2","publisher":"Delcourt","year":"2012","format":"Album","notes":"Avec Iris."},
+  {"id":"qzv-6","completed":false,"seq":6,"title":"L'ostie d'chat, tome 3","publisher":"Delcourt","year":"2013","format":"Album","notes":"Avec Iris."},
+  {"id":"qzv-7","completed":false,"seq":7,"title":"L'ostie d'chat — intégrale","publisher":"Delcourt","year":"2014","format":"Intégrale","notes":"Les trois tomes réunis."},
+  {"id":"qzv-8","completed":false,"seq":8,"title":"Ping-Pong","publisher":"Pow Pow","year":"2014","format":"Album","notes":"Édition augmentée en 2015."},
+  {"id":"qzv-9","completed":false,"seq":9,"title":"Pain de viande avec dissonances","publisher":"Pow Pow","year":"2018","format":"Album","notes":""},
+  {"id":"qzv-10","completed":false,"seq":10,"title":"Ping-Pong — édition augmentée","publisher":"Pow Pow","year":"2015","format":"Album","notes":""}
+];
+
+const QHN_ITEMS = [
+  {"id":"qhn-1","completed":false,"seq":1,"title":"Hiver nucléaire, tome 1","publisher":"Front Froid","year":"2015","format":"Album","notes":"Premier tome; traduit en anglais (Nuclear Winter)."},
+  {"id":"qhn-2","completed":false,"seq":2,"title":"Hiver nucléaire, tome 2","publisher":"Front Froid","year":"2017","format":"Album","notes":""},
+  {"id":"qhn-3","completed":false,"seq":3,"title":"Hiver nucléaire, tome 3","publisher":"Front Froid","year":"2019","format":"Album","notes":"Conclusion de la trilogie."},
+  {"id":"qhn-4","completed":false,"seq":4,"title":"Hiver nucléaire — intégrale","publisher":"Front Froid","year":"2021","format":"Intégrale","notes":"Les trois tomes réunis."}
+];
+
+const QPA_COLLECTION = {
+  id:'qc-paul-rabagliati', name:"Paul — Michel Rabagliati",
+  description:"La série Paul de Michel Rabagliati (La Pastèque) : les neuf albums de « Paul à la campagne » à « Paul à la maison », plus les publications associées.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QPA_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QSC_COLLECTION = {
+  id:'qc-samuel-cantin', name:"Samuel Cantin",
+  description:"Les bandes dessinées de Samuel Cantin, publiées chez Pow Pow — humour grinçant et malaise social.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QSC_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QGD_COLLECTION = {
+  id:'qc-guy-delisle', name:"Guy Delisle",
+  description:"Les bandes dessinées de Guy Delisle, auteur québécois — les carnets de voyage (Shenzhen, Pyongyang, Chroniques birmanes, Chroniques de Jérusalem) et le reste de l'œuvre.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QGD_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QZV_COLLECTION = {
+  id:'qc-zviane', name:"Zviane",
+  description:"Les bandes dessinées de Zviane (Sylvie-Anne Ménard) — Pow Pow, Mécanique générale et Delcourt, dont L'ostie d'chat avec Iris.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QZV_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const QHN_COLLECTION = {
+  id:'qc-hiver-nucleaire', name:"Hiver nucléaire — Cab",
+  description:"La série Hiver nucléaire de Cab (Front Froid) : Montréal figée dans un hiver post-apocalyptique. Trilogie complète.",
+  category:'reading', icon:'⚜️', checks: COMIC_CHECKS, tpb: true,
+  fields: BD_FIELDS, items: QHN_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6745,6 +6855,12 @@ function load() {
   if (!collections.find(c=>c.id==='tpb-house-of-mystery')) { collections.push(THM_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-batman-loeb')) { collections.push(TBL_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-saga')) { collections.push(TSG_COLLECTION); save(); }
+  // Seed section Québec if missing
+  if (!collections.find(c=>c.id==='qc-paul-rabagliati')) { collections.push(QPA_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-samuel-cantin')) { collections.push(QSC_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-guy-delisle')) { collections.push(QGD_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-zviane')) { collections.push(QZV_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='qc-hiver-nucleaire')) { collections.push(QHN_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -6922,11 +7038,11 @@ function getActive() { return collections.find(c=>c.id===activeId); }
 // ── Category tree (collapsible home navigation) ────────────────
 const CATEGORY_TREE = {
   'Watching': { 'Marvel': { 'MCU': {}, 'Non-MCU': {} } },
-  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {}, 'Dynamite': {} },
+  'Reading': { 'Marvel': { 'X-Men': { 'Events': {} }, 'Collected Editions': {} }, 'DC': {}, 'Image': {}, 'Dark Horse': {}, 'IDW': {}, 'Dynamite': {}, 'Québec': {} },
   'Gaming': {}
 };
 const ROOT_ORDER = ['Watching','Reading','Gaming'];
-const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW','Dynamite'] };
+const CHILD_ORDER = { 'Reading': ['Marvel','DC','Image','Dark Horse','IDW','Dynamite','Québec'] };
 // Where each collection lives in the tree (deepest node). Falls back to its
 // root category (capitalized) for anything not listed here.
 const COLLECTION_PATHS = {
@@ -6965,6 +7081,11 @@ const COLLECTION_PATHS = {
   'tpb-house-of-mystery': ["Reading", "DC"],
   'tpb-batman-loeb': ["Reading", "DC"],
   'tpb-saga': ["Reading", "Image"],
+  'qc-paul-rabagliati': ["Reading", "Québec"],
+  'qc-samuel-cantin': ["Reading", "Québec"],
+  'qc-guy-delisle': ["Reading", "Québec"],
+  'qc-zviane': ["Reading", "Québec"],
+  'qc-hiver-nucleaire': ["Reading", "Québec"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
