@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -5542,7 +5542,7 @@ function valueBaseline(year){
   for(const [y,v] of VALUE_ERAS) if(year<=y) return v;
   return 4;
 }
-const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
+const TPB_FORMAT_VALUES = {'TPB':18,'Essential':22,'Masterworks':50,'HC':30,'Epic Collection':30,'Ultimate Collection':35,'Complete Collection':35,'Omnibus':90};
 function estimateValue(c,item){
   if (c.tpb) return TPB_FORMAT_VALUES[item.format] ?? 18;
   const keys = VALUE_KEYS[c.id];
@@ -6415,6 +6415,150 @@ const TEM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Collected editions, wave 4 ─────────────────────────────────
+const TCB_ITEMS = [
+  {"id":"tcb-1","completed":false,"seq":1,"title":"Captain America Vol. 1: Winter Soldier Book One","collects":"Captain America (2005) #1–7","format":"TPB","year":"2006"},
+  {"id":"tcb-2","completed":false,"seq":2,"title":"Captain America Vol. 2: Winter Soldier Book Two","collects":"#8–9, #11–14","format":"TPB","year":"2006"},
+  {"id":"tcb-3","completed":false,"seq":3,"title":"Captain America Vol. 3: Red Menace Book One","collects":"#15–17, 65th Anniversary Special","format":"TPB","year":"2006"},
+  {"id":"tcb-4","completed":false,"seq":4,"title":"Captain America Vol. 4: Red Menace Book Two","collects":"#18–21","format":"TPB","year":"2007"},
+  {"id":"tcb-5","completed":false,"seq":5,"title":"Captain America: Civil War","collects":"#22–24","format":"TPB","year":"2007"},
+  {"id":"tcb-6","completed":false,"seq":6,"title":"The Death of Captain America Vol. 1: The Death of the Dream","collects":"#25–30","format":"TPB","year":"2008"},
+  {"id":"tcb-7","completed":false,"seq":7,"title":"The Death of Captain America Vol. 2: The Burden of Dreams","collects":"#31–36","format":"TPB","year":"2008"},
+  {"id":"tcb-8","completed":false,"seq":8,"title":"The Death of Captain America Vol. 3: The Man Who Bought America","collects":"#37–42","format":"TPB","year":"2009"},
+  {"id":"tcb-9","completed":false,"seq":9,"title":"Captain America: Road to Reborn","collects":"#43–48","format":"TPB","year":"2010"},
+  {"id":"tcb-10","completed":false,"seq":10,"title":"Captain America: Reborn","collects":"Captain America: Reborn #1–6","format":"TPB","year":"2010"},
+  {"id":"tcb-11","completed":false,"seq":11,"title":"Captain America: Two Americas","collects":"#602–605","format":"TPB","year":"2010"},
+  {"id":"tcb-12","completed":false,"seq":12,"title":"Captain America: No Escape","collects":"#606–610","format":"TPB","year":"2011"},
+  {"id":"tcb-13","completed":false,"seq":13,"title":"Captain America: The Trial of Captain America","collects":"#611–615, #615.1","format":"TPB","year":"2011"},
+  {"id":"tcb-14","completed":false,"seq":14,"title":"Captain America: Prisoner of War","collects":"#616–619","format":"TPB","year":"2011"},
+  {"id":"tcb-15","completed":false,"seq":15,"title":"Captain America by Ed Brubaker Vol. 1","collects":"Captain America (2011) #1–5","format":"TPB","year":"2012"},
+  {"id":"tcb-16","completed":false,"seq":16,"title":"Captain America by Ed Brubaker Vol. 2","collects":"#6–10","format":"TPB","year":"2012"},
+  {"id":"tcb-17","completed":false,"seq":17,"title":"Captain America by Ed Brubaker Vol. 3","collects":"#11–14","format":"TPB","year":"2013"},
+  {"id":"tcb-18","completed":false,"seq":18,"title":"Captain America by Ed Brubaker Vol. 4","collects":"#15–19","format":"TPB","year":"2013"},
+  {"id":"tcb-19","completed":false,"seq":19,"title":"Captain America & Bucky: The Life Story of Bucky Barnes","collects":"Captain America and Bucky #620–624","format":"TPB","year":"2012"},
+  {"id":"tcb-20","completed":false,"seq":20,"title":"Winter Soldier Vol. 1: The Longest Winter","collects":"Winter Soldier #1–5","format":"TPB","year":"2012"},
+  {"id":"tcb-21","completed":false,"seq":21,"title":"Winter Soldier Vol. 2: Broken Arrow","collects":"#6–9","format":"TPB","year":"2012"},
+  {"id":"tcb-22","completed":false,"seq":22,"title":"Winter Soldier Vol. 3: Black Widow Hunt","collects":"#10–14","format":"TPB","year":"2013"},
+  {"id":"tcb-23","completed":false,"seq":23,"title":"Winter Soldier by Ed Brubaker: The Complete Collection","collects":"Fear Itself #7.1, Winter Soldier #1–14","format":"Complete Collection","year":"2014"},
+  {"id":"tcb-24","completed":false,"seq":24,"title":"Captain America by Ed Brubaker Omnibus Vol. 1","collects":"#1–25, 65th Anniversary Special, Winter Kills","format":"Omnibus","year":"2007"},
+  {"id":"tcb-25","completed":false,"seq":25,"title":"Captain America by Ed Brubaker Omnibus Vol. 2: The Death of Captain America","collects":"#25–42","format":"Omnibus","year":"2009"},
+  {"id":"tcb-26","completed":false,"seq":26,"title":"Captain America by Ed Brubaker Omnibus Vol. 3: Captain America Lives","collects":"#43–50, Reborn #1–5, #600–601","format":"Omnibus","year":"2011"},
+  {"id":"tcb-27","completed":false,"seq":27,"title":"Captain America: The Trial of Captain America Omnibus","collects":"#602–619, Steve Rogers: Super-Soldier, CA (2011) #1–10","format":"Omnibus","year":"2012"},
+  {"id":"tcb-28","completed":false,"seq":28,"title":"Captain America: Return of the Winter Soldier Omnibus","collects":"CA & Bucky #620–628, Winter Soldier #1–14, CA (2011) #11–19","format":"Omnibus","year":"2014"}
+];
+
+const TMW_ITEMS = [
+  {"id":"tmw-1","completed":false,"seq":1,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 1","collects":"Amazing Fantasy #15, Amazing Spider-Man #1–10","format":"Masterworks","year":""},
+  {"id":"tmw-2","completed":false,"seq":2,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 2","collects":"#11–19, Annual #1","format":"Masterworks","year":""},
+  {"id":"tmw-3","completed":false,"seq":3,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 3","collects":"#20–30, Annual #2","format":"Masterworks","year":""},
+  {"id":"tmw-4","completed":false,"seq":4,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 4","collects":"#31–40, Annual #3","format":"Masterworks","year":""},
+  {"id":"tmw-5","completed":false,"seq":5,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 5","collects":"#41–50, Annual #4","format":"Masterworks","year":""},
+  {"id":"tmw-6","completed":false,"seq":6,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 6","collects":"#51–61, Annual #5","format":"Masterworks","year":""},
+  {"id":"tmw-7","completed":false,"seq":7,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 7","collects":"#62–67, Spectacular Spider-Man Magazine #1–2, Annual #6","format":"Masterworks","year":""},
+  {"id":"tmw-8","completed":false,"seq":8,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 8","collects":"#68–77","format":"Masterworks","year":""},
+  {"id":"tmw-9","completed":false,"seq":9,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 9","collects":"#78–87, Annual #7","format":"Masterworks","year":""},
+  {"id":"tmw-10","completed":false,"seq":10,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 10","collects":"#88–99","format":"Masterworks","year":""},
+  {"id":"tmw-11","completed":false,"seq":11,"title":"Marvel Masterworks: The Amazing Spider-Man Vol. 11","collects":"#100–109 (Lee's run ends with #100)","format":"Masterworks","year":""}
+];
+
+const TFL_ITEMS = [
+  {"id":"tfl-1","completed":false,"seq":1,"title":"Fell Vol. 1: Feral City","collects":"Fell #1–8","format":"TPB","year":"2007"}
+];
+
+const THM_ITEMS = [
+  {"id":"thm-1","completed":false,"seq":1,"title":"House of Mystery Vol. 1: Room and Boredom","collects":"#1–5","format":"TPB","year":""},
+  {"id":"thm-2","completed":false,"seq":2,"title":"House of Mystery Vol. 2: Love Stories for Dead People","collects":"#6–10","format":"TPB","year":""},
+  {"id":"thm-3","completed":false,"seq":3,"title":"House of Mystery Vol. 3: The Space Between","collects":"#11–15","format":"TPB","year":""},
+  {"id":"thm-4","completed":false,"seq":4,"title":"House of Mystery Vol. 4: The Beauty of Decay","collects":"#16–20","format":"TPB","year":""},
+  {"id":"thm-5","completed":false,"seq":5,"title":"House of Mystery Vol. 5: Under New Management","collects":"#21–25","format":"TPB","year":""},
+  {"id":"thm-6","completed":false,"seq":6,"title":"House of Mystery Vol. 6: Safe as Houses","collects":"#26–30","format":"TPB","year":""},
+  {"id":"thm-7","completed":false,"seq":7,"title":"House of Mystery Vol. 7: Conception","collects":"#31–35","format":"TPB","year":""},
+  {"id":"thm-8","completed":false,"seq":8,"title":"House of Mystery Vol. 8: Desolation","collects":"#36–42","format":"TPB","year":""},
+  {"id":"thm-9","completed":false,"seq":9,"title":"House of Mystery Halloween Annual","collects":"The Halloween Annuals","format":"TPB","year":""}
+];
+
+const TBL_ITEMS = [
+  {"id":"tbl-1","completed":false,"seq":1,"title":"Batman: Haunted Knight","collects":"Legends of the Dark Knight Halloween Specials #1–3","format":"TPB","year":"1996"},
+  {"id":"tbl-2","completed":false,"seq":2,"title":"Batman: The Long Halloween","collects":"The Long Halloween #1–13","format":"TPB","year":"1998"},
+  {"id":"tbl-3","completed":false,"seq":3,"title":"Batman: Dark Victory","collects":"Dark Victory #0–13","format":"TPB","year":"2001"},
+  {"id":"tbl-4","completed":false,"seq":4,"title":"Catwoman: When in Rome","collects":"When in Rome #1–6","format":"TPB","year":"2005"},
+  {"id":"tbl-5","completed":false,"seq":5,"title":"Batman: Hush","collects":"Batman #608–619","format":"TPB","year":"2009"},
+  {"id":"tbl-6","completed":false,"seq":6,"title":"Batman: The Long Halloween Deluxe Edition","collects":"The Long Halloween #1–13","format":"HC","year":"2021"},
+  {"id":"tbl-7","completed":false,"seq":7,"title":"Batman: Dark Victory Deluxe Edition","collects":"Dark Victory #0–13","format":"HC","year":"2022"},
+  {"id":"tbl-8","completed":false,"seq":8,"title":"Batman: Hush Unwrapped Deluxe Edition","collects":"Batman #608–619 (uninked)","format":"HC","year":"2011"},
+  {"id":"tbl-9","completed":false,"seq":9,"title":"Absolute Batman: The Long Halloween","collects":"The Long Halloween #1–13","format":"HC","year":"2007"},
+  {"id":"tbl-10","completed":false,"seq":10,"title":"Absolute Batman: Hush","collects":"Batman #608–619","format":"HC","year":"2005"},
+  {"id":"tbl-11","completed":false,"seq":11,"title":"Batman by Jeph Loeb & Tim Sale Omnibus","collects":"Haunted Knight, Long Halloween, Dark Victory, When in Rome","format":"Omnibus","year":"2019"}
+];
+
+const TSG_ITEMS = [
+  {"id":"tsg-1","completed":false,"seq":1,"title":"Saga Vol. 1","collects":"#1–6","format":"TPB","year":""},
+  {"id":"tsg-2","completed":false,"seq":2,"title":"Saga Vol. 2","collects":"#7–12","format":"TPB","year":""},
+  {"id":"tsg-3","completed":false,"seq":3,"title":"Saga Vol. 3","collects":"#13–18","format":"TPB","year":""},
+  {"id":"tsg-4","completed":false,"seq":4,"title":"Saga Vol. 4","collects":"#19–24","format":"TPB","year":""},
+  {"id":"tsg-5","completed":false,"seq":5,"title":"Saga Vol. 5","collects":"#25–30","format":"TPB","year":""},
+  {"id":"tsg-6","completed":false,"seq":6,"title":"Saga Vol. 6","collects":"#31–36","format":"TPB","year":""},
+  {"id":"tsg-7","completed":false,"seq":7,"title":"Saga Vol. 7","collects":"#37–42","format":"TPB","year":""},
+  {"id":"tsg-8","completed":false,"seq":8,"title":"Saga Vol. 8","collects":"#43–48","format":"TPB","year":""},
+  {"id":"tsg-9","completed":false,"seq":9,"title":"Saga Vol. 9","collects":"#49–54","format":"TPB","year":""},
+  {"id":"tsg-10","completed":false,"seq":10,"title":"Saga Vol. 10","collects":"#55–60","format":"TPB","year":""},
+  {"id":"tsg-11","completed":false,"seq":11,"title":"Saga Vol. 11","collects":"#61–66","format":"TPB","year":""},
+  {"id":"tsg-12","completed":false,"seq":12,"title":"Saga Vol. 12","collects":"#67–72","format":"TPB","year":""},
+  {"id":"tsg-13","completed":false,"seq":13,"title":"Saga: Book One (Deluxe Edition)","collects":"#1–18","format":"HC","year":"2014"},
+  {"id":"tsg-14","completed":false,"seq":14,"title":"Saga: Book Two (Deluxe Edition)","collects":"#19–36","format":"HC","year":"2016"},
+  {"id":"tsg-15","completed":false,"seq":15,"title":"Saga: Book Three (Deluxe Edition)","collects":"#37–54","format":"HC","year":"2019"},
+  {"id":"tsg-16","completed":false,"seq":16,"title":"Saga: Book Four (Deluxe Edition)","collects":"#55–72","format":"HC","year":"2026"},
+  {"id":"tsg-17","completed":false,"seq":17,"title":"Saga Compendium One","collects":"#1–54","format":"Omnibus","year":"2019"}
+];
+
+const TCB_COLLECTION = {
+  id:'tpb-cap-brubaker', name:"Captain America by Ed Brubaker",
+  description:"Collected editions of Ed Brubaker's Captain America (2005–2012) — the Winter Soldier, Death of Captain America and Reborn arcs, the 2011 relaunch, Winter Soldier and the Omnibuses.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TCB_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TMW_COLLECTION = {
+  id:'tpb-asm-masterworks', name:"Amazing Spider-Man by Stan Lee (Masterworks)",
+  description:"Marvel Masterworks: The Amazing Spider-Man — Stan Lee & Steve Ditko/John Romita's original run from Amazing Fantasy #15 through the end of Lee's tenure at #100.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TMW_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TFL_COLLECTION = {
+  id:'tpb-fell', name:"Fell by Warren Ellis",
+  description:"Collected editions of Warren Ellis & Ben Templesmith's Fell — the celebrated 'sixteen-page' crime series (#1–9, left unfinished).",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TFL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const THM_COLLECTION = {
+  id:'tpb-house-of-mystery', name:"House of Mystery by Matthew Sturges",
+  description:"Collected editions of Matthew Sturges & Bill Willingham's House of Mystery (Vertigo, 2008–2011, #1–42).",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: THM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TBL_COLLECTION = {
+  id:'tpb-batman-loeb', name:"Batman by Jeph Loeb",
+  description:"Collected editions of Jeph Loeb & Tim Sale's Batman (Haunted Knight, The Long Halloween, Dark Victory, When in Rome) and Hush with Jim Lee.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TBL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TSG_COLLECTION = {
+  id:'tpb-saga', name:"Saga by Brian K. Vaughan",
+  description:"Collected editions of Brian K. Vaughan & Fiona Staples's Saga — the twelve trade paperbacks plus the Deluxe Edition hardcovers and Compendium One. Series ongoing.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TSG_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6594,6 +6738,13 @@ function load() {
   if (!collections.find(c=>c.id==='tpb-fables')) { collections.push(TFB_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-100-bullets')) { collections.push(THB_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='tpb-ex-machina')) { collections.push(TEM_COLLECTION); save(); }
+  // Seed collected editions, wave 4 if missing
+  if (!collections.find(c=>c.id==='tpb-cap-brubaker')) { collections.push(TCB_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-asm-masterworks')) { collections.push(TMW_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-fell')) { collections.push(TFL_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-house-of-mystery')) { collections.push(THM_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-batman-loeb')) { collections.push(TBL_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-saga')) { collections.push(TSG_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -6808,6 +6959,12 @@ const COLLECTION_PATHS = {
   'tpb-fables': ["Reading", "DC"],
   'tpb-100-bullets': ["Reading", "DC"],
   'tpb-ex-machina': ["Reading", "DC"],
+  'tpb-cap-brubaker': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-asm-masterworks': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-fell': ["Reading", "Image"],
+  'tpb-house-of-mystery': ["Reading", "DC"],
+  'tpb-batman-loeb': ["Reading", "DC"],
+  'tpb-saga': ["Reading", "Image"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
