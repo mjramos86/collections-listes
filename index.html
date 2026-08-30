@@ -304,7 +304,7 @@ td.strike{text-decoration:line-through;color:var(--text2)}
 const STORAGE_KEY = 'collectliste-v1';
 // Collections that track two independent statuses per item instead of one.
 const COMIC_CHECKS = [{key:'read',label:'Read'},{key:'collected',label:'Collected'}];
-const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire'];
+const DUAL_CHECK_IDS = ['uncanny-xmen','wolverine-comics','x-men-1991','astonishing-xmen','x-treme-x-men','deadly-genesis','generation-x','new-mutants','x-factor','excalibur','x-force','cable','x-man','deadpool-1997','cable-deadpool','exiles-2001','x-statix','district-x','weapon-x-2002','mystique','emma-frost','gambit-1999','gambit-2004','bishop-last','mutant-x','new-mutants-2003','new-x-men-academy','rogue-2004','nightcrawler-2004','soldier-x','sentinel-2003','x23-2005','madrox','hellions','wolverine-2003','excalibur-2004','xmen-ls-1980s','xmen-ls-1990s','xmen-ls-2000s','evt-mutant-massacre','evt-fall-mutants','evt-inferno','evt-dofp','evt-xtinction','evt-muir','evt-xcutioner','evt-fatal','evt-phalanx','evt-aoa','evt-onslaught','evt-ozt','evt-twelve','evt-ages-apoc','evt-max-security','evt-house-of-m','tpb-daredevil-bendis','tpb-xfactor-david','tpb-uncanny-avengers','tpb-civil-war','tpb-brubaker-xmen','tpb-carey-xmen','tpb-aaron-wolverine-xmen','tpb-uncanny-xforce','tpb-whedon-xmen','tpb-ultimate-xmen','tpb-wolverine-minis','tpb-daredevil-waid','tpb-spiderman-slott','tpb-xmen-bendis','tpb-xmen-morrison','tpb-criminal','tpb-authority-ellis','tpb-planetary','tpb-invisibles','tpb-bsg','tpb-walking-dead','tpb-hickman-ff','tpb-spiderman-jms','tpb-xmen-essentials','tpb-powers','tpb-fables','tpb-100-bullets','tpb-ex-machina','tpb-cap-brubaker','tpb-asm-masterworks','tpb-fell','tpb-house-of-mystery','tpb-batman-loeb','tpb-saga','qc-paul-rabagliati','qc-samuel-cantin','qc-guy-delisle','qc-zviane','qc-hiver-nucleaire','tpb-dark-tower','tpb-sin-city','tpb-hellblazer'];
 const CAT_ICONS = {reading:'📚',gaming:'🎮',watching:'🎬',music:'🎵',other:'📋'};
 const CAT_COLORS = {reading:'#7c6af7',gaming:'#34d399',watching:'#f59e0b',music:'#f472b6',other:'#94a3b8'};
 
@@ -6669,6 +6669,98 @@ const QHN_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Collected editions, wave 5 ─────────────────────────────────
+const TDT_ITEMS = [
+  {"id":"tdt-1","completed":false,"seq":1,"title":"The Dark Tower: The Gunslinger Born","collects":"The Gunslinger Born #1–7","format":"HC","year":"2007"},
+  {"id":"tdt-2","completed":false,"seq":2,"title":"The Dark Tower: The Long Road Home","collects":"The Long Road Home #1–5","format":"HC","year":"2008"},
+  {"id":"tdt-3","completed":false,"seq":3,"title":"The Dark Tower: Treachery","collects":"Treachery #1–6","format":"HC","year":"2009"},
+  {"id":"tdt-4","completed":false,"seq":4,"title":"The Dark Tower: Fall of Gilead","collects":"Fall of Gilead #1–6, Sorcerer #1","format":"HC","year":"2010"},
+  {"id":"tdt-5","completed":false,"seq":5,"title":"The Dark Tower: Battle of Jericho Hill","collects":"Battle of Jericho Hill #1–5","format":"HC","year":"2010"},
+  {"id":"tdt-6","completed":false,"seq":6,"title":"The Dark Tower: The Gunslinger – The Journey Begins","collects":"The Journey Begins #1–5","format":"HC","year":"2011"},
+  {"id":"tdt-7","completed":false,"seq":7,"title":"The Dark Tower: The Gunslinger – The Little Sisters of Eluria","collects":"The Little Sisters of Eluria #1–5","format":"HC","year":"2011"},
+  {"id":"tdt-8","completed":false,"seq":8,"title":"The Dark Tower: The Gunslinger – The Battle of Tull","collects":"The Battle of Tull #1–5","format":"HC","year":"2012"},
+  {"id":"tdt-9","completed":false,"seq":9,"title":"The Dark Tower: The Gunslinger – The Way Station","collects":"The Way Station #1–5","format":"HC","year":"2013"},
+  {"id":"tdt-10","completed":false,"seq":10,"title":"The Dark Tower: The Gunslinger – The Man in Black","collects":"The Man in Black #1–5","format":"HC","year":"2013"},
+  {"id":"tdt-11","completed":false,"seq":11,"title":"The Dark Tower: The Gunslinger – Last Shots","collects":"Sheemie's Tale #1–2, Evil Ground #1, Last Shots #1–2","format":"HC","year":"2014"},
+  {"id":"tdt-12","completed":false,"seq":12,"title":"The Dark Tower: The Drawing of the Three – The Prisoner","collects":"The Prisoner #1–5","format":"HC","year":"2015"},
+  {"id":"tdt-13","completed":false,"seq":13,"title":"The Dark Tower: The Drawing of the Three – House of Cards","collects":"House of Cards #1–5","format":"HC","year":"2016"},
+  {"id":"tdt-14","completed":false,"seq":14,"title":"The Dark Tower: The Drawing of the Three – Lady of Shadows","collects":"Lady of Shadows #1–5","format":"HC","year":"2016"},
+  {"id":"tdt-15","completed":false,"seq":15,"title":"The Dark Tower: The Drawing of the Three – Bitter Medicine","collects":"Bitter Medicine #1–5","format":"HC","year":"2017"},
+  {"id":"tdt-16","completed":false,"seq":16,"title":"The Dark Tower: The Drawing of the Three – The Sailor","collects":"The Sailor #1–5","format":"HC","year":"2017"},
+  {"id":"tdt-17","completed":false,"seq":17,"title":"The Dark Tower Omnibus","collects":"The complete Roland's-youth arcs","format":"Omnibus","year":"2013"},
+  {"id":"tdt-18","completed":false,"seq":18,"title":"The Dark Tower: The Complete Concordance","collects":"Companion/reference volume","format":"HC","year":"2012"},
+  {"id":"tdt-19","completed":false,"seq":19,"title":"The Dark Tower: End-World Almanac","collects":"Companion/reference volume","format":"HC","year":"2010"},
+  {"id":"tdt-20","completed":false,"seq":20,"title":"The Dark Tower: Guide to Gilead","collects":"Companion/reference volume","format":"HC","year":"2009"}
+];
+
+const TSC_ITEMS = [
+  {"id":"tsc-1","completed":false,"seq":1,"title":"Sin City Vol. 1: The Hard Goodbye","collects":"Marv's story","format":"TPB","year":""},
+  {"id":"tsc-2","completed":false,"seq":2,"title":"Sin City Vol. 2: A Dame to Kill For","collects":"Dwight & Ava Lord","format":"TPB","year":""},
+  {"id":"tsc-3","completed":false,"seq":3,"title":"Sin City Vol. 3: The Big Fat Kill","collects":"Dwight and the girls of Old Town","format":"TPB","year":""},
+  {"id":"tsc-4","completed":false,"seq":4,"title":"Sin City Vol. 4: That Yellow Bastard","collects":"Hartigan & Nancy","format":"TPB","year":""},
+  {"id":"tsc-5","completed":false,"seq":5,"title":"Sin City Vol. 5: Family Values","collects":"Miho & Dwight (original graphic novel)","format":"TPB","year":""},
+  {"id":"tsc-6","completed":false,"seq":6,"title":"Sin City Vol. 6: Booze, Broads, & Bullets","collects":"Short stories","format":"TPB","year":""},
+  {"id":"tsc-7","completed":false,"seq":7,"title":"Sin City Vol. 7: Hell and Back","collects":"Wallace's story","format":"TPB","year":""},
+  {"id":"tsc-8","completed":false,"seq":8,"title":"Frank Miller's Sin City Library Edition Vol. 1","collects":"Vols. 1–2","format":"HC","year":"2015"},
+  {"id":"tsc-9","completed":false,"seq":9,"title":"Frank Miller's Sin City Library Edition Vol. 2","collects":"Vols. 3–4","format":"HC","year":"2015"},
+  {"id":"tsc-10","completed":false,"seq":10,"title":"Frank Miller's Sin City Library Edition Vol. 3","collects":"Vols. 5–7","format":"HC","year":"2016"},
+  {"id":"tsc-11","completed":false,"seq":11,"title":"Sin City: The Hard Goodbye Curator's Collection","collects":"Oversized artist's edition","format":"HC","year":"2015"},
+  {"id":"tsc-12","completed":false,"seq":12,"title":"Big Damn Sin City","collects":"The complete series in one volume","format":"Omnibus","year":"2014"}
+];
+
+const THL_ITEMS = [
+  {"id":"thl-1","completed":false,"seq":1,"title":"John Constantine, Hellblazer Vol. 1: Original Sins","collects":"","format":"TPB","year":""},
+  {"id":"thl-2","completed":false,"seq":2,"title":"John Constantine, Hellblazer Vol. 2: The Devil You Know","collects":"","format":"TPB","year":""},
+  {"id":"thl-3","completed":false,"seq":3,"title":"John Constantine, Hellblazer Vol. 3: The Fear Machine","collects":"","format":"TPB","year":""},
+  {"id":"thl-4","completed":false,"seq":4,"title":"John Constantine, Hellblazer Vol. 4: The Family Man","collects":"","format":"TPB","year":""},
+  {"id":"thl-5","completed":false,"seq":5,"title":"John Constantine, Hellblazer Vol. 5: Dangerous Habits","collects":"","format":"TPB","year":""},
+  {"id":"thl-6","completed":false,"seq":6,"title":"John Constantine, Hellblazer Vol. 6: Bloodlines","collects":"","format":"TPB","year":""},
+  {"id":"thl-7","completed":false,"seq":7,"title":"John Constantine, Hellblazer Vol. 7: Tainted Love","collects":"","format":"TPB","year":""},
+  {"id":"thl-8","completed":false,"seq":8,"title":"John Constantine, Hellblazer Vol. 8: Rake at the Gates of Hell","collects":"","format":"TPB","year":""},
+  {"id":"thl-9","completed":false,"seq":9,"title":"John Constantine, Hellblazer Vol. 9: Critical Mass","collects":"","format":"TPB","year":""},
+  {"id":"thl-10","completed":false,"seq":10,"title":"John Constantine, Hellblazer Vol. 10: In the Line of Fire","collects":"","format":"TPB","year":""},
+  {"id":"thl-11","completed":false,"seq":11,"title":"John Constantine, Hellblazer Vol. 11: Last Man Standing","collects":"","format":"TPB","year":""},
+  {"id":"thl-12","completed":false,"seq":12,"title":"John Constantine, Hellblazer Vol. 12: How to Play with Fire","collects":"","format":"TPB","year":""},
+  {"id":"thl-13","completed":false,"seq":13,"title":"John Constantine, Hellblazer Vol. 13: Haunted","collects":"","format":"TPB","year":""},
+  {"id":"thl-14","completed":false,"seq":14,"title":"John Constantine, Hellblazer Vol. 14: Good Intentions","collects":"","format":"TPB","year":""},
+  {"id":"thl-15","completed":false,"seq":15,"title":"John Constantine, Hellblazer Vol. 15: Highwater","collects":"","format":"TPB","year":""},
+  {"id":"thl-16","completed":false,"seq":16,"title":"John Constantine, Hellblazer Vol. 16: The Wild Card","collects":"","format":"TPB","year":""},
+  {"id":"thl-17","completed":false,"seq":17,"title":"John Constantine, Hellblazer Vol. 17: Out of Season","collects":"","format":"TPB","year":""},
+  {"id":"thl-18","completed":false,"seq":18,"title":"John Constantine, Hellblazer Vol. 18: The Gift","collects":"","format":"TPB","year":""},
+  {"id":"thl-19","completed":false,"seq":19,"title":"John Constantine, Hellblazer Vol. 19: Red Right Hand","collects":"","format":"TPB","year":""},
+  {"id":"thl-20","completed":false,"seq":20,"title":"John Constantine, Hellblazer Vol. 20: Systems of Control","collects":"","format":"TPB","year":""},
+  {"id":"thl-21","completed":false,"seq":21,"title":"John Constantine, Hellblazer Vol. 21: The Laughing Magician","collects":"","format":"TPB","year":""},
+  {"id":"thl-22","completed":false,"seq":22,"title":"John Constantine, Hellblazer Vol. 22: Regeneration","collects":"","format":"TPB","year":""},
+  {"id":"thl-23","completed":false,"seq":23,"title":"John Constantine, Hellblazer Vol. 23: No Future","collects":"","format":"TPB","year":""},
+  {"id":"thl-24","completed":false,"seq":24,"title":"John Constantine, Hellblazer Vol. 24: Sectioned","collects":"","format":"TPB","year":""},
+  {"id":"thl-25","completed":false,"seq":25,"title":"John Constantine, Hellblazer Vol. 25: Another Season","collects":"","format":"TPB","year":""},
+  {"id":"thl-26","completed":false,"seq":26,"title":"John Constantine, Hellblazer Vol. 26: The Curse of the Constantines","collects":"","format":"TPB","year":""}
+];
+
+const TDT_COLLECTION = {
+  id:'tpb-dark-tower', name:"The Dark Tower (Marvel)",
+  description:"Collected editions of Marvel's Dark Tower comics adapting Stephen King — the Roland's-youth arcs, The Gunslinger cycle and The Drawing of the Three.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TDT_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const TSC_COLLECTION = {
+  id:'tpb-sin-city', name:"Sin City by Frank Miller",
+  description:"Collected editions of Frank Miller's Sin City (Dark Horse) — the seven volumes of the Basin City yarns plus the Library and omnibus editions.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: TSC_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
+const THL_COLLECTION = {
+  id:'tpb-hellblazer', name:"John Constantine, Hellblazer (2011 editions)",
+  description:"The 2011-onward Vertigo/DC collected editions that re-collect Hellblazer in order from #1 — 26 volumes covering the complete 300-issue run.",
+  category:'reading', icon:'📗', checks: COMIC_CHECKS, tpb: true,
+  fields: TPB_FIELDS, items: THL_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── State ──────────────────────────────────────────────────────
 let collections = [];
 let activeId = null;
@@ -6861,6 +6953,10 @@ function load() {
   if (!collections.find(c=>c.id==='qc-guy-delisle')) { collections.push(QGD_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='qc-zviane')) { collections.push(QZV_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='qc-hiver-nucleaire')) { collections.push(QHN_COLLECTION); save(); }
+  // Seed collected editions, wave 5 if missing
+  if (!collections.find(c=>c.id==='tpb-dark-tower')) { collections.push(TDT_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-sin-city')) { collections.push(TSC_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='tpb-hellblazer')) { collections.push(THL_COLLECTION); save(); }
   // Repair icons saved as broken escape text (\U0001F4DA / \U0001F4A5) in older sessions.
   for (const c of collections) {
     if (c.icon==='U0001F4DA' || c.icon==='\\U0001F4DA') c.icon='📚';
@@ -7086,6 +7182,9 @@ const COLLECTION_PATHS = {
   'qc-guy-delisle': ["Reading", "Québec"],
   'qc-zviane': ["Reading", "Québec"],
   'qc-hiver-nucleaire': ["Reading", "Québec"],
+  'tpb-dark-tower': ["Reading", "Marvel", "Collected Editions"],
+  'tpb-sin-city': ["Reading", "Dark Horse"],
+  'tpb-hellblazer': ["Reading", "DC"],
   'uncanny-xmen':     ['Reading','Marvel','X-Men'],
   'wolverine-comics': ['Reading','Marvel','X-Men'],
   'x-men-1991':       ['Reading','Marvel','X-Men'],
