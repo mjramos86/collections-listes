@@ -6174,22 +6174,23 @@ const TWD_ITEMS = [
 ];
 
 const THF_ITEMS = [
-  {"id":"thf-1","completed":false,"seq":1,"title":"Fantastic Four by Jonathan Hickman Vol. 1","collects":"Fantastic Four #570–574","format":"TPB","year":"2010"},
-  {"id":"thf-2","completed":false,"seq":2,"title":"Fantastic Four by Jonathan Hickman Vol. 2","collects":"#575–578","format":"TPB","year":"2010"},
-  {"id":"thf-3","completed":false,"seq":3,"title":"Fantastic Four by Jonathan Hickman Vol. 3","collects":"#579–582","format":"TPB","year":"2011"},
-  {"id":"thf-4","completed":false,"seq":4,"title":"Fantastic Four by Jonathan Hickman Vol. 4","collects":"#583–588","format":"TPB","year":"2011"},
-  {"id":"thf-5","completed":false,"seq":5,"title":"Fantastic Four by Jonathan Hickman Vol. 5","collects":"Fantastic Four #600–605","format":"TPB","year":"2012"},
-  {"id":"thf-6","completed":false,"seq":6,"title":"Fantastic Four by Jonathan Hickman Vol. 6","collects":"#605.1, #606–611","format":"TPB","year":"2012"},
-  {"id":"thf-7","completed":false,"seq":7,"title":"FF by Jonathan Hickman Vol. 1","collects":"FF #1–5","format":"TPB","year":"2011"},
-  {"id":"thf-8","completed":false,"seq":8,"title":"FF by Jonathan Hickman Vol. 2","collects":"FF #6–11","format":"TPB","year":"2012"},
-  {"id":"thf-9","completed":false,"seq":9,"title":"FF by Jonathan Hickman Vol. 3","collects":"FF #12–16","format":"TPB","year":"2012"},
-  {"id":"thf-10","completed":false,"seq":10,"title":"FF by Jonathan Hickman Vol. 4","collects":"FF #17–23","format":"TPB","year":"2012"},
-  {"id":"thf-11","completed":false,"seq":11,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 1","collects":"FF #570–578 & related","format":"Complete Collection","year":"2013"},
-  {"id":"thf-12","completed":false,"seq":12,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 2","collects":"#579–588, FF #1–5","format":"Complete Collection","year":"2013"},
-  {"id":"thf-13","completed":false,"seq":13,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 3","collects":"FF #6–16, FF #600–603","format":"Complete Collection","year":"2014"},
-  {"id":"thf-14","completed":false,"seq":14,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 4","collects":"#604–611, FF #17–23","format":"Complete Collection","year":"2014"},
-  {"id":"thf-15","completed":false,"seq":15,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 1","collects":"FF #570–588, FF #1–11","format":"Omnibus","year":"2013"},
-  {"id":"thf-16","completed":false,"seq":16,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 2","collects":"FF #600–611, FF #12–23","format":"Omnibus","year":"2014"}
+  {"id":"thf-1","completed":false,"seq":1,"title":"Dark Reign: Fantastic Four","collects":"Dark Reign: Fantastic Four #1–5 (Hickman's first FF work)","format":"TPB","year":"2009"},
+  {"id":"thf-2","completed":false,"seq":2,"title":"Fantastic Four by Jonathan Hickman Vol. 1","collects":"Fantastic Four #570–574","format":"TPB","year":"2010"},
+  {"id":"thf-3","completed":false,"seq":3,"title":"Fantastic Four by Jonathan Hickman Vol. 2","collects":"#575–578","format":"TPB","year":"2010"},
+  {"id":"thf-4","completed":false,"seq":4,"title":"Fantastic Four by Jonathan Hickman Vol. 3","collects":"#579–582","format":"TPB","year":"2011"},
+  {"id":"thf-5","completed":false,"seq":5,"title":"Fantastic Four by Jonathan Hickman Vol. 4","collects":"#583–588","format":"TPB","year":"2011"},
+  {"id":"thf-6","completed":false,"seq":6,"title":"Fantastic Four by Jonathan Hickman Vol. 5","collects":"Fantastic Four #600–605","format":"TPB","year":"2012"},
+  {"id":"thf-7","completed":false,"seq":7,"title":"Fantastic Four by Jonathan Hickman Vol. 6","collects":"#605.1, #606–611","format":"TPB","year":"2012"},
+  {"id":"thf-8","completed":false,"seq":8,"title":"FF by Jonathan Hickman Vol. 1","collects":"FF #1–5","format":"TPB","year":"2011"},
+  {"id":"thf-9","completed":false,"seq":9,"title":"FF by Jonathan Hickman Vol. 2","collects":"FF #6–11","format":"TPB","year":"2012"},
+  {"id":"thf-10","completed":false,"seq":10,"title":"FF by Jonathan Hickman Vol. 3","collects":"FF #12–16","format":"TPB","year":"2012"},
+  {"id":"thf-11","completed":false,"seq":11,"title":"FF by Jonathan Hickman Vol. 4","collects":"FF #17–23","format":"TPB","year":"2012"},
+  {"id":"thf-12","completed":false,"seq":12,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 1","collects":"Dark Reign: Fantastic Four #1–5, Fantastic Four #570–578","format":"Complete Collection","year":"2013"},
+  {"id":"thf-13","completed":false,"seq":13,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 2","collects":"#579–588, FF #1–5","format":"Complete Collection","year":"2013"},
+  {"id":"thf-14","completed":false,"seq":14,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 3","collects":"FF #6–16, Fantastic Four #600–603","format":"Complete Collection","year":"2014"},
+  {"id":"thf-15","completed":false,"seq":15,"title":"Fantastic Four by Jonathan Hickman: The Complete Collection Vol. 4","collects":"#604–611, FF #17–23","format":"Complete Collection","year":"2014"},
+  {"id":"thf-16","completed":false,"seq":16,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 1","collects":"Dark Reign: FF, Fantastic Four #570–588, FF #1–11","format":"Omnibus","year":"2013"},
+  {"id":"thf-17","completed":false,"seq":17,"title":"Fantastic Four / FF by Jonathan Hickman Omnibus Vol. 2","collects":"Fantastic Four #600–611, FF #12–23","format":"Omnibus","year":"2014"}
 ];
 
 const TJM_ITEMS = [
@@ -7301,13 +7302,13 @@ function load() {
       save();
     }
   }
-  // The Slott list was rebuilt to include the individual Big Time trades.
-  // Re-key an existing copy by title so Read/Collected state survives.
-  {
-    const c = collections.find(x=>x.id==='tpb-spiderman-slott');
-    if (c && c.items.length < TSS_ITEMS.length) {
+  // Lists that were rebuilt/reordered after release: re-key an existing copy
+  // by title so Read/Collected state (and edited values) survive.
+  for (const [id, SRC] of [['tpb-spiderman-slott', TSS_ITEMS], ['tpb-hickman-ff', THF_ITEMS]]) {
+    const c = collections.find(x=>x.id===id);
+    if (c && c.items.length < SRC.length) {
       const prev = new Map(c.items.map(it=>[it.title, it]));
-      c.items = TSS_ITEMS.map(src => {
+      c.items = SRC.map(src => {
         const it = JSON.parse(JSON.stringify(src));
         const old = prev.get(src.title);
         if (old) {
