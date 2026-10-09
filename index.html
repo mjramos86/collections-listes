@@ -7712,6 +7712,32 @@ function setFilter(mode, btn) {
   renderTable();
 }
 
+// Maps the date strings used across the lists ("March 31, 1985", "Sep 1963",
+// "1967–1970", "2002") onto a sortable YYYYMMDD-ish number so date columns
+// order chronologically instead of alphabetically. Returns null if unparseable.
+const MONTH_INDEX = {
+  jan:1, january:1, feb:2, february:2, mar:3, march:3, apr:4, april:4,
+  may:5, jun:6, june:6, jul:7, july:7, aug:8, august:8,
+  sep:9, sept:9, september:9, oct:10, october:10, nov:11, november:11, dec:12, december:12
+};
+function dateSortKey(v) {
+  const s = String(v ?? '').trim();
+  if (!s) return null;
+  let m = s.match(/^([A-Za-z]+)\.?\s+(\d{1,2})\s*,\s*(\d{4})$/);   // Month D, YYYY
+  if (m) {
+    const mo = MONTH_INDEX[m[1].toLowerCase()];
+    if (mo) return Number(m[3])*10000 + mo*100 + Number(m[2]);
+  }
+  m = s.match(/^([A-Za-z]+)\.?\s*\/?\s*(?:[A-Za-z]+\.?\s+)?(\d{4})$/);  // Mon YYYY / Oct-Nov YYYY
+  if (m) {
+    const mo = MONTH_INDEX[m[1].toLowerCase()];
+    if (mo) return Number(m[2])*10000 + mo*100;
+  }
+  m = s.match(/^(\d{4})(?:\s*[–—\-\/]\s*(?:\d{2,4}|present|Present|ongoing|Ongoing))?$/); // YYYY or YYYY–YYYY
+  if (m) return Number(m[1])*10000;
+  return null;
+}
+
 function getDisplayedItems() {
   const c = getActive();
   const q = document.getElementById('search-input').value.toLowerCase();
@@ -7724,7 +7750,13 @@ function getDisplayedItems() {
   items.sort((a,b) => {
     const av=a[sortField]??'', bv=b[sortField]??'';
     const an=Number(av), bn=Number(bv);
-    const cmp = !isNaN(an)&&!isNaN(bn) ? an-bn : String(av).localeCompare(String(bv));
+    let cmp;
+    if (!isNaN(an) && !isNaN(bn) && String(av).trim()!=='' && String(bv).trim()!=='') {
+      cmp = an-bn;
+    } else {
+      const ad=dateSortKey(av), bd=dateSortKey(bv);
+      cmp = (ad!==null && bd!==null) ? ad-bd : String(av).localeCompare(String(bv));
+    }
     return sortDir==='asc'?cmp:-cmp;
   });
   return items;
