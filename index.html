@@ -120,6 +120,7 @@ td.check-cell{width:36px;text-align:center}
 .check-box.done{background:var(--green);border-color:var(--green);color:#000;font-size:10px;font-weight:900}
 .check-box.partial{border-color:var(--accent2);background:var(--accent2)22}
 td.truncate{max-width:180px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+td.wrap{min-width:200px;max-width:420px;white-space:normal;overflow-wrap:break-word}
 td.strike{text-decoration:line-through;color:var(--text2)}
 
 /* Expand row */
@@ -7930,6 +7931,13 @@ function getDisplayedItems() {
   return items;
 }
 
+// The name column carries the longest text in every list (game titles, story
+// arcs, edition names), so it wraps onto as many lines as it needs instead of
+// being cut off with an ellipsis. Every other column stays on one line.
+const NAME_KEYS = new Set(['title','event','story','storyline','collects']);
+const NAME_LABELS = new Set(['Title','Titre','Game','Edition','Event','Story / Arc','Storyline','Collects']);
+function isNameField(f) { return NAME_KEYS.has(f.key) || NAME_LABELS.has(f.label); }
+
 function renderTable() {
   const c = getActive();
   const checks = checksOf(c);
@@ -7984,7 +7992,7 @@ function renderTable() {
 
     for (const f of mainFields) {
       const td = document.createElement('td');
-      td.className = 'truncate'+(rowDone?' strike':'');
+      td.className = (isNameField(f)?'wrap':'truncate')+(rowDone?' strike':'');
       td.textContent = item[f.key]??'';
       tr.appendChild(td);
     }
