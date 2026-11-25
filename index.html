@@ -5461,6 +5461,53 @@ const ANIM_COLLECTION = {
   sortField:'seq', sortDir:'asc'
 };
 
+// ── Avengers: Doomsday watchlist ───────────────────────────────
+const DOOM_FIELDS = [
+  {key:'seq',label:'#',type:'number'},
+  {key:'title',label:'Title',type:'text'},
+  {key:'type',label:'Type',type:'text'},
+  {key:'release',label:'Released',type:'text'},
+  {key:'priority',label:'Priority',type:'text'},
+  {key:'notes',label:'Notes',type:'text'},
+];
+
+const DOOM_ITEMS = [
+  // Pre-Endgame
+  {"id":"doom-1","completed":false,"seq":1,"title":"Black Widow","type":"Film","release":"Jul 9, 2021","priority":"Recommended","notes":"Pre-Endgame. Introduces Yelena Belova and Red Guardian."},
+  {"id":"doom-2","completed":false,"seq":2,"title":"Spider-Man: Homecoming","type":"Film","release":"Jul 7, 2017","priority":"Essential","notes":"Pre-Endgame. Tom Holland's first solo Spider-Man film."},
+  // Post-Endgame
+  {"id":"doom-3","completed":false,"seq":3,"title":"Loki – Season 1","type":"Series","release":"Jun 9, 2021","priority":"Essential","notes":"Set outside time; placed after Endgame per Disney+ timeline order."},
+  {"id":"doom-4","completed":false,"seq":4,"title":"Loki – Season 2","type":"Series","release":"Oct 5, 2023","priority":"Essential","notes":"Finale 'Glorious Purpose' is the key episode. Loki returns in Doomsday."},
+  {"id":"doom-5","completed":false,"seq":5,"title":"WandaVision","type":"Series","release":"Jan 15, 2021","priority":"Recommended","notes":"Watch before VisionQuest."},
+  {"id":"doom-6","completed":false,"seq":6,"title":"Shang-Chi and the Legend of the Ten Rings","type":"Film","release":"Sep 3, 2021","priority":"Recommended","notes":"On Disney+'s official Doomsday watchlist."},
+  {"id":"doom-7","completed":false,"seq":7,"title":"The Falcon and the Winter Soldier","type":"Series","release":"Mar 19, 2021","priority":"Recommended","notes":"Sam and Bucky's arcs; John Walker becomes U.S. Agent."},
+  {"id":"doom-8","completed":false,"seq":8,"title":"Spider-Man: Far From Home","type":"Film","release":"Jul 2, 2019","priority":"Essential","notes":""},
+  {"id":"doom-9","completed":false,"seq":9,"title":"Spider-Man: No Way Home","type":"Film","release":"Dec 17, 2021","priority":"Essential","notes":"Multiverse breaks open."},
+  {"id":"doom-10","completed":false,"seq":10,"title":"Doctor Strange in the Multiverse of Madness","type":"Film","release":"May 6, 2022","priority":"Essential","notes":"Latest Doctor Strange film; incursions and the multiverse."},
+  {"id":"doom-11","completed":false,"seq":11,"title":"Black Panther: Wakanda Forever","type":"Film","release":"Nov 11, 2022","priority":"Recommended","notes":"Shuri becomes Black Panther; introduces Namor."},
+  {"id":"doom-12","completed":false,"seq":12,"title":"Thor: Love and Thunder","type":"Film","release":"Jul 8, 2022","priority":"Recommended","notes":""},
+  {"id":"doom-13","completed":false,"seq":13,"title":"The Marvels","type":"Film","release":"Nov 10, 2023","priority":"Recommended","notes":"Mutant tease in the post-credits scene."},
+  {"id":"doom-14","completed":false,"seq":14,"title":"Deadpool & Wolverine","type":"Film","release":"Jul 26, 2024","priority":"Essential","notes":"Introduces Channing Tatum's Gambit, confirmed for Doomsday."},
+  {"id":"doom-15","completed":false,"seq":15,"title":"Captain America: Brave New World","type":"Film","release":"Feb 14, 2025","priority":"Essential","notes":"Sam Wilson as Captain America."},
+  {"id":"doom-16","completed":false,"seq":16,"title":"Thunderbolts*","type":"Film","release":"May 2, 2025","priority":"Essential","notes":"The team becomes the New Avengers."},
+  {"id":"doom-17","completed":false,"seq":17,"title":"Spider-Man: Brand New Day","type":"Film","release":"Jul 31, 2026","priority":"Essential","notes":"Timeline placement approximate."},
+  {"id":"doom-18","completed":false,"seq":18,"title":"VisionQuest – Season 1","type":"Series","release":"Oct 14, 2026","priority":"Essential","notes":"Concludes the WandaVision trilogy. Timeline placement approximate."},
+  {"id":"doom-19","completed":false,"seq":19,"title":"The Fantastic Four: First Steps","type":"Film","release":"Jul 25, 2025","priority":"Essential","notes":"Earth-828; sets up Doctor Doom. Watch last before Doomsday."},
+  // Bonus — Fox X-Men universe
+  {"id":"doom-20","completed":false,"seq":20,"title":"X-Men","type":"Film","release":"Jul 14, 2000","priority":"Bonus","notes":"Fox X-Men universe; several cast members return in Doomsday."},
+  {"id":"doom-21","completed":false,"seq":21,"title":"X2: X-Men United","type":"Film","release":"May 2, 2003","priority":"Bonus","notes":"Fox X-Men universe; introduces Nightcrawler."},
+  {"id":"doom-22","completed":false,"seq":22,"title":"X-Men: The Last Stand","type":"Film","release":"May 26, 2006","priority":"Bonus","notes":"Fox X-Men universe."},
+  {"id":"doom-23","completed":false,"seq":23,"title":"X-Men: Days of Future Past","type":"Film","release":"May 23, 2014","priority":"Bonus","notes":"Fox X-Men universe; rewrites The Last Stand's ending."}
+];
+
+const DOOM_COLLECTION = {
+  id:'avengers-doomsday-watchlist', name:"Avengers: Doomsday Watchlist",
+  description:"What to watch before Avengers: Doomsday (Dec 18, 2026), in story (chronological) order, with the Fox X-Men films as a bonus.",
+  category:'watching', icon:'🎬',
+  fields: DOOM_FIELDS, items: DOOM_ITEMS,
+  sortField:'seq', sortDir:'asc'
+};
+
 // ── Approximate market values ──────────────────────────────────
 // Rough RAW MID-GRADE (≈FN/VF) estimates in USD, used only to give a
 // ballpark total. Key issues are calibrated against public price-guide
@@ -7498,6 +7545,7 @@ function load() {
   if (!collections.find(c=>c.id==='mcu-series')) { collections.push(MCUS_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-television')) { collections.push(MTV_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-films-legacy')) { collections.push(LGF_COLLECTION); save(); }
+  if (!collections.find(c=>c.id==='avengers-doomsday-watchlist')) { collections.push(DOOM_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-tv-legacy')) { collections.push(LGTV_COLLECTION); save(); }
   if (!collections.find(c=>c.id==='marvel-animated')) { collections.push(ANIM_COLLECTION); save(); }
   // Seed Marvel collected editions (TPB) if missing
@@ -7996,6 +8044,7 @@ const COLLECTION_PATHS = {
   'marvel-films-legacy': ['Watching','Marvel','Non-MCU'],
   'marvel-tv-legacy': ['Watching','Marvel','Non-MCU'],
   'marvel-animated': ['Watching','Marvel','Non-MCU'],
+  'avengers-doomsday-watchlist': ['Watching','Marvel','MCU'],
   'wcw-ppv-history':  ['Watching'],
 };
 function pathOf(c) {
